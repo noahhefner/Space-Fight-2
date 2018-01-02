@@ -13,12 +13,20 @@ class Menu(object):
         self.menu_screen_active = self.menu_items_home
         self.game_settings = ["player_white.png", "bullet_red.png"]
 
-        self.menu_items_home = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
-        self.menu_items_upgrades = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
-        self.menu_items_upgrades_ship_type = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
-        self.menu_items_upgrades_bullet_type = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
-        self.menu_items_upgrades_start_lives = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
-        self.menu_items_upgrades_special = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        # TODO: figure out line-carry-over stuff (\)
+
+        self.menu_items_home = \
+        pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        self.menu_items_upgrades = \
+        pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        self.menu_items_upgrades_ship_type = \
+        pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        self.menu_items_upgrades_bullet_type = \
+        pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        self.menu_items_upgrades_start_lives = \
+        pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        self.menu_items_upgrades_special = \
+        pygame.sprite.LayeredUpdates([pygame.sprite.Group])
 
         # Home menu page items
         self.button_start = Button("START")
@@ -50,9 +58,13 @@ class Menu(object):
 
                     next_screen = self.get_cursor_click(sprite)
 
-                    if next_screen == 'game' or next_screen == 'quit':
+                    if next_screen == True:
 
-                        return True
+                        return next_screen
+
+                    else if next_screen == False:
+
+                        pass
 
                     else:
 
@@ -83,11 +95,11 @@ class Menu(object):
 
         if button.text == "START":
 
-            return game
+            return True
 
         if button.text == "QUIT":
 
-            return done
+            return True
 
         if button.text == "UPGRADES":
 

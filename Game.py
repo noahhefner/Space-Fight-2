@@ -17,8 +17,9 @@ class Game(object):
         self.bullets_left = 100
         self.score = 0
         self.lives = 3
-        self.type_player_string = settings[0]
-        self.type_bullet_string = settings[1]
+        self.settings = settings
+        self.type_player_string = self.settings[0]
+        self.type_bullet_string = self.settings[1]
         self.player = Player(self.type_player_string)
         self.time = time.clock()
 

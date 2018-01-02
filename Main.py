@@ -38,8 +38,8 @@ game_done = True
 menu_done = False
 clock = pygame.time.Clock()
 
-game = Game()
 menu = Menu()
+game = Game(menu.settings)
 
 star_group = pygame.sprite.Group()
 
@@ -55,6 +55,7 @@ while not done:
 
     while not menu_done:
 
+        game.settings = menu.game_settings
         menu_done = menu.process_user_events()
 
     while not game_done:

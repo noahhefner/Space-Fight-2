@@ -3,11 +3,6 @@
 # Functions
 # Last Edit: 12/17/2017
 
-def get_current_time():
-    """ Returns current time. """
-
-    return time.time()
-
 def get_bullet_vel(speed):
     """ Returns vel_x and vel_y attributes for bullets. """
 
@@ -27,7 +22,7 @@ def get_alien_multiplier(total_frames):
     return round(total_frames / 3600)
 
 def get_alien_vel():
-    """ Set vel_x and vel_y attributes for alien. """
+    """ Returns vel_x and vel_y attributes for alien. """
 
     x_diff = game.player.rect.x - self.rect.center[0]
     y_diff = game.player.rect.y - self.rect.center[1]
@@ -38,6 +33,32 @@ def get_alien_vel():
     vel_x = math.cos(angle)
 
     return [vel_x, vel_y]
+
+def grid_pos_calc(screen_width, screen_height, rows, columns):
+    """ Returns an array of x and y positions for the given rows and columns
+        from left column to right column and from top row to bottom row.
+
+    Args:
+        screen_width (int): Width of the surface.
+        screen_height (int): Height of the surface.
+        rows (int): Number of rows in the grid.
+        columns (int): Number of columns in the grid.
+    """
+
+    final_list = []
+
+    for i in range(columns):
+
+        x = (i + 1) * (screen_width / (columns + 1))
+
+        for j in range(rows):
+
+            y = (j + 1) * (screen_height / (rows + 1))
+
+            position = [x,y]
+            final_list.append(position)
+
+    return final_list
 
 def random_alien_spawn(screen_width, screen_height):
     """ Returns a random position off-screen for alien spawn. """
