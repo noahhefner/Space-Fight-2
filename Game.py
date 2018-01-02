@@ -12,7 +12,7 @@ class Game(object):
         self.bullets_left = 100
         self.score = 0
         self.lives = 3
-        self.player = Player('''some player image''')
+        self.player = Player("player_white.png")
         self.time = time.clock()
 
         self.bullets = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
@@ -44,6 +44,8 @@ class Game(object):
 
             explosion = Explosion(alien.rect.x, alien.rect.y)
             self.lives -= 1
+
+        
 
     def spawn_bullet(self):
         """ Spawns a bullet if there are bullets left. """
@@ -90,5 +92,7 @@ class Game(object):
 
         print(self.score)
 
-    def display_frame(self):
+    def display_frame(self, surface):
         """ Draw the appropriate sprites for the current screen. """
+
+        Functions.draw_sprite(self.player, surface)

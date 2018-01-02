@@ -11,7 +11,7 @@ class Alien(pygame.sprite.Sprite):
 
         super(Alien, self).__init__()
 
-        self.image = pygame.image.load(""" Some alien pic. """).convert()
+        self.image = pygame.image.load("alien_level_one.png").convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.pos_initial = Functions.random_alien_spawn()

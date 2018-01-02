@@ -11,6 +11,7 @@ class Menu(object):
 
         # Sprite Lists that hold items for each screen
         self.menu_screen_active = self.menu_items_home
+        self.game_settings = ["player_white.png", "bullet_red.png"]
 
         self.menu_items_home = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
         self.menu_items_upgrades = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
@@ -31,11 +32,9 @@ class Menu(object):
         self.button_ship_type = Button("SHIP")
         self.button_bullet_type = Button("BULLET")
         self.button_start_lives = Button("LIVES")
-        self.button_special = Button("SPECIAL")
         self.menu_items_upgrades.add(self.button_ship_type)
         self.menu_items_upgrades.add(self.button_bullet_type)
         self.menu_items_upgrades.add(self.button_start_lives)
-        self.menu_items_upgrades.add(self.button_special)
 
         # Ship type upgrade menu
         """ Picture Sprites """
@@ -106,11 +105,9 @@ class Menu(object):
 
             return self.menu_items_upgrades_start_lives
 
-        elif button.text == "SPECIAL":
+        else:
 
-            return self.menu_items_upgrades_special
-
-        elif button.text ==
+            return
 
     def update(self):
         """ Update the Text menu items. """

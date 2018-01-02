@@ -34,8 +34,8 @@ SCREEN = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
 #Variables
 done = False
-game_done = False
-menu_done = True
+game_done = True
+menu_done = False
 clock = pygame.time.Clock()
 
 game = Game()
@@ -45,12 +45,13 @@ while not done:
 
     while not menu_done:
 
-        menu_done =menu.process_user_events()
+        menu_done = menu.process_user_events()
 
     while not game_done:
 
         SCREEN.fill(BLACK)
         game.process_user_events()
+        game.display_frame(SCREEN)
         pygame.display.flip()
         clock.tick(60)
 
