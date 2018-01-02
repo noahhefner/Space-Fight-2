@@ -11,7 +11,6 @@ class Menu(object):
 
         # Sprite Lists that hold items for each screen
         self.menu_screen_active = self.menu_items_home
-        self.game_settings = ["player_white.png", "bullet_red.png"]
 
         # TODO: figure out line-carry-over stuff (\)
 

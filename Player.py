@@ -23,7 +23,6 @@ class Player(pygame.sprite.Sprite):
         self.vel_x = None
         self.vel_y = None
         self.ammo = 100
-        self.speed = 5
         self.special = "special image"
 
     def change_speed(self, x, y):

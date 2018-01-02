@@ -17,12 +17,11 @@ from Game import Game
 from Star import Star
 from Menu import Menu
 from Player import Player
+from Settings import Settings
 
 pygame.init()
 
 # Constants
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
 YELLOW = [255, 255, 0]
 BLACK = [0, 0, 0]
 WHITE = [255, 255, 255]
@@ -39,6 +38,7 @@ menu_done = False
 clock = pygame.time.Clock()
 
 menu = Menu()
+settings = Settings()
 game = Game(menu.settings)
 
 star_group = pygame.sprite.Group()
