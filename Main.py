@@ -41,7 +41,17 @@ clock = pygame.time.Clock()
 game = Game()
 menu = Menu()
 
+star_group = pygame.sprite.Group()
+
+for i in range(SCREEN_WIDTH):
+
+    star = Star("star.png")
+    star_group.append(star)
+
 while not done:
+
+    star_group.update()
+    star_group.draw(SCREEN)
 
     while not menu_done:
 
