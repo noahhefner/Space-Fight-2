@@ -32,11 +32,15 @@ class Game(object):
                 explosion = explosion(alien.rect.x, alien.rect.y)
                 self.score += 1
 
+                if alien.drop <= 3:
+
+                    drop = Drop(alien)
+
         alien_player_collision = pygame.spritecollide(self.player, self.aliens, False)
 
         for alien in alien_player_collision:
 
-            sxplosion = explosion(alien.rect.x, alien.rect.y)
+            explosion = Explosion(alien.rect.x, alien.rect.y)
             self.lives -= 1
 
     def spawn_bullet(self):
