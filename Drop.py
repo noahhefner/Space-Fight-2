@@ -36,8 +36,7 @@ class Drop(pyame.sprite.Sprite):
         self.dropped_frames = 0
 
     def update(self):
-
-        TODO: "lower opacity of sprite over time"
+        """ Times the drop for dropped_frames. """
 
         if self.dropped_frames == 360:
 
