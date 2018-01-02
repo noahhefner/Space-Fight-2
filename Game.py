@@ -45,7 +45,7 @@ class Game(object):
             explosion = Explosion(alien.rect.x, alien.rect.y)
             self.lives -= 1
 
-        
+        #TODO: spawn aliens on a time-based interval
 
     def spawn_bullet(self):
         """ Spawns a bullet if there are bullets left. """
