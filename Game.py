@@ -21,7 +21,7 @@ class Game(object):
     def game_logic(self):
         """ Handles game logic. """
 
-        # Fisrt, lets update everything
+        # First, lets update everything
         self.update()
 
         # Then see what happened
