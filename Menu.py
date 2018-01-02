@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Menu Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Menu(object):
     """ Holds code regarding menu screen elements. """

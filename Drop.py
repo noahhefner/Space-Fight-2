@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Drop Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Drop(pygame.sprite.Sprite):
     """ Powerups that drop when an alien is killed. """

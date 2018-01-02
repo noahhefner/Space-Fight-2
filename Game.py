@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Game Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Game(object):
     """ Holds code regarding in-game elements. """
