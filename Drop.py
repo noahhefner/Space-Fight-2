@@ -22,6 +22,6 @@ class Drop(pygame.sprite.Sprite):
     def update(self):
         """ Times the drop for dropped_frames. """
 
-        if self.dropped_frames == 360:
+        if self.dropped_frames == 400:
 
             self.kill()

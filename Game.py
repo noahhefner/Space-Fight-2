@@ -25,7 +25,8 @@ class Game(object):
         self.update()
 
         # Then see what happened
-        alien_bullet_collision = pygame.groupcollide(self.aliens, self.bullets, False, True)
+        alien_bullet_collision = pygame.groupcollide(self.aliens, self.bullets,
+        False, True)
 
         for alien in alien_bullet_collision:
 
@@ -36,7 +37,8 @@ class Game(object):
 
                     drop = Drop(alien)
 
-        alien_player_collision = pygame.spritecollide(self.player, self.aliens, False)
+        alien_player_collision = pygame.spritecollide(self.player, self.aliens,
+        False)
 
         for alien in alien_player_collision:
 
