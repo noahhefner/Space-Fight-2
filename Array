@@ -1,3 +1,8 @@
+# Noah Hefner
+# Space Fight 2.0
+# Alien Class
+# Last Edit: 1/2/2017
+
 class Array():
 
     def __init__ (self, screen_width, screen_height, rows, columns):
