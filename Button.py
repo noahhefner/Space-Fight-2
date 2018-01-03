@@ -33,6 +33,8 @@ class Button(pygame.sprite.Sprite):
             self.image.set_colorkey(BLACK)
             self.rect = self.image.get_rect()
 
+        return
+
     def update(self):
         """ Highlight the text if the button is text and the cursor is on it. """
 
@@ -49,3 +51,7 @@ class Button(pygame.sprite.Sprite):
                 self.color = self.default_color
 
             self.image = self.font.render(self.text, False, self.color)
+
+        else:
+
+            return

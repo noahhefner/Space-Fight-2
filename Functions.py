@@ -34,7 +34,7 @@ def get_alien_vel():
 
     return [vel_x, vel_y]
 
-def sprite_grid(screen_width, screen_height, rows, columns):
+def sprite_array(sprite_list, screen_width, screen_height, rows, columns):
     """ Returns an array of x and y positions for the given rows and columns
         from left column to right column and from top row to bottom row.
 
@@ -45,7 +45,8 @@ def sprite_grid(screen_width, screen_height, rows, columns):
         columns (int): Number of columns in the grid.
     """
 
-    final_list = []
+    sprite_array = []
+    sprite_number = 0
 
     for i in range(columns):
 
@@ -55,10 +56,11 @@ def sprite_grid(screen_width, screen_height, rows, columns):
 
             y = (j + 1) * (screen_height / (rows + 1))
 
-            position = [x,y]
-            final_list.append(position)
+            sprite_info = [sprite_list[sprite_number], x, y]
+            sprite_array.append(sprite_info)
+            sprite_number ++
 
-    return final_list
+    return sprite_array
 
 def random_alien_spawn(screen_width, screen_height):
     """ Returns a random position off-screen for alien spawn. """

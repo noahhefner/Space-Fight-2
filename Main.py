@@ -18,6 +18,7 @@ from Star import Star
 from Menu import Menu
 from Player import Player
 from Settings import Settings
+from Scene import Scene
 
 pygame.init()
 
