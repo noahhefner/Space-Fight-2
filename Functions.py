@@ -34,7 +34,7 @@ def get_alien_vel():
 
     return [vel_x, vel_y]
 
-def grid_pos_calc(screen_width, screen_height, rows, columns):
+def sprite_grid(screen_width, screen_height, rows, columns):
     """ Returns an array of x and y positions for the given rows and columns
         from left column to right column and from top row to bottom row.
 

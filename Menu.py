@@ -9,7 +9,7 @@ class Menu(object):
     def __init__(self):
         """ Initiates menu class. """
 
-        # Sprite Lists that hold items for each screen
+        # Sprite Lists that hol1d items for each screen
         self.menu_screen_active = self.menu_items_home
         self.game_settings = ["player_white.png", "bullet_red.png"]
 
