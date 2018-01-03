@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Functions
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 def get_bullet_vel(speed):
     """ Returns vel_x and vel_y attributes for bullets. """

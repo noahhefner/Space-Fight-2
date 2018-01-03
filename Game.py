@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Game Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Game(object):
     """ Holds code regarding in-game elements. """
@@ -11,15 +11,15 @@ class Game(object):
 
         Args:
             settings (list): list of settings from menu [type_player_string,
-            type_bullet_string]
+            type_bullet_string, player_speed]
         """
 
         self.bullets_left = 100
         self.score = 0
         self.lives = 3
-        self.settings = settings
-        self.type_player_string = self.settings[0]
-        self.type_bullet_string = self.settings[1]
+        self.paused = False
+        self.type_player_string = settings[0]
+        self.type_bullet_string = settings[1]
         self.player = Player(self.type_player_string)
         self.time = time.clock()
 
@@ -29,31 +29,35 @@ class Game(object):
     def game_logic(self):
         """ Handles game logic. """
 
-        # First, lets update everything
-        self.update()
+        if not self.paused:
 
-        # Then see what happened
-        alien_bullet_collision = pygame.groupcollide(self.aliens, self.bullets,
-        False, True)
+            # First, lets update everything
+            self.player.update()
+            self.bullets.update()
+            self.aliens.update()
 
-        for alien in alien_bullet_collision:
+            # Then see what happened
+            alien_bullet_collision = pygame.groupcollide(self.aliens, self.bullets,
+            False, True)
 
-                explosion = explosion(alien.rect.x, alien.rect.y)
-                self.score += 1
+            for alien in alien_bullet_collision:
 
-                if alien.drop <= 3:
+                    explosion = explosion(alien.rect.x, alien.rect.y)
+                    self.score += 1
 
-                    drop = Drop(alien)
+                    if alien.drop <= 3:
 
-        alien_player_collision = pygame.spritecollide(self.player, self.aliens,
-        False)
+                        drop = Drop(alien)
 
-        for alien in alien_player_collision:
+            alien_player_collision = pygame.spritecollide(self.player, self.aliens,
+            False)
 
-            explosion = Explosion(alien.rect.x, alien.rect.y)
-            self.lives -= 1
+            for alien in alien_player_collision:
 
-        #TODO: spawn aliens on a time-based interval, no starting aliens
+                explosion = Explosion(alien.rect.x, alien.rect.y)
+                self.lives -= 1
+
+            # TODO: spawn aliens on increasingly fast time-based interval
 
     def spawn_bullet(self):
         """ Spawns a bullet if there are bullets left. """
@@ -91,14 +95,23 @@ class Game(object):
 
                     self.player.change_speed(self.player.speed, 0)
 
-    def update(self):
-        """ Update the sprites. """
+                elif event.key == pygame.K_ESC:
 
-        self.player.update()
-        self.bullets.update()
-        self.aliens.update()
+                    self.paused = True
+
+                else:
+
+                    pass
 
     def display_frame(self, surface):
         """ Draw the appropriate sprites for the current screen. """
+
+        for alien in self.aliens:
+
+            Functions.draw_sprite(alien, surface)
+
+        for bullet in self.bullets:
+
+            Functions.draw_sprite(bullet, surface)
 
         Functions.draw_sprite(self.player, surface)

@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Player Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Player(pygame.sprite.Sprite):
     """ In-game player entity. """
@@ -23,7 +23,6 @@ class Player(pygame.sprite.Sprite):
         self.vel_x = None
         self.vel_y = None
         self.ammo = 100
-        self.speed = 5
         self.special = "special image"
 
     def change_speed(self, x, y):

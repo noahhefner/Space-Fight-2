@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Menu Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Menu(object):
     """ Holds code regarding menu screen elements. """
@@ -11,7 +11,6 @@ class Menu(object):
 
         # Sprite Lists that hol1d items for each screen
         self.menu_screen_active = self.menu_items_home
-        self.game_settings = ["player_white.png", "bullet_red.png"]
 
         # TODO: figure out line-carry-over stuff (\)
 

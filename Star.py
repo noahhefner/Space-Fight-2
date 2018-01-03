@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Star Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/2/2017
 
 class Star(pygame.sprite.Sprite):
     """ Star sprite images used for background. """
