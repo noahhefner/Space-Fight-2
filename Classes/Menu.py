@@ -39,11 +39,18 @@ class Menu(object):
         self.menu_items_upgrades.add(self.button_bullet_type)
         self.menu_items_upgrades.add(self.button_start_lives)
 
-        # Ship type upgrade menu
+        # Ship type menu items
         self.player_blue_button = Button("player_blue.png", True)
         self.player_green_button = Button("player_green.png", True)
         self.player_white_button = Button("player_white.png", True)
         self.player_yellow_button = Button("player_yellow.png", True)
+
+        # Bullet type menu items
+        self.bulelt_blue_button = Button("bullet_blue.png", True)
+        self.bullet_green_button = Button("bullet_green.png", True)
+        self.bullet_purple_button = Button("bullet_purple.png", True)
+        self.bullet_red_button = Button("bullet_red.png", True)
+        self.bullet_yellow_button = Button("bullet_yellow.png", True)
 
         return
 
