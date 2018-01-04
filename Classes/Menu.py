@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Menu Class
-# Last Edit: 1/2/2017
+# Last Edit: 1/4/2018
 
 class Menu(object):
     """ Holds code regarding menu screen elements. """
@@ -21,7 +21,7 @@ class Menu(object):
         self.array_menu_upgrades = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 3, 1)
         self.array_menu_ship_type = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 1, 4)
         self.array_menu_bullet_type = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 1, 5)
-        self.array_menu_other
+        self.array_menu_other = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 3, 1)
 
         # Home menu page items
         self.button_start = Button("START")
@@ -40,7 +40,12 @@ class Menu(object):
         self.menu_items_upgrades.add(self.button_start_lives)
 
         # Ship type upgrade menu
-        """ Picture Sprites """
+        self.player_blue_button = Button("player_blue.png", True)
+        self.player_green_button = Button("player_green.png", True)
+        self.player_white_button = Button("player_white.png", True)
+        self.player_yellow_button = Button("player_yellow.png", True)
+
+        return
 
     def process_user_events(self):
         """ Handle user input. """
@@ -123,12 +128,16 @@ class Menu(object):
 
             item.update()
 
+        return
+
     def display_frame(self, surface):
         """ Draw the sprites needed for the current screen. """
 
         for item in self.menu_screen_active:
 
             item.draw(surface)
+
+        return
 
     def set_menu_resolution_margins(self):
         """ Adjust menu items for the current screen size. """
@@ -142,3 +151,5 @@ class Menu(object):
             item.rect.x = (SCREEN_WIDTH / 2) - (item.rect.width / 2)
 
             count += 1
+
+        return

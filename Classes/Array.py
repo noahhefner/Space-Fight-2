@@ -1,11 +1,13 @@
 # Noah Hefner
 # Space Fight 2.0
 # Alien Class
-# Last Edit: 1/2/2017
+# Last Edit: 1/4/2018
 
 class Array():
+    """ Creates a matrix of points for menu item positioning. """
 
     def __init__ (self, screen_width, screen_height, rows, columns):
+        """ Initiates Array class. """
 
         # TODO: Check if screen variables can be taken out of params and used
         #       from main function.
@@ -31,14 +33,10 @@ class Array():
 
             self.array.append(row)
 
+        return
+
     def get_position(self, index_x, index_y):
 
         position = self.array[index_y - 1][index_x - 1]
 
         return position
-
-new_array = Array(4,4,3,3)
-
-position_one = new_array.get_position(2,2)
-
-print(position_one)

@@ -1,12 +1,12 @@
 # Noah Hefner
 # Space Fight 2.0
 # Button Class
-# Last Edit: 12/17/2017
+# Last Edit: 1/4//2018
 
 class Button(pygame.sprite.Sprite):
     """ Buttons can be either images or text strings. """
 
-    def __init__(self, image):
+    def __init__(self, image, x2_image_scale = False):
         """ Initializes button class.
         Args:
             image (string): image string or text to be made a button.
@@ -31,6 +31,11 @@ class Button(pygame.sprite.Sprite):
 
             self.image = pygame.image.load(image).convert()
             self.image.set_colorkey(BLACK)
+
+            if x2_image_scale:
+
+                self.image = pygame.transform.scale2x(self.image)
+
             self.rect = self.image.get_rect()
 
         return
