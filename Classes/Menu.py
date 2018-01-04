@@ -21,7 +21,7 @@ class Menu(object):
         self.array_menu_upgrades = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 3, 1)
         self.array_menu_ship_type = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 1, 4)
         self.array_menu_bullet_type = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 1, 5)
-        self.array_menu_other = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 3, 1)
+        self.array_menu_boosts = Array(SCREEN_WIDTH, SCREEN_HEIGHT, 3, 1)
 
         # Home menu page items
         self.button_start = Button("START")
@@ -31,10 +31,14 @@ class Menu(object):
         self.menu_items_home.add(self.button_upgrades)
         self.menu_items_home.add(self.button_quit)
 
+        self.button_start.assign_array_pos(self.array_menu_home.position(1,1))
+        self.button_upgrades.assign_array_pos(self.array_menu_home.position(1,2))
+        self.button_quit.assign_array_pos(array_menu_home.position(1,3))
+
         # Upgrades menu page items
         self.button_ship_type = Button("SHIP")
         self.button_bullet_type = Button("BULLET")
-        self.button_start_lives = Button("OTHER")
+        self.button_boosts = Button("BOOSTS")
         self.menu_items_upgrades.add(self.button_ship_type)
         self.menu_items_upgrades.add(self.button_bullet_type)
         self.menu_items_upgrades.add(self.button_start_lives)
@@ -51,6 +55,11 @@ class Menu(object):
         self.bullet_purple_button = Button("bullet_purple.png", True)
         self.bullet_red_button = Button("bullet_red.png", True)
         self.bullet_yellow_button = Button("bullet_yellow.png", True)
+
+        # Boost upgrades menu items
+        self.boost_speed_button = Button("MOAR SPEED")
+        self.boost_lives_button = Button("MOAR LIVES")
+        self.boost_ammo_button = Button("MOAR AMMOS")
 
         return
 

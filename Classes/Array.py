@@ -35,7 +35,7 @@ class Array():
 
         return
 
-    def get_position(self, index_x, index_y):
+    def position(self, index_x, index_y):
 
         position = self.array[index_y - 1][index_x - 1]
 

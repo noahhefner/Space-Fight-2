@@ -60,3 +60,10 @@ class Button(pygame.sprite.Sprite):
         else:
 
             return
+
+    def assign_array_pos(self, position):
+
+        self.rect.x = position[0]
+        self.rect.y = position[1]
+
+        return
