@@ -19,6 +19,7 @@ from Menu import Menu
 from Player import Player
 from Settings import Settings
 from Scene import Scene
+from Array import Array
 
 pygame.init()
 
