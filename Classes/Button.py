@@ -1,12 +1,12 @@
 # Noah Hefner
 # Space Fight 2.0
 # Button Class
-# Last Edit: 1/4//2018
+# Last Edit: 1/5//2018
 
 class Button(pygame.sprite.Sprite):
     """ Buttons can be either images or text strings. """
 
-    def __init__(self, image, x2_image_scale = False):
+    def __init__(self, image, x2_image_scale = False, highlight = False):
         """ Initializes button class.
         Args:
             image (string): image string or text to be made a button.
@@ -26,6 +26,7 @@ class Button(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.highlight_color = RED
             self.is_text = True
+            self.highlight = True
 
         else:
 
@@ -47,7 +48,8 @@ class Button(pygame.sprite.Sprite):
 
             (mouse_x, mouse_y) = pygame.mouse.get_pos()
 
-            if mouse_x in range(self.rect.x, self.rect.x + self.rect.width):
+            if mouse_x in range(self.rect.x, self.rect.x + self.rect.width) \
+            and self.highlight:
 
                 self.color = self.highlight_color
 
@@ -61,9 +63,9 @@ class Button(pygame.sprite.Sprite):
 
             return
 
-    def assign_array_pos(self, position):
+    def position(self, position):
 
-        self.rect.x = position[0]
-        self.rect.y = position[1]
+        self.rect.x = position[0] - ((1/2) * self.rect.x)
+        self.rect.y = position[1] - ((1/2) * self.rect.y)
 
         return

@@ -16,3 +16,4 @@ class Settings(object):
         self.cursor_type = "cursor_red.png"
         self.screen_width = 1920
         self.screen_height = 1080
+        self.coins = 0
