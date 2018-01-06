@@ -1,6 +1,6 @@
 # Noah Hefner
 # Space Fight 2.0
-# Last Edit: 1/2/2017
+# Last Edit: 1/6/2018
 
 # Library Imports
 from math import *
@@ -30,18 +30,17 @@ WHITE = [255, 255, 255]
 GREEN = [0, 255, 0]
 GREY = [105, 105, 105]
 RED = [255, 0, 0]
-SCREEN = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
-
-#Variables
-done = False
-game_done = True
-menu_done = False
+# Variables
 clock = pygame.time.Clock()
 
+# Program Objects
 menu = Menu()
 settings = Settings()
 game = Game(menu.settings)
+
+SCREEN = pygame.display.set_mode([settings.screen_width,\
+                                  settings.screen_height])
 
 star_group = pygame.sprite.Group()
 
@@ -50,26 +49,22 @@ for i in range(SCREEN_WIDTH):
     star = Star("star.png")
     star_group.append(star)
 
-while not done:
+while settings.active_screen != "DONE":
 
     star_group.update()
     star_group.draw(SCREEN)
 
-    while not menu_done:
+    while settings.active_screen == "MENU":
 
         game.settings = menu.game_settings
         menu_done = menu.process_user_events()
 
-    while not game_done:
+    while settings.active_screen == "GAME":
 
         SCREEN.fill(BLACK)
         game.process_user_events()
         game.display_frame(SCREEN)
         pygame.display.flip()
         clock.tick(60)
-
-    if game_done and menu_done:
-
-        done = True
 
 pygame.quit

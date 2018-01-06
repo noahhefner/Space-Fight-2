@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Menu Class
-# Last Edit: 1/5/2018
+# Last Edit: 1/6/2018
 
 class Menu(object):
     """ Holds code regarding menu screen elements. """
@@ -19,36 +19,38 @@ class Menu(object):
         self.menu_screen_active = self.menu_screen_home()
 
         # Arrays to hold positions for items for each screen
-        self.array_menu_home = Array(Settings.screen_width, \
-                                     Settings.screen_height, 5, 1)
-        self.array_menu_upgrades = Array(Settings.screen_width, \
-                                         Settings.screen_height, 5, 4)
+        self.array_menu_home = Array(settings.screen_width, \
+                                     settings.screen_height, 5, 1)
+        self.array_menu_upgrades = Array(settings.screen_width, \
+                                         settings.screen_height, 5, 4)
 
-        """" - - - Home Menu Items - - - """
-        # Buttons
+        """" - - Home Menu Items - - """
+
+        """ - Buttons - """
         self.button_start = Button("START")
         self.button_upgrades = Button("UPGRADES")
         self.button_quit = Button("QUIT")
 
-        # Add home menu items to home menu group
+        """ - Add home menu items to home menu group """
         self.menu_screen_home.add(self.button_start)
         self.menu_screen_home.add(self.button_upgrades)
         self.menu_screen_home.add(self.button_quit)
 
-        # Grid home menu buttons
+        """ - Grid home menu buttons - """
         self.button_start.position(self.array_menu_home.position(1,1))
-        self.button_upgrades.position(self.array_menu_home.position(1,2))
+        self.button_upgrades -.position(self.array_menu_home.position(1,2))
         self.button_quit.position(self.array_menu_home.position(1,3))
 
-        """ - - - Upgrade Menu Items - - - """
-        """ Buttons """
+        """ - - Upgrade Menu Items - - """
+
+        """ - Buttons - """
         self.player_blue_button = Button("player_blue.png", True)
         self.player_green_button = Button("player_green.png", True)
         self.player_white_button = Button("player_white.png", True)
         self.player_yellow_button = Button("player_yellow.png", True)
         # TODO: Add purple player
 
-        self.bulelt_blue_button = Button("bullet_blue.png", True)
+        self.bullet_blue_button = Button("bullet_blue.png", True)
         self.bullet_green_button = Button("bullet_green.png", True)
         self.bullet_purple_button = Button("bullet_purple.png", True)
         self.bullet_red_button = Button("bullet_red.png", True)
@@ -60,7 +62,7 @@ class Menu(object):
 
         self.current_button = Button("CURRENT", False, False)
 
-        # Add upgrade menu items to upgrade menu group
+        """ - Add upgrade menu items to upgrade menu group - """
         self.menu_screen_upgrades.add(self.player_blue_button)
         self.menu_screen_upgrades.add(self.player_green_button)
         self.menu_screen_upgrades.add(self.player_white_button)
@@ -78,13 +80,13 @@ class Menu(object):
 
         self.menu_screen_upgrades.add(self.current_button)
 
-        # Grid upgrade menu buttons
+        """ - Grid upgrade menu buttons - """
         self.player_white_button.position(self.array_menu_upgrades.position(1,1))
         self.player_blue_button.position(self.array_menu_upgrades.position(1,2))
         self.player_green_button.position(self.array_menu_upgrades.position(1,3))
         self.player_yellow_button.position(self.array_menu_upgrades.position(1,4))
 
-        self.bulelt_blue_button.position(self.array_menu_upgrades.position(2,2))
+        self.bullet_blue_button.position(self.array_menu_upgrades.position(2,2))
         self.bullet_green_button.position(self.array_menu_upgrades.position(2,3))
         self.bullet_purple_button.position(self.array_menu_upgrades.position(2,5))
         self.bullet_red_button.position(self.array_menu_upgrades.position(2,1))
@@ -103,38 +105,81 @@ class Menu(object):
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
+                # TODO: Move cursor pos sampling to arg as clicked() method
+
+                # If the current screen is the home screen
                 if self.menu_screen_active == self.menu_screen_home:
 
-                    if pygame.sprite.collide_rect(self.cursor, \
-                                                  self.button_start) or \
-                    pygame.sprite.collide_rect(self.cursor, self.button_quit):
+                    if self.button_quit.is_clicked():
 
-                        return True
+                        settings.active_screen = "DONE"
 
-                    else if pygame.sprite.collide_rect(self.cursor, \
-                                                       self.button_upgrades):
+                    else if self.button_start.is_clicked():
+
+                        settings.active_screen = "GAME"
+
+                    else if self.button_upgrades.is_clicked():
+
                         self.menu_screen_active = self.menu_screen_upgrades
 
-                if self.menu_screen_active == self.menu_scren
+                # If the current screen is the upgrades screen
+                if self.menu_screen_active == self.menu_screen_upgrades:
+
+                    if self.player_white_button.is_clicked():
+
+                        settings.player_type_string = "player_white.png"
+
+                    else if self.player_blue_button.is_clicked():
+
+                        settings.player_type_string = "player_blue.png"
+
+                    else if self.player_green_button.is_clicked():
+
+                        settings.player_type_string = "player_green.png"
+
+                    else if self.player_yellow_button.is_clicked():
+
+                        settings.player_type_string = "player_yellow.png"
+
+                    else if self.bullet_red_button.is_clicked():
+
+                        settings.bullet_type_string = "bullet_red.png"
+
+                    else if self.bullet_green_button.is_clicked():
+
+                        settings.bullet_type_string = "bullet_green.png"
+
+                    else if self.bullet_green_button.is_clicked():
+
+                        settings.bullet_type_string = "bullet_purple.png"
+
+                    else if self.bullet_yellow_button.is_clicked():
+
+                        settings.bullet_type_string = "bullet_yellow.png"
+
+                    else if self.bullet_blue_button.is_clicked():
+
+                        settings.bullet_type_string = "bullet_blue.png"
+
+                    else if self.boost_speed_button.is_clicked() and \
+                    settings.coins >= 10:
+
+                        settings.player_speed += 3
+                        settings.coins -= 10
+
+                    else if self.boost_ammo_button.is_clicked() and \
+                    settings.coins >= 20:
+
+                        settings.player_start_ammo += 50
+                        settings.coins -= 20
+
+                    else if self.boost_lives_button.is_clicked() and \
+                    settings.coins >= 30:
+
+                        settings.player_start_lives += 1
+                        settings.coins -= 30
 
         return False
-
-    @staticmethod
-    def get_cursor_click(self, sprite):
-        """"""
-
-        [mouse_x, mouse_y] = pygame.mouse.get_pos()
-
-        if mouse_x in range(sprite.rect.x, sprite.rect.x + sprite.rect.width) and \
-           mouse_y in range(sprite.rect.y, sprite.rect.y + sprite.rect.height):
-
-            to_screen = self.get_screen(sprite)
-
-            return to_screen
-
-        else:
-
-            return False
 
     @staticmethod
     def get_screen(self, button):

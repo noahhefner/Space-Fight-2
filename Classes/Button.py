@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Button Class
-# Last Edit: 1/5//2018
+# Last Edit: 1/6/2018
 
 class Button(pygame.sprite.Sprite):
     """ Buttons can be either images or text strings. """
@@ -69,3 +69,16 @@ class Button(pygame.sprite.Sprite):
         self.rect.y = position[1] - ((1/2) * self.rect.y)
 
         return
+
+    def is_clicked(self):
+
+        mouse_x, mouse_y = pygame.cursor.get_pos()
+
+        if mouse_x in range(self.rect.x, self.rect.x + self.rect.width) and \
+        mouse_y in range(self.rect.y, self.rect.y + self.rect.height):
+
+           return True
+
+        else:
+
+           return False
