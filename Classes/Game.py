@@ -6,7 +6,7 @@
 class Game(object):
     """ Holds code regarding in-game elements. """
 
-    def __init__(self, settings):
+    def __init__(self):
         """ Initiates game class.
 
         Args:
@@ -16,11 +16,12 @@ class Game(object):
 
         self.bullets_left = 100
         self.score = 0
-        self.lives = 3
+        self.lives = settings.player_start_lives
         self.paused = False
-        self.type_player_string = settings[0]
-        self.type_bullet_string = settings[1]
-        self.player = Player(self.type_player_string)
+        self.type_player_string = settings.player_type_string
+        self.type_bullet_string = settings.bullet_type_string
+        self.player = Player(self.player_type_string)
+        self.player.speed = settings.player_speed
         self.time = time.clock()
 
         self.bullets = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
