@@ -61,6 +61,7 @@ class Menu(object):
         self.boost_ammo_button = Button("AMMOS (20 COINS)")
 
         self.current_button = Button("CURRENT", False, False)
+        self.back_button = Button("BACK", False, True)
 
         """ - Add upgrade menu items to upgrade menu group - """
         self.menu_screen_upgrades.add(self.player_blue_button)
@@ -79,6 +80,8 @@ class Menu(object):
         self.menu_screen_upgrades.add(self.boost_ammo_button)
 
         self.menu_screen_upgrades.add(self.current_button)
+        self.menu_screen_upgrade.add(self.back_button)
+        # TODO: set coords for back_button
 
         """ - Grid upgrade menu buttons - """
         self.player_white_button.position(self.array_menu_upgrades.position(1,1))
