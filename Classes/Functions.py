@@ -34,6 +34,14 @@ def get_alien_vel():
 
     return [vel_x, vel_y]
 
+def set_coords(sprite, x, y):
+    """ Sets the given coordinates for the given sprite. """
+
+    sprite.rect.x = x
+    sprite.rect.y = y
+
+    return sprite
+
 def sprite_array(sprite_list, screen_width, screen_height, rows, columns):
     """ Returns an array of x and y positions for the given rows and columns
         from left column to right column and from top row to bottom row.

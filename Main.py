@@ -37,7 +37,7 @@ clock = pygame.time.Clock()
 # Program Objects
 menu = Menu()
 settings = Settings()
-game = Game(menu.settings)
+game = Game(settings)
 
 SCREEN = pygame.display.set_mode([settings.screen_width,\
                                   settings.screen_height])

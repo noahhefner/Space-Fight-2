@@ -63,6 +63,9 @@ class Menu(object):
         self.current_button = Button("CURRENT", False, False)
         self.back_button = Button("BACK", False, True)
 
+        # Not part of grid, needs coords set manually
+        self.back_button = Functions.set_coords(self.back_button, 10, 10)
+
         """ - Add upgrade menu items to upgrade menu group - """
         self.menu_screen_upgrades.add(self.player_blue_button)
         self.menu_screen_upgrades.add(self.player_green_button)
