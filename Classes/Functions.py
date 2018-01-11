@@ -1,7 +1,10 @@
 # Noah Hefner
 # Space Fight 2.0
 # Functions
-# Last Edit: 1/2/2017
+# Last Edit: 1/11/2018
+
+# TODO: Implement save settings to text file
+# TODO: Implement load settings from text file
 
 def get_bullet_vel(speed):
     """ Returns vel_x and vel_y attributes for bullets. """
@@ -35,7 +38,7 @@ def get_alien_vel():
     return [vel_x, vel_y]
 
 def set_coords(sprite, x, y):
-    """ Sets the given coordinates for the given sprite. """
+    """ Sets sprite ract.x and rect.y to x and y respectively. """
 
     sprite.rect.x = x
     sprite.rect.y = y

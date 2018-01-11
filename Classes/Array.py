@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Alien Class
-# Last Edit: 1/4/2018
+# Last Edit: 1/11/2018
 
 class Array():
     """ Creates a matrix of points for menu item positioning. """
@@ -35,8 +35,14 @@ class Array():
 
         return
 
-    def position(self, index_x, index_y):
+    def position(self, column, row):
+        """ Given array position, return x and y screen coordinates for that
+        position.
+        Args:
+            column (int): column of the array
+            row (int): row of the array
+        """
 
-        position = self.array[index_y - 1][index_x - 1]
+        position = self.array[row - 1][column - 1]
 
         return position

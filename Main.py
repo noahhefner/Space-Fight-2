@@ -1,6 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
-# Last Edit: 1/10/2018
+# Main (run this to start program)
+# Last Edit: 1/11/2018
 
 # Library Imports
 from math import *
@@ -20,6 +21,7 @@ from Player import Player
 from Settings import Settings
 from Scene import Scene
 from Array import Array
+from random import *
 
 pygame.init()
 
@@ -42,6 +44,7 @@ game = Game(settings)
 SCREEN = pygame.display.set_mode([settings.screen_width,\
                                   settings.screen_height])
 
+# Stars are not part of menu or game
 star_group = pygame.sprite.Group()
 
 for i in range(SCREEN_WIDTH):

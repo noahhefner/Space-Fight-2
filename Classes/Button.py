@@ -1,12 +1,12 @@
 # Noah Hefner
 # Space Fight 2.0
 # Button Class
-# Last Edit: 1/6/2018
+# Last Edit: 1/11/2018
 
 class Button(pygame.sprite.Sprite):
     """ Buttons can be either images or text strings. """
 
-    def __init__(self, image, x2_image_scale = False, highlight = False):
+    def __init__(self, image, scale = 1, highlight = False):
         """ Initializes button class.
         Args:
             image (string): image string or text to be made a button.
@@ -33,11 +33,8 @@ class Button(pygame.sprite.Sprite):
             self.image = pygame.image.load(image).convert()
             self.image.set_colorkey(BLACK)
 
-            if x2_image_scale:
-
-                self.image = pygame.transform.scale2x(self.image)
-
-            self.rect = self.image.get_rect()
+        self.image = pygame.transform.scale(self.rect.width * scale, \
+        self.rect.height * scale)
 
         return
 
@@ -64,18 +61,26 @@ class Button(pygame.sprite.Sprite):
             return
 
     def position(self, position):
+        """ Sets rect attributes to the given position.
+        Args:
+            position (tuple): tuple value of x and y positions for which the
+            rect values will be assigned
+        """
 
         self.rect.x = position[0] - ((1/2) * self.rect.x)
         self.rect.y = position[1] - ((1/2) * self.rect.y)
 
         return
 
-    def is_clicked(self):
+    def is_clicked(self, mouse_pos):
+        """ Returns boolean True if cursor is clicked within rect boundaries
+        and False if outside rect boundaries.
+        Args:
+            mouse_pos (tuple): position of the cursor
+        """
 
-        mouse_x, mouse_y = pygame.cursor.get_pos()
-
-        if mouse_x in range(self.rect.x, self.rect.x + self.rect.width) and \
-        mouse_y in range(self.rect.y, self.rect.y + self.rect.height):
+        if mouse_pos[0] in range(self.rect.x, self.rect.x + self.rect.width) and \
+        mouse_pos[1] in range(self.rect.y, self.rect.y + self.rect.height):
 
            return True
 

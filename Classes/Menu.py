@@ -1,10 +1,10 @@
 # Noah Hefner
 # Space Fight 2.0
 # Menu Class
-# Last Edit: 1/6/2018
+# Last Edit: 1/11/2018
 
 class Menu(object):
-    """ Holds code regarding menu screen elements. """
+    """ Runs the menu portion of the program. """
 
     def __init__(self):
         """ Initiates menu class. """
@@ -27,19 +27,23 @@ class Menu(object):
         """" - - Home Menu Items - - """
 
         """ - Buttons - """
+        self.button_logo = Button("space_fight_logo.png")
         self.button_start = Button("START")
         self.button_upgrades = Button("UPGRADES")
         self.button_quit = Button("QUIT")
 
         """ - Add home menu items to home menu group """
+        self.menu_screen_home.add(self.button_logo)
         self.menu_screen_home.add(self.button_start)
         self.menu_screen_home.add(self.button_upgrades)
         self.menu_screen_home.add(self.button_quit)
 
         """ - Grid home menu buttons - """
-        self.button_start.position(self.array_menu_home.position(1,1))
-        self.button_upgrades -.position(self.array_menu_home.position(1,2))
-        self.button_quit.position(self.array_menu_home.position(1,3))
+        self.button_logo.position((1/2) * settings.screen_width - (1/2) * \
+        self.button_logo.rect.x, 20)
+        self.button_start.position(self.array_menu_home.position(1,3))
+        self.button_upgrades -.position(self.array_menu_home.position(1,4))
+        self.button_quit.position(self.array_menu_home.position(1,5))
 
         """ - - Upgrade Menu Items - - """
 
@@ -60,11 +64,13 @@ class Menu(object):
         self.boost_lives_button = Button("LIVES (30 COINS)")
         self.boost_ammo_button = Button("AMMOS (20 COINS)")
 
-        self.current_button = Button("CURRENT", False, False)
-        self.back_button = Button("BACK", False, True)
+        self.button_active_player = Button(settings.player_type_string, True)
+        self.button_active_bullet = Button(settings.bullet_type_string, True)
 
-        # Not part of grid, needs coords set manually
-        self.back_button = Functions.set_coords(self.back_button, 10, 10)
+        self.current_button = Button("CURRENT")
+        self.current_player = Button(settings.player_type_string, True)
+        self.current_bullet = Button(settings.bullet_type_string, True)
+        self.back_button = Button("BACK", False, True)
 
         """ - Add upgrade menu items to upgrade menu group - """
         self.menu_screen_upgrades.add(self.player_blue_button)
@@ -84,7 +90,6 @@ class Menu(object):
 
         self.menu_screen_upgrades.add(self.current_button)
         self.menu_screen_upgrade.add(self.back_button)
-        # TODO: set coords for back_button
 
         """ - Grid upgrade menu buttons - """
         self.player_white_button.position(self.array_menu_upgrades.position(1,1))
@@ -102,6 +107,9 @@ class Menu(object):
         self.boost_lives_button.position(self.array_menu_upgrades.position(3,3))
         self.boost_ammo_button.position(self.array_menu_upgrades.position(3,5))
 
+        # Not part of grid, needs coords set manually
+        self.back_button = Functions.set_coords(self.back_button, 10, 10)
+
         return
 
     def process_user_events(self):
@@ -111,113 +119,87 @@ class Menu(object):
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
+                mouse_pos = pygame.cursor.get_pos()
+
                 # TODO: Move cursor pos sampling to arg as clicked() method
 
                 # If the current screen is the home screen
                 if self.menu_screen_active == self.menu_screen_home:
 
-                    if self.button_quit.is_clicked():
+                    if self.button_quit.is_clicked(mouse_pos):
 
                         settings.active_screen = "DONE"
 
-                    else if self.button_start.is_clicked():
+                    else if self.button_start.is_clicked(mouse_pos):
 
                         settings.active_screen = "GAME"
 
-                    else if self.button_upgrades.is_clicked():
+                    else if self.button_upgrades.is_clicked(mouse_pos):
 
                         self.menu_screen_active = self.menu_screen_upgrades
 
                 # If the current screen is the upgrades screen
                 if self.menu_screen_active == self.menu_screen_upgrades:
 
-                    if self.player_white_button.is_clicked():
+                    if self.back_button.is_clicked(mouse_pos):
+
+                        self.menu_screen_active = self.menu_screen_home
+
+                    if self.player_white_button.is_clicked(mouse_pos):
 
                         settings.player_type_string = "player_white.png"
 
-                    else if self.player_blue_button.is_clicked():
+                    else if self.player_blue_button.is_clicked(mouse_pos):
 
                         settings.player_type_string = "player_blue.png"
 
-                    else if self.player_green_button.is_clicked():
+                    else if self.player_green_button.is_clicked(mouse_pos):
 
                         settings.player_type_string = "player_green.png"
 
-                    else if self.player_yellow_button.is_clicked():
+                    else if self.player_yellow_button.is_clicked(mouse_pos):
 
                         settings.player_type_string = "player_yellow.png"
 
-                    else if self.bullet_red_button.is_clicked():
+                    else if self.bullet_red_button.is_clicked(mouse_pos):
 
                         settings.bullet_type_string = "bullet_red.png"
 
-                    else if self.bullet_green_button.is_clicked():
+                    else if self.bullet_green_button.is_clicked(mouse_pos):
 
                         settings.bullet_type_string = "bullet_green.png"
 
-                    else if self.bullet_green_button.is_clicked():
+                    else if self.bullet_green_button.is_clicked(mouse_pos):
 
                         settings.bullet_type_string = "bullet_purple.png"
 
-                    else if self.bullet_yellow_button.is_clicked():
+                    else if self.bullet_yellow_button.is_clicked(mouse_pos):
 
                         settings.bullet_type_string = "bullet_yellow.png"
 
-                    else if self.bullet_blue_button.is_clicked():
+                    else if self.bullet_blue_button.is_clicked(mouse_pos):
 
                         settings.bullet_type_string = "bullet_blue.png"
 
-                    else if self.boost_speed_button.is_clicked() and \
+                    else if self.boost_speed_button.is_clicked(mouse_pos) and \
                     settings.coins >= 10:
 
                         settings.player_speed += 3
                         settings.coins -= 10
 
-                    else if self.boost_ammo_button.is_clicked() and \
+                    else if self.boost_ammo_button.is_clicked(mouse_pos) and \
                     settings.coins >= 20:
 
                         settings.player_start_ammo += 50
                         settings.coins -= 20
 
-                    else if self.boost_lives_button.is_clicked() and \
+                    else if self.boost_lives_button.is_clicked(mouse_pos) and \
                     settings.coins >= 30:
 
                         settings.player_start_lives += 1
                         settings.coins -= 30
 
-        return False
-
-    @staticmethod
-    def get_screen(self, button):
-        """ Returns the next screens sprite list from the given button tag. """
-
-        if button.text == "START":
-
-            return True
-
-        if button.text == "QUIT":
-
-            return True
-
-        if button.text == "UPGRADES":
-
-            return self.menu_screen_upgrades
-
-        elif button.text == "SHIP":
-
-            return self.menu_screen_upgrades_ship_type
-
-        elif button.text == "BULLET":
-
-            return self.menu_screen_upgrades_bullet_type
-
-        elif button.text == "LIVES":
-
-            return self.menu_screen_upgrades_start_lives
-
-        else:
-
-            return
+        return
 
     def update(self):
         """ Update the Text menu items. """
@@ -227,23 +209,12 @@ class Menu(object):
         return
 
     def display_frame(self, surface):
-        """ Draw the sprites needed for the current screen. """
+        """ Draw the sprites needed for the current screen.
+        Args:
+            surface (pygame surface): pygame surface on which the screen will be
+            drawn
+        """
 
         self.menu_screen_active.draw()
-
-        return
-
-    def set_menu_resolution_margins(self):
-        """ Adjust menu items for the current screen size. """
-
-        count = 0
-
-        for item in self.menu_screen_active:
-
-            center_space_y = Settings.screen_height / (len(self.menu_screen_active) + 1)
-            item.rect.y = (center_space_y * (1 + count)) - (item.rect.height / 2)
-            item.rect.x = (Settings.screen_width / 2) - (item.rect.width / 2)
-
-            count += 1
 
         return
