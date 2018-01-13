@@ -71,6 +71,8 @@ class Menu(object):
         self.current_player = Button(settings.player_type_string, True)
         self.current_bullet = Button(settings.bullet_type_string, True)
         self.back_button = Button("BACK", False, True)
+        self.coin_pic_image = Button("coin.png")
+        self.coin_count_image = Button(str(settings.coins))
 
         """ - Add upgrade menu items to upgrade menu group - """
         self.menu_screen_upgrades.add(self.player_blue_button)
@@ -90,6 +92,10 @@ class Menu(object):
 
         self.menu_screen_upgrades.add(self.current_button)
         self.menu_screen_upgrade.add(self.back_button)
+        self.menu_screen_upgrade.add(self.current_player)
+        self.menu_screen_upgrade.add(self.current_bullet)
+        self.menu_screen_upgrades.add(self.coin_pic_image)
+        self.menu_screen_upgrades.add(self.coin_count_image)
 
         """ - Grid upgrade menu buttons - """
         self.player_white_button.position(self.array_menu_upgrades.position(1,1))
@@ -109,6 +115,7 @@ class Menu(object):
 
         # Not part of grid, needs coords set manually
         self.back_button = Functions.set_coords(self.back_button, 10, 10)
+        self.current_player = Functions.set_coords(self.current_player, )
 
         return
 
