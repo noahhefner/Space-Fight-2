@@ -3,7 +3,7 @@
 # Main (run this to start program)
 # Last Edit: 1/11/2018
 
-# TODO: Make settings a text file, possible using h5py library
+# TODO: Make functions for writing and reading settings dict
 
 # Library Imports
 import math
