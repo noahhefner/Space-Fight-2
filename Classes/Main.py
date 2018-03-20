@@ -4,12 +4,13 @@
 # Last Edit: 1/11/2018
 
 # Library Imports
-from math import *
-from pygame import *
-from time import *
-from Functions import *
+import math
+import pygame
+import time
+
+pygame.init()
+
 from Explosion import Explosion
-from Text import Text
 from Button import Button
 from Bullet import Bullet
 from Alien import Alien
@@ -19,11 +20,8 @@ from Star import Star
 from Menu import Menu
 from Player import Player
 from Settings import Settings
-from Scene import Scene
 from Array import Array
 from random import *
-
-pygame.init()
 
 # Constants
 YELLOW = [255, 255, 0]

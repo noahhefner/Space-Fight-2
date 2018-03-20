@@ -3,6 +3,12 @@
 # Bullet Class
 # Last Edit: 12/17/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Bullet(pygame.sprite.Sprite):
     """ In-game bullet entity. """
 

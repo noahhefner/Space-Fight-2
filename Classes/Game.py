@@ -3,6 +3,12 @@
 # Game Class
 # Last Edit: 1/2/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Game(object):
     """ Holds code regarding in-game elements. """
 
@@ -73,7 +79,7 @@ class Game(object):
 
         for event in pygame.event.get():
 
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
             self.bullets_left > 0:
 
                 spawn_bullet()

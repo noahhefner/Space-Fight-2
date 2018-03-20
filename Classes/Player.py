@@ -3,6 +3,12 @@
 # Player Class
 # Last Edit: 1/2/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Player(pygame.sprite.Sprite):
     """ In-game player entity. """
 

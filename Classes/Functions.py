@@ -6,6 +6,12 @@
 # TODO: Implement save settings to text file
 # TODO: Implement load settings from text file
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 def get_bullet_vel(speed):
     """ Returns vel_x and vel_y attributes for bullets. """
 

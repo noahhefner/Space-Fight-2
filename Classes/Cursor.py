@@ -3,6 +3,20 @@
 # Menu Class
 # Last Edit: 1/5/2018
 
+import math
+import pygame
+import time
+
+# Constants
+YELLOW = [255, 255, 0]
+BLACK = [0, 0, 0]
+WHITE = [255, 255, 255]
+GREEN = [0, 255, 0]
+GREY = [105, 105, 105]
+RED = [255, 0, 0]
+
+pygame.init()
+
 class Cursor(pygame.sprite.Sprite):
   """ Cursor that is blitted in place of the windows cursor.
 
@@ -20,7 +34,7 @@ class Cursor(pygame.sprite.Sprite):
 
     super(Cursor, self).__init__()
 
-    self.image = pygame.image.load("cursor_red.png").convert()
+    self.image = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/cursor_red.png")
     self.image.set_colorkey(BLACK)
 
     self.rect = self.image.get_rect()

@@ -3,6 +3,12 @@
 # Alien Class
 # Last Edit: 1/2/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Alien(pygame.sprite.Sprite):
     """ In game alien entity. """
 

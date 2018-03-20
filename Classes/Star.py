@@ -3,6 +3,12 @@
 # Star Class
 # Last Edit: 1/2/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Star(pygame.sprite.Sprite):
     """ Star sprite images used for background. """
 

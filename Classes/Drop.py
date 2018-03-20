@@ -3,13 +3,19 @@
 # Drop Class
 # Last Edit: 1/2/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Drop(pygame.sprite.Sprite):
     """ Powerups that drop when an alien is killed. """
     """ Restrict usage of this method to only recieve sprites with drops. """
 
     def __init__(self, alien):
 
-        super(Alien, self)__init__()
+        super(Drop, self).__init__()
 
         drop_image_list = ["drop_ammo.png", "drop_coin.png", "drop_life.png"]
 

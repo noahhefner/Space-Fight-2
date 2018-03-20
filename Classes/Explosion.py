@@ -3,6 +3,12 @@
 # Explosion Class
 # Last Edit: 12/17/2017
 
+import math
+import pygame
+import time
+
+pygame.init()
+
 class Explosion(pygame.sprite.Sprite):
     """ Spawns an explosion at the given location. """
 
