@@ -3,6 +3,8 @@
 # Main (run this to start program)
 # Last Edit: 1/11/2018
 
+# TODO: Make settings a text file, possible using h5py library
+
 # Library Imports
 import math
 import pygame
@@ -31,16 +33,16 @@ GREEN = [0, 255, 0]
 GREY = [105, 105, 105]
 RED = [255, 0, 0]
 
+settings = Settings()
+
+SCREEN = pygame.display.set_mode([settings.screen_width, settings.screen_height])
+
 # Variables
 clock = pygame.time.Clock()
 
 # Program Objects
 menu = Menu()
-settings = Settings()
 game = Game(settings)
-
-SCREEN = pygame.display.set_mode([settings.screen_width,\
-                                  settings.screen_height])
 
 # Stars are not part of menu or game
 star_group = pygame.sprite.Group()

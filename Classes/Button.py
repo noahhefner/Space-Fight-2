@@ -6,6 +6,14 @@
 import pygame
 pygame.init()
 
+# Constants
+YELLOW = [255, 255, 0]
+BLACK = [0, 0, 0]
+WHITE = [255, 255, 255]
+GREEN = [0, 255, 0]
+GREY = [105, 105, 105]
+RED = [255, 0, 0]
+
 class Button(pygame.sprite.Sprite):
     """ Buttons can be either images or text strings. """
 
@@ -29,7 +37,6 @@ class Button(pygame.sprite.Sprite):
             self.color = WHITE
             self.text = str(image)
             self.image = self.font.render(self.text, False, self.color)
-            self.rect = self.image.get_rect()
             self.highlight_color = RED
             self.is_text = True
             self.highlight = True
@@ -39,8 +46,8 @@ class Button(pygame.sprite.Sprite):
             self.image = pygame.image.load(image).convert()
             self.image.set_colorkey(BLACK)
 
-        self.image = pygame.transform.scale(self.rect.width * scale, \
-        self.rect.height * scale)
+        self.rect = self.image.get_rect()
+        self.image = pygame.transform.scale(self.rect.width * scale, self.rect.height * scale)
 
         return
 
