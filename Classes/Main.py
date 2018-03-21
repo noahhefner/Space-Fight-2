@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Main (run this to start program)
-# Last Edit: 1/11/2018
+# Last Edit: 3/20/2018
 
 # TODO: Make functions for writing and reading settings dict
 
@@ -21,7 +21,7 @@ from Game import Game
 from Star import Star
 from Menu import Menu
 from Player import Player
-from Settings import Settings
+from Settings import settings
 from Array import Array
 from random import *
 
@@ -33,36 +33,41 @@ GREEN = [0, 255, 0]
 GREY = [105, 105, 105]
 RED = [255, 0, 0]
 
-settings = Settings()
-
-SCREEN = pygame.display.set_mode([settings.screen_width, settings.screen_height])
+screen = pygame.display.set_mode([settings[screen_width], settings[screen_height])
 
 # Variables
 clock = pygame.time.Clock()
 
 # Program Objects
 menu = Menu()
-game = Game(settings)
+game = Game()
 
 # Stars are not part of menu or game
 star_group = pygame.sprite.Group()
 
-for i in range(SCREEN_WIDTH):
+for i in range(settings[screen_width]):
 
     star = Star("star.png")
     star_group.append(star)
 
-while settings.active_screen != "DONE":
+while settings[active_screen] != "DONE":
 
+    # Updates
     star_group.update()
-    star_group.draw(SCREEN)
 
-    while settings.active_screen == "MENU":
+
+    # Draw background first
+    screen.fill(BLACK)
+
+    # Draw active elements
+    star_group.draw(screen)
+
+    while settings[active_screen] == "MENU":
 
         game.settings = menu.game_settings
         menu_done = menu.process_user_events()
 
-    while settings.active_screen == "GAME":
+    while settings[active_screen] == "GAME":
 
         SCREEN.fill(BLACK)
         game.process_user_events()

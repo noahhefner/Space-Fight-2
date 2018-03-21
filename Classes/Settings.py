@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Settings Dict
-# Last Edit: 1/2/2017
+# Last Edit: 3/20/2018
 
 settings = {}
 settings["player_type_string"] = "player_white.png"

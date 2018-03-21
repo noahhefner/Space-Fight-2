@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Functions
-# Last Edit: 1/11/2018
+# Last Edit: 3/20/2018
 
 # TODO: Implement save settings to text file
 # TODO: Implement load settings from text file
@@ -9,6 +9,7 @@
 import math
 import pygame
 import time
+from settings import settings
 
 pygame.init()
 

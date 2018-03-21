@@ -15,7 +15,7 @@ from Drop import Drop
 from Game import Game
 from Star import Star
 from Player import Player
-from Settings import Settings
+from Settings import settings
 from Array import Array
 from random import *
 
