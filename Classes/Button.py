@@ -47,7 +47,7 @@ class Button(pygame.sprite.Sprite):
             self.image.set_colorkey(BLACK)
 
         self.rect = self.image.get_rect()
-        self.image = pygame.transform.scale(self.rect.width * scale, self.rect.height * scale)
+        self.image = pygame.transform.scale(self.image, [self.rect.width * scale, self.rect.height * scale])
 
         return
 

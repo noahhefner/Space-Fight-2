@@ -31,7 +31,6 @@ class Menu(object):
 
         # Cursor sprite
         self.cursor = Cursor()
-        self.settings = Settings()
         # TODO: Add cursor upgrades
 
         # Sprite groups that hol1d items for each screen
@@ -40,10 +39,10 @@ class Menu(object):
         self.menu_screen_active = pygame.sprite.Group()
 
         # Arrays to hold positions for items for each screen
-        self.array_menu_home = Array(self.settings.screen_width, \
-                                     self.settings.screen_height, 5, 1)
-        self.array_menu_upgrades = Array(self.settings.screen_width, \
-                                         self.settings.screen_height, 5, 4)
+        self.array_menu_home = Array(settings["screen_width"], \
+                                     settings["screen_height"], 5, 1)
+        self.array_menu_upgrades = Array(settings["screen_width"], \
+                                         settings["screen_height"], 5, 4)
 
         """" - - Home Menu Items - - """
 
@@ -60,8 +59,7 @@ class Menu(object):
         self.menu_screen_home.add(self.button_quit)
 
         """ - Grid home menu buttons - """
-        self.button_logo.position((1/2) * self.settings.screen_width - (1/2) * \
-        self.button_logo.rect.x, 20)
+        self.button_logo.position([((1/2) * settings["screen_width"] - (1/2) * self.button_logo.rect.x), 20])
         self.button_start.position(self.array_menu_home.position(1,3))
         self.button_upgrades.position(self.array_menu_home.position(1,4))
         self.button_quit.position(self.array_menu_home.position(1,5))
@@ -69,31 +67,31 @@ class Menu(object):
         """ - - Upgrade Menu Items - - """
 
         """ - Buttons - """
-        self.player_blue_button = Button("player_blue.png", True)
-        self.player_green_button = Button("player_green.png", True)
-        self.player_white_button = Button("player_white.png", True)
-        self.player_yellow_button = Button("player_yellow.png", True)
+        self.player_blue_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/player_blue.png", True)
+        self.player_green_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/player_green.png", True)
+        self.player_white_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/player_white.png", True)
+        self.player_yellow_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/player_yellow.png", True)
         # TODO: Add purple player
 
-        self.bullet_blue_button = Button("bullet_blue.png", True)
-        self.bullet_green_button = Button("bullet_green.png", True)
-        self.bullet_purple_button = Button("bullet_purple.png", True)
-        self.bullet_red_button = Button("bullet_red.png", True)
-        self.bullet_yellow_button = Button("bullet_yellow.png", True)
+        self.bullet_blue_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/bullet_blue.png", True)
+        self.bullet_green_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/bullet_green.png", True)
+        self.bullet_purple_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/bullet_purple.png", True)
+        self.bullet_red_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/bullet_red.png", True)
+        self.bullet_yellow_button = Button("/home/noahhefner/Git/Space-Fight-2/Images/bullet_yellow.png", True)
 
         self.boost_speed_button = Button("SPEED (10 COINS)")
         self.boost_lives_button = Button("LIVES (30 COINS)")
         self.boost_ammo_button = Button("AMMOS (20 COINS)")
 
-        self.button_active_player = Button(self.settings.player_type_string, True)
-        self.button_active_bullet = Button(self.settings.bullet_type_string, True)
+        self.button_active_player = Button(settings["player_type_string"], True)
+        self.button_active_bullet = Button(settings["bullet_type_string"], True)
 
         self.current_button = Button("CURRENT")
-        self.current_player = Button(self.settings.player_type_string, True)
-        self.current_bullet = Button(self.settings.bullet_type_string, True)
+        self.current_player = Button(settings["player_type_string"], True)
+        self.current_bullet = Button(settings["bullet_type_string"], True)
         self.back_button = Button("BACK", False, True)
-        self.coin_pic_image = Button("coin.png")
-        self.coin_count_image = Button(str(self.settings.coins))
+        self.coin_pic_image = Button("/home/noahhefner/Git/Space-Fight-2/Images/coin.png")
+        self.coin_count_image = Button(str(settings["coins"]))
 
         """ - Add upgrade menu items to upgrade menu group - """
         self.menu_screen_upgrades.add(self.player_blue_button)
@@ -159,11 +157,11 @@ class Menu(object):
 
                     if self.button_quit.is_clicked(mouse_pos):
 
-                        self.settings.active_screen = "DONE"
+                        self.settings["active_screen"] = "done"
 
                     elif self.button_start.is_clicked(mouse_pos):
 
-                        self.settings.active_screen = "GAME"
+                        self.settings["active_screen"] = "game"
 
                     elif self.button_upgrades.is_clicked(mouse_pos):
 
@@ -178,57 +176,57 @@ class Menu(object):
 
                     if self.player_white_button.is_clicked(mouse_pos):
 
-                        self.settings.player_type_string = "player_white.png"
+                        self.settings["player_type_string"] = "player_white.png"
 
                     elif self.player_blue_button.is_clicked(mouse_pos):
 
-                        self.settings.player_type_string = "player_blue.png"
+                        self.settings["player_type_string"] = "player_blue.png"
 
                     elif self.player_green_button.is_clicked(mouse_pos):
 
-                        self.settings.player_type_string = "player_green.png"
+                        self.settings["player_type_string"] = "player_green.png"
 
                     elif self.player_yellow_button.is_clicked(mouse_pos):
 
-                        self.settings.player_type_string = "player_yellow.png"
+                        self.settings["player_type_string"] = "player_yellow.png"
 
                     elif self.bullet_red_button.is_clicked(mouse_pos):
 
-                        self.settings.bullet_type_string = "bullet_red.png"
+                        self.settings["bullet_type_string"] = "bullet_red.png"
 
                     elif self.bullet_green_button.is_clicked(mouse_pos):
 
-                        self.settings.bullet_type_string = "bullet_green.png"
+                        self.settings["bullet_type_string"] = "bullet_green.png"
 
                     elif self.bullet_green_button.is_clicked(mouse_pos):
 
-                        self.settings.bullet_type_string = "bullet_purple.png"
+                        self.settings["bullet_type_string"] = "bullet_purple.png"
 
                     elif self.bullet_yellow_button.is_clicked(mouse_pos):
 
-                        self.settings.bullet_type_string = "bullet_yellow.png"
+                        self.settings["bullet_type_string"] = "bullet_yellow.png"
 
                     elif self.bullet_blue_button.is_clicked(mouse_pos):
 
-                        self.settings.bullet_type_string = "bullet_blue.png"
+                        self.settings["bullet_type_string"] = "bullet_blue.png"
 
                     elif self.boost_speed_button.is_clicked(mouse_pos) and \
-                    self.settings.coins >= 10:
+                    self.settings["coins"] >= 10:
 
-                        self.settings.player_speed += 3
-                        self.settings.coins -= 10
+                        self.settings["player_speed"] += 3
+                        self.settings["coins"] -= 10
 
                     elif self.boost_ammo_button.is_clicked(mouse_pos) and \
-                    self.settings.coins >= 20:
+                    self.settings["coins"] >= 20:
 
-                        self.settings.player_start_ammo += 50
-                        self.settings.coins -= 20
+                        self.settings["player_start_ammo"] += 50
+                        self.settings["coins"] -= 20
 
                     elif self.boost_lives_button.is_clicked(mouse_pos) and \
-                    self.settings.coins >= 30:
+                    self.settings["coins"] >= 30:
 
-                        self.settings.player_start_lives += 1
-                        self.settings.coins -= 30
+                        self.settings["player_start_lives"] += 1
+                        self.settings["coins"] -= 30
 
         return
 

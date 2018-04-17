@@ -4,9 +4,9 @@
 # Last Edit: 3/20/2018
 
 settings = {}
-settings["player_type_string"] = "player_white.png"
-settings["bullet_type_string"] = "bullet_red.png"
-settings["cursor_type_string"] = "cursor_red.png"
+settings["player_type_string"] = "/home/noahhefner/Git/Space-Fight-2/Images/player_white.png"
+settings["bullet_type_string"] = "/home/noahhefner/Git/Space-Fight-2/Images/bullet_red.png"
+settings["cursor_type_string"] = "/home/noahhefner/Git/Space-Fight-2/Images/cursor_red.png"
 settings["active_screen"] = "menu"
 settings["player_start_ammo"] = 100
 settings["player_start_lives"] = 3

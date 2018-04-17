@@ -33,7 +33,7 @@ GREEN = [0, 255, 0]
 GREY = [105, 105, 105]
 RED = [255, 0, 0]
 
-screen = pygame.display.set_mode([settings[screen_width], settings[screen_height])
+screen = pygame.display.set_mode([settings["screen_width"], settings["screen_height"]])
 
 # Variables
 clock = pygame.time.Clock()
