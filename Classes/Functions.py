@@ -9,7 +9,7 @@
 import math
 import pygame
 import time
-from settings import settings
+from Settings import settings
 
 pygame.init()
 
@@ -76,7 +76,7 @@ def sprite_array(sprite_list, screen_width, screen_height, rows, columns):
 
             sprite_info = [sprite_list[sprite_number], x, y]
             sprite_array.append(sprite_info)
-            sprite_number ++
+            sprite_number += 1
 
     return sprite_array
 
@@ -90,7 +90,7 @@ def random_alien_spawn(screen_width, screen_height):
     left_right = random.randrange(0,2)
     top_bottom = random.randrange(0,2)
 
-    if left_right = 0:
+    if left_right == 0:
 
         x = random.randrange(-100, -600)
 

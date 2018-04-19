@@ -18,6 +18,7 @@ from Player import Player
 from Settings import settings
 from Array import Array
 from random import *
+from Functions import *
 
 from Cursor import Cursor
 
@@ -99,7 +100,7 @@ class Menu(object):
         self.menu_screen_upgrades.add(self.player_white_button)
         self.menu_screen_upgrades.add(self.player_yellow_button)
 
-        self.menu_screen_upgrades.add(self.bulelt_blue_button)
+        self.menu_screen_upgrades.add(self.bullet_blue_button)
         self.menu_screen_upgrades.add(self.bullet_green_button)
         self.menu_screen_upgrades.add(self.bullet_purple_button)
         self.menu_screen_upgrades.add(self.bullet_red_button)
@@ -110,9 +111,9 @@ class Menu(object):
         self.menu_screen_upgrades.add(self.boost_ammo_button)
 
         self.menu_screen_upgrades.add(self.current_button)
-        self.menu_screen_upgrade.add(self.back_button)
-        self.menu_screen_upgrade.add(self.current_player)
-        self.menu_screen_upgrade.add(self.current_bullet)
+        self.menu_screen_upgrades.add(self.back_button)
+        self.menu_screen_upgrades.add(self.current_player)
+        self.menu_screen_upgrades.add(self.current_bullet)
         self.menu_screen_upgrades.add(self.coin_pic_image)
         self.menu_screen_upgrades.add(self.coin_count_image)
 
@@ -133,8 +134,8 @@ class Menu(object):
         self.boost_ammo_button.position(self.array_menu_upgrades.position(3,5))
 
         # Not part of grid, needs coords set manually
-        self.back_button = Functions.set_coords(self.back_button, 10, 10)
-        self.current_player = Functions.set_coords(self.current_player, )
+        self.back_button = set_coords(self.back_button, 10, 10)
+        self.current_player = set_coords(self.current_player, 100, 100)
 
         self.set_active(self.menu_screen_home)
 
@@ -243,7 +244,7 @@ class Menu(object):
 
         for item in new_active:
 
-            self.menu_screen_active.append(item)
+            self.menu_screen_active.add(item)
 
 
     def display_frame(self, surface):

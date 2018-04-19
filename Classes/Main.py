@@ -45,12 +45,12 @@ game = Game()
 # Stars are not part of menu or game
 star_group = pygame.sprite.Group()
 
-for i in range(settings[screen_width]):
+for i in range(settings["screen_width"]):
 
-    star = Star("star.png")
-    star_group.append(star)
+    star = Star("/home/noahhefner/Git/Space-Fight-2/Images/star.png", settings["screen_width"], settings["screen_height"])
+    star_group.add(star)
 
-while settings[active_screen] != "DONE":
+while settings["active_screen"] != "done":
 
     # Updates
     star_group.update()
@@ -62,12 +62,11 @@ while settings[active_screen] != "DONE":
     # Draw active elements
     star_group.draw(screen)
 
-    while settings[active_screen] == "MENU":
+    while settings["active_screen"] == "menu":
 
-        game.settings = menu.game_settings
         menu_done = menu.process_user_events()
 
-    while settings[active_screen] == "GAME":
+    while settings["active_screen"] == "game":
 
         SCREEN.fill(BLACK)
         game.process_user_events()

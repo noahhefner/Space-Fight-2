@@ -6,6 +6,15 @@
 import math
 import pygame
 import time
+import random
+
+# Constants
+YELLOW = [255, 255, 0]
+BLACK = [0, 0, 0]
+WHITE = [255, 255, 255]
+GREEN = [0, 255, 0]
+GREY = [105, 105, 105]
+RED = [255, 0, 0]
 
 pygame.init()
 
@@ -22,7 +31,7 @@ class Star(pygame.sprite.Sprite):
         self.rect.x = random.randrange(0, screen_width)
         self.rect.y = random.randrange(0, screen_height)
         self.velx = random.randrange(1,4)
-        self.vely = random.ranrange(-3,0)
+        self.vely = random.randrange(-3,0)
 
     def update(self):
         """ Add the velx and vely attributes to the rect.x and rect.y

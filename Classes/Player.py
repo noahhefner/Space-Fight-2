@@ -7,6 +7,16 @@ import math
 import pygame
 import time
 
+from Settings import settings
+
+# Constants
+YELLOW = [255, 255, 0]
+BLACK = [0, 0, 0]
+WHITE = [255, 255, 255]
+GREEN = [0, 255, 0]
+GREY = [105, 105, 105]
+RED = [255, 0, 0]
+
 pygame.init()
 
 class Player(pygame.sprite.Sprite):
@@ -24,8 +34,8 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey(BLACK)
         self.original = self.image
         self.rect = self.image.get_rect()
-        self.rect.x = (SCREEN_WIDTH / 2) - (self.rect.width / 2)
-        self.rect.y = (SCREEN_HEIGHT / 2) - (self.rect.height / 2)
+        self.rect.x = (settings["screen_height"] / 2) - (self.rect.width / 2)
+        self.rect.y = (settings["screen_width"] / 2) - (self.rect.height / 2)
         self.vel_x = None
         self.vel_y = None
         self.ammo = 100

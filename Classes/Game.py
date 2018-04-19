@@ -7,6 +7,26 @@ import math
 import pygame
 import time
 
+from Functions import *
+from Explosion import Explosion
+from Button import Button
+from Bullet import Bullet
+from Alien import Alien
+from Drop import Drop
+from Star import Star
+from Player import Player
+from Settings import settings
+from Array import Array
+from random import *
+
+# Constants
+YELLOW = [255, 255, 0]
+BLACK = [0, 0, 0]
+WHITE = [255, 255, 255]
+GREEN = [0, 255, 0]
+GREY = [105, 105, 105]
+RED = [255, 0, 0]
+
 pygame.init()
 
 class Game(object):
@@ -22,16 +42,17 @@ class Game(object):
 
         self.bullets_left = 100
         self.score = 0
-        self.lives = settings.player_start_lives
+        self.lives = settings["player_start_lives"]
         self.paused = False
-        self.type_player_string = settings.player_type_string
-        self.type_bullet_string = settings.bullet_type_string
-        self.player = Player(self.player_type_string)
-        self.player.speed = settings.player_speed
+        self.type_player_string = settings["player_type_string"]
+        self.type_bullet_string = settings["bullet_type_string"]
+        self.player = Player(self.type_player_string)
+        self.player.speed = settings["player_speed"]
         self.time = time.clock()
 
-        self.bullets = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
-        self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group])
+        self.bullets = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+        self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+        self.explosions = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
 
     def game_logic(self):
         """ Handles game logic. """
@@ -42,6 +63,7 @@ class Game(object):
             self.player.update()
             self.bullets.update()
             self.aliens.update()
+            self.explosions.update()
 
             # Then see what happened
             alien_bullet_collision = pygame.groupcollide(self.aliens, self.bullets,
@@ -62,6 +84,7 @@ class Game(object):
             for alien in alien_player_collision:
 
                 explosion = Explosion(alien.rect.x, alien.rect.y)
+                self.explosions.append(explosion)
                 self.lives -= 1
 
             # TODO: spawn aliens on increasingly fast time-based interval
@@ -115,10 +138,14 @@ class Game(object):
 
         for alien in self.aliens:
 
-            Functions.draw_sprite(alien, surface)
+            draw_sprite(alien, surface)
 
         for bullet in self.bullets:
 
-            Functions.draw_sprite(bullet, surface)
+            draw_sprite(bullet, surface)
+
+        for explosion in self.explosions:
+
+            draw_sprite(explosion, surface)
 
         Functions.draw_sprite(self.player, surface)
