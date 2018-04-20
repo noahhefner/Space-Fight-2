@@ -54,10 +54,16 @@ class Game(object):
         self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.explosions = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
 
-    def game_logic(self):
+    def run_game_logic(self):
         """ Handles game logic. """
 
         if not self.paused:
+
+            # Keep the number of aliens at a constant 20
+            if len(self.aliens) < 20:
+
+                alien = Alien()
+                self.aliens.add(alien)
 
             # First, lets update everything
             self.player.update()
@@ -66,8 +72,7 @@ class Game(object):
             self.explosions.update()
 
             # Then see what happened
-            alien_bullet_collision = pygame.groupcollide(self.aliens, self.bullets,
-            False, True)
+            alien_bullet_collision = pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
 
             for alien in alien_bullet_collision:
 
@@ -78,7 +83,7 @@ class Game(object):
 
                         drop = Drop(alien)
 
-            alien_player_collision = pygame.spritecollide(self.player, self.aliens,
+            alien_player_collision = pygame.sprite.spritecollide(self.player, self.aliens,
             False)
 
             for alien in alien_player_collision:
@@ -93,9 +98,8 @@ class Game(object):
         """ Spawns a bullet if there are bullets left. """
 
         bullet = Bullet(self.type_bullet_string)
-        bullet.set_vel()
-        game.bullets.add(bullet)
-        game.bullets_left -= 1
+        self.bullets.add(bullet)
+        self.bullets_left -= 1
 
     def process_user_events(self):
         """ Process user imput. """
@@ -105,7 +109,7 @@ class Game(object):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
             self.bullets_left > 0:
 
-                spawn_bullet()
+                self.spawn_bullet()
 
             if event.type == pygame.KEYDOWN:
 
@@ -125,9 +129,35 @@ class Game(object):
 
                     self.player.change_speed(self.player.speed, 0)
 
-                elif event.key == pygame.K_ESC:
+                elif event.key == pygame.K_ESCAPE:
 
-                    self.paused = True
+                    settings["active_screen"] = "done"
+
+                else:
+
+                    pass
+
+            if event.type == pygame.KEYUP:
+
+                if event.key == pygame.K_w:
+
+                    self.player.change_speed(0, self.player.speed)
+
+                elif event.key == pygame.K_a:
+
+                    self.player.change_speed(self.player.speed, 0)
+
+                elif event.key == pygame.K_s:
+
+                    self.player.change_speed(0, -1 * self.player.speed)
+
+                elif event.key == pygame.K_d:
+
+                    self.player.change_speed(-1 * self.player.speed, 0)
+
+                elif event.key == pygame.K_ESCAPE:
+
+                    settings["active_screen"] = "done"
 
                 else:
 
@@ -148,4 +178,4 @@ class Game(object):
 
             draw_sprite(explosion, surface)
 
-        Functions.draw_sprite(self.player, surface)
+        draw_sprite(self.player, surface)

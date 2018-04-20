@@ -71,7 +71,7 @@ while settings["active_screen"] != "done":
 
     if settings["active_screen"] == "game":
 
-        SCREEN.fill(BLACK)
+        game.run_game_logic()
         game.process_user_events()
         game.display_frame(screen)
 

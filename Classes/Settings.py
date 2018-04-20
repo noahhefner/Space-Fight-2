@@ -16,3 +16,6 @@ settings["bullet_speed"] = 15
 settings["screen_width"] = 1920
 settings["screen_height"] = 1080
 settings["coins"] = 0
+settings["player_x_center"] = 0
+settings["player_y_center"] = 0
+settings["alien_speed"] = 2

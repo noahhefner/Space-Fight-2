@@ -7,6 +7,9 @@ import math
 import pygame
 import time
 
+from Functions import *
+from Settings import settings
+
 pygame.init()
 
 # Constants
@@ -31,7 +34,9 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_string).convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.vel = Functions.get_bullet_vel(20)
+        self.rect.x = settings["player_x_center"]
+        self.rect.y = settings["player_y_center"]
+        self.vel = get_bullet_vel(20)
 
     def update(self):
         """ Move bullet and check for kill. """
@@ -43,6 +48,6 @@ class Bullet(pygame.sprite.Sprite):
 
             self.kill()
 
-        elif self.rect.y > SCREEN_HEIGHT or self.rect.x > SCREEN_WIDTH:
+        elif self.rect.y > settings["screen_height"] or self.rect.x > settings["screen_width"]:
 
             self.kill()

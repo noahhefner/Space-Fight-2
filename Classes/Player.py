@@ -36,8 +36,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = (settings["screen_height"] / 2) - (self.rect.width / 2)
         self.rect.y = (settings["screen_width"] / 2) - (self.rect.height / 2)
-        self.vel_x = None
-        self.vel_y = None
+        self.vel_x = 0
+        self.vel_y = 0
         self.ammo = 100
         self.special = "special image"
 
@@ -55,8 +55,8 @@ class Player(pygame.sprite.Sprite):
         """ Check if the player is colliding with the edge of the screen. If so, stop the player from going off the
         screen. """
 
-        if self.rect.x + self.rect.width >= SCREEN_WIDTH:
-            self.rect.right = SCREEN_WIDTH
+        if self.rect.x + self.rect.width >= settings["screen_width"]:
+            self.rect.right = settings["screen_width"]
 
         if self.rect.x <= 0:
             self.rect.left = 0
@@ -64,8 +64,8 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y <= 0:
             self.rect.top = 0
 
-        if self.rect.y + self.rect.height >= SCREEN_HEIGHT:
-            self.rect.bottom = SCREEN_HEIGHT
+        if self.rect.y + self.rect.height >= settings["screen_height"]:
+            self.rect.bottom = settings["screen_height"]
 
     def rotate_player(self):
         """ Rotate player to face the cursor. """
@@ -83,6 +83,9 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         """ Checks edge-of-screen collision, move and rotate player. """
+
+        settings["player_x_center"] = self.rect.center[0]
+        settings["player_y_center"] = self.rect.center[1]
 
         self.check_screen_edge_hit()
         self.rotate_player()

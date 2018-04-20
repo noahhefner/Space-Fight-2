@@ -10,16 +10,17 @@ import math
 import pygame
 import time
 from Settings import settings
+import random
 
 pygame.init()
 
 def get_bullet_vel(speed):
     """ Returns vel_x and vel_y attributes for bullets. """
 
-    [mouse_x, mouse_y] = pygame.cursor.get_pos()
+    [mouse_x, mouse_y] = pygame.mouse.get_pos()
 
-    angle = math.atan2(game.player.rect.center[1]-mouse_y,
-    game.player.rect.center[0]-mouse_x)
+    angle = math.atan2(settings["player_y_center"]-mouse_y,
+    settings["player_x_center"]-mouse_x)
 
     x_vel = math.cos(angle) * (-1 * speed)
     y_vel = math.sin(angle)  * (-1 * speed)
@@ -118,4 +119,4 @@ def draw_sprite(sprite, surface):
          surface (surface): destination for text to be drawn.
     """
 
-    surface.blit(self.image, [sprite.rect.x, sprite.rect.y])
+    surface.blit(sprite.image, [sprite.rect.x, sprite.rect.y])
