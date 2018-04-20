@@ -65,6 +65,8 @@ while settings["active_screen"] != "done":
 
     if settings["active_screen"] == "menu":
 
+        menu.update()
+        menu.process_user_events()
         menu.display_frame(screen)
 
     if settings["active_screen"] == "game":

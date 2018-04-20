@@ -7,6 +7,7 @@ import math
 import pygame
 import time
 import random
+from Settings import settings
 
 # Constants
 YELLOW = [255, 255, 0]
@@ -30,7 +31,6 @@ class Star(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(0, screen_width)
         self.rect.y = random.randrange(0, screen_height)
-        self.velx = random.randrange(1,4)
         self.vely = random.randrange(-3,0)
 
     def update(self):
@@ -40,9 +40,8 @@ class Star(pygame.sprite.Sprite):
 
         """
 
-        self.rect.x += self.velx
         self.rect.y += self.vely
 
         if self.rect.y + self.rect.height < 0:
 
-            self.rect.y = SCREEN_HEIGHT
+            self.rect.y = settings["screen_height"]

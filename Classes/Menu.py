@@ -148,85 +148,86 @@ class Menu(object):
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
-                mouse_pos = pygame.cursor.get_pos()
+                mouse_pos = pygame.mouse.get_pos()
 
                 # TODO: Move cursor pos sampling to arg as clicked() method
 
                 # If the current screen is the home screen
-                if self.menu_screen_active == self.menu_screen_home:
+                if settings["active_submenu"] == "home":
 
+                    print("YEAH")
                     if self.button_quit.is_clicked(mouse_pos):
 
-                        self.settings["active_screen"] = "done"
+                        settings["active_screen"] = "done"
 
                     elif self.button_start.is_clicked(mouse_pos):
 
-                        self.settings["active_screen"] = "game"
+                        settings["active_screen"] = "game"
 
                     elif self.button_upgrades.is_clicked(mouse_pos):
 
-                        self.menu_screen_active = self.menu_screen_upgrades
+                        settings["active_submenu"] = "upgrades"
 
                 # If the current screen is the upgrades screen
-                if self.menu_screen_active == self.menu_screen_upgrades:
+                if settings["active_submenu"] == "upgrades":
 
                     if self.back_button.is_clicked(mouse_pos):
 
-                        self.menu_screen_active = self.menu_screen_home
+                        settings["active_submenu"] = "home"
 
                     if self.player_white_button.is_clicked(mouse_pos):
 
-                        self.settings["player_type_string"] = "player_white.png"
+                        settings["player_type_string"] = "player_white.png"
 
                     elif self.player_blue_button.is_clicked(mouse_pos):
 
-                        self.settings["player_type_string"] = "player_blue.png"
+                        settings["player_type_string"] = "player_blue.png"
 
                     elif self.player_green_button.is_clicked(mouse_pos):
 
-                        self.settings["player_type_string"] = "player_green.png"
+                        settings["player_type_string"] = "player_green.png"
 
                     elif self.player_yellow_button.is_clicked(mouse_pos):
 
-                        self.settings["player_type_string"] = "player_yellow.png"
+                        settings["player_type_string"] = "player_yellow.png"
 
                     elif self.bullet_red_button.is_clicked(mouse_pos):
 
-                        self.settings["bullet_type_string"] = "bullet_red.png"
+                        settings["bullet_type_string"] = "bullet_red.png"
 
                     elif self.bullet_green_button.is_clicked(mouse_pos):
 
-                        self.settings["bullet_type_string"] = "bullet_green.png"
+                        settings["bullet_type_string"] = "bullet_green.png"
 
                     elif self.bullet_green_button.is_clicked(mouse_pos):
 
-                        self.settings["bullet_type_string"] = "bullet_purple.png"
+                        settings["bullet_type_string"] = "bullet_purple.png"
 
                     elif self.bullet_yellow_button.is_clicked(mouse_pos):
 
-                        self.settings["bullet_type_string"] = "bullet_yellow.png"
+                        settings["bullet_type_string"] = "bullet_yellow.png"
 
                     elif self.bullet_blue_button.is_clicked(mouse_pos):
 
-                        self.settings["bullet_type_string"] = "bullet_blue.png"
+                        settings["bullet_type_string"] = "bullet_blue.png"
 
                     elif self.boost_speed_button.is_clicked(mouse_pos) and \
-                    self.settings["coins"] >= 10:
+                    settings["coins"] >= 10:
 
-                        self.settings["player_speed"] += 3
-                        self.settings["coins"] -= 10
+                        settings["player_speed"] += 3
+                        settings["coins"] -= 10
 
                     elif self.boost_ammo_button.is_clicked(mouse_pos) and \
                     self.settings["coins"] >= 20:
 
-                        self.settings["player_start_ammo"] += 50
-                        self.settings["coins"] -= 20
+                        settings["player_start_ammo"] += 50
+                        settings["coins"] -= 20
 
                     elif self.boost_lives_button.is_clicked(mouse_pos) and \
-                    self.settings["coins"] >= 30:
+                    settings["coins"] >= 30:
 
-                        self.settings["player_start_lives"] += 1
-                        self.settings["coins"] -= 30
+                        settings["player_start_lives"] += 1
+                        settings["coins"] -= 30
 
         return
 
