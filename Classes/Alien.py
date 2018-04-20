@@ -34,12 +34,14 @@ class Alien(pygame.sprite.Sprite):
         self.pos_initial = random_alien_spawn(settings["screen_width"], settings["screen_height"])
         self.rect.x, self.rect.y = self.pos_initial[0], self.pos_initial[1]
         self.speed = settings["alien_speed"]
-        self.drop = random.randrange(0,10)
+        self.drop = random.randrange(0,3)
 
     def update(self):
         """ Moves the alien. """
 
-        new_vel = get_alien_vel()
+        new_vel = get_alien_vel(self)
 
         self.rect.x += new_vel[0]
         self.rect.y += new_vel[1]
+
+        print(new_vel)

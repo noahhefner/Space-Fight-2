@@ -76,8 +76,13 @@ class Game(object):
 
             for alien in alien_bullet_collision:
 
-                    explosion = explosion(alien.rect.x, alien.rect.y)
+                    explosion = Explosion(alien.rect.x, alien.rect.y)
+                    self.explosions.add(explosion)
                     self.score += 1
+                    alien.kill()
+
+                    new_alien = Alien()
+                    self.aliens.add(new_alien)
 
                     if alien.drop <= 3:
 
@@ -89,7 +94,7 @@ class Game(object):
             for alien in alien_player_collision:
 
                 explosion = Explosion(alien.rect.x, alien.rect.y)
-                self.explosions.append(explosion)
+                self.explosions.add(explosion)
                 self.lives -= 1
 
             # TODO: spawn aliens on increasingly fast time-based interval

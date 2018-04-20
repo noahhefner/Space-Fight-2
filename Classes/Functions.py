@@ -32,16 +32,15 @@ def get_alien_multiplier(total_frames):
 
     return round(total_frames / 3600)
 
-def get_alien_vel():
+def get_alien_vel(alien):
     """ Returns vel_x and vel_y attributes for alien. """
 
-    x_diff = game.player.rect.x - self.rect.center[0]
-    y_diff = game.player.rect.y - self.rect.center[1]
-
+    x_diff = settings["player_x_center"] - alien.rect.center[0]
+    y_diff = settings["player_y_center"] - alien.rect.center[1]
     angle = math.atan2(y_diff, x_diff)
 
-    vel_y = math.sin(angle)
-    vel_x = math.cos(angle)
+    vel_y = math.sin(angle) * settings["alien_speed"]
+    vel_x = math.cos(angle) * settings["alien_speed"]
 
     return [vel_x, vel_y]
 
@@ -93,7 +92,7 @@ def random_alien_spawn(screen_width, screen_height):
 
     if left_right == 0:
 
-        x = random.randrange(-100, -600)
+        x = random.randrange(-600, -100)
 
     else:
 
@@ -103,7 +102,7 @@ def random_alien_spawn(screen_width, screen_height):
 
     if top_bottom == 0:
 
-        y = random.randrange(-100,-600)
+        y = random.randrange(-600,-100)
 
     else:
 

@@ -17,10 +17,12 @@ class Drop(pygame.sprite.Sprite):
 
         super(Drop, self).__init__()
 
-        drop_image_list = ["drop_ammo.png", "drop_coin.png", "drop_life.png"]
+        drop_image_list = ["/home/noahhefner/Git/Space-Fight-2/Images/drop_ammo.png", \
+        "/home/noahhefner/Git/Space-Fight-2/Images/drop_coin.png", \
+         "/home/noahhefner/Git/Space-Fight-2/Images/drop_life.png"]
 
         self.image = pygame.image.load(drop_image_list[alien.drop])
-        self.rect = self.imge.get_rect()
+        self.rect = self.image.get_rect()
         self.rect.x = (alien.rect.x + (alien.rect.width / 2)) - self.rect.width /  2
         self.rect.y = (alien.rect.y + (alien.rect.height / 2)) - self.rect.height / 2
         self.dropped_frames = 0
