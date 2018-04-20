@@ -139,7 +139,6 @@ class Menu(object):
 
         self.set_active(self.menu_screen_home)
 
-
         return
 
     def process_user_events(self):
@@ -254,6 +253,6 @@ class Menu(object):
             drawn
         """
 
-        self.menu_screen_active.draw()
+        self.menu_screen_active.draw(surface)
 
         return

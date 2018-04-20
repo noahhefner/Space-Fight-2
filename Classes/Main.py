@@ -42,6 +42,8 @@ clock = pygame.time.Clock()
 menu = Menu()
 game = Game()
 
+menu_done = False
+
 # Stars are not part of menu or game
 star_group = pygame.sprite.Group()
 
@@ -55,23 +57,23 @@ while settings["active_screen"] != "done":
     # Updates
     star_group.update()
 
-
     # Draw background first
     screen.fill(BLACK)
 
     # Draw active elements
     star_group.draw(screen)
 
-    while settings["active_screen"] == "menu":
+    if settings["active_screen"] == "menu":
 
-        menu_done = menu.process_user_events()
+        menu.display_frame(screen)
 
-    while settings["active_screen"] == "game":
+    if settings["active_screen"] == "game":
 
         SCREEN.fill(BLACK)
         game.process_user_events()
-        game.display_frame(SCREEN)
-        pygame.display.flip()
-        clock.tick(60)
+        game.display_frame(screen)
+
+    pygame.display.flip()
+    clock.tick(60)
 
 pygame.quit
