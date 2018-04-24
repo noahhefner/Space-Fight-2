@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Bullet Class
-# Last Edit: 12/17/2017
+# Last Edit: 4/24/2018
 
 import math
 import pygame
@@ -38,6 +38,8 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y = settings["player_y_center"]
         self.vel = get_bullet_vel(20)
 
+        return
+
     def update(self):
         """ Move bullet and check for kill. """
 
@@ -51,3 +53,5 @@ class Bullet(pygame.sprite.Sprite):
         elif self.rect.y > settings["screen_height"] or self.rect.x > settings["screen_width"]:
 
             self.kill()
+
+        return

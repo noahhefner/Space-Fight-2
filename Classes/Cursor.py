@@ -30,14 +30,16 @@ class Cursor(pygame.sprite.Sprite):
 
   """
 
-  def __init__ (self):
+  def __init__ (self, cursor_image):
 
     super(Cursor, self).__init__()
 
-    self.image = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/cursor_red.png")
+    self.image = pygame.image.load(cursor_image)
     self.image.set_colorkey(BLACK)
 
     self.rect = self.image.get_rect()
+
+    return
 
   def update(self):
     """ Get the mouse position. Set the center of the cursor to that
@@ -48,9 +50,4 @@ class Cursor(pygame.sprite.Sprite):
     (mouse_x, mouse_y) = pygame.mouse.get_pos()
     self.rect.center = (mouse_x,mouse_y)
 
-  def draw(self, screen):
-    """ Blit the cursor to the screen.
-
-    """
-
-    screen.blit(self.image, [self.rect.x, self.rect.y])
+    return

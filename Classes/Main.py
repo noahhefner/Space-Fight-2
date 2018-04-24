@@ -20,6 +20,7 @@ from Drop import Drop
 from Game import Game
 from Star import Star
 from Menu import Menu
+from Cursor import Cursor
 from Player import Player
 from Settings import settings
 from Array import Array

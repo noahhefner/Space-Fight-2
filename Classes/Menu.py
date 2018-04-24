@@ -31,7 +31,7 @@ class Menu(object):
         """ Initiates menu class. """
 
         # Cursor sprite
-        self.cursor = Cursor()
+        self.cursor = Cursor(settings["cursor_type_string"])
         # TODO: Add cursor upgrades
 
         # Sprite groups that hol1d items for each screen

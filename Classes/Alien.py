@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Alien Class
-# Last Edit: 1/2/2017
+# Last Edit: 4/24/2018s
 
 import math
 import pygame
@@ -34,7 +34,9 @@ class Alien(pygame.sprite.Sprite):
         self.pos_initial = random_alien_spawn(settings["screen_width"], settings["screen_height"])
         self.rect.x, self.rect.y = self.pos_initial[0], self.pos_initial[1]
         self.speed = settings["alien_speed"]
-        self.drop = random.randrange(0,3)
+        self.drop = random.randrange(0,10)
+
+        return
 
     def update(self):
         """ Moves the alien. """
@@ -44,4 +46,4 @@ class Alien(pygame.sprite.Sprite):
         self.rect.x += new_vel[0]
         self.rect.y += new_vel[1]
 
-        print(new_vel)
+        return

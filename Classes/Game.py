@@ -13,6 +13,7 @@ from Button import Button
 from Bullet import Bullet
 from Alien import Alien
 from Drop import Drop
+from Cursor import Cursor
 from Star import Star
 from Player import Player
 from Settings import settings
@@ -42,17 +43,23 @@ class Game(object):
 
         self.bullets_left = 100
         self.score = 0
-        self.lives = settings["player_start_lives"]
+        self.lives = settings["player_lives"]
         self.paused = False
         self.type_player_string = settings["player_type_string"]
         self.type_bullet_string = settings["bullet_type_string"]
+        self.type_cursor_string = settings["cursor_type_string"]
         self.player = Player(self.type_player_string)
+        self.cursor = Cursor(self.type_cursor_string)
         self.player.speed = settings["player_speed"]
         self.time = time.clock()
 
         self.bullets = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.explosions = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+        self.drops = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+        self.hud = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+
+        return
 
     def run_game_logic(self):
         """ Handles game logic. """
@@ -70,6 +77,8 @@ class Game(object):
             self.bullets.update()
             self.aliens.update()
             self.explosions.update()
+            self.drops.update()
+            self.cursor.update()
 
             # Then see what happened
             alien_bullet_collision = pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
@@ -84,18 +93,38 @@ class Game(object):
                     new_alien = Alien()
                     self.aliens.add(new_alien)
 
-                    if alien.drop <= 3:
+                    if alien.drop <= 2:
 
                         drop = Drop(alien)
+                        self.drops.add(drop)
 
             alien_player_collision = pygame.sprite.spritecollide(self.player, self.aliens,
-            False)
+            True)
 
             for alien in alien_player_collision:
 
                 explosion = Explosion(alien.rect.x, alien.rect.y)
                 self.explosions.add(explosion)
                 self.lives -= 1
+
+            player_drop_collision = pygame.sprite.spritecollide(self.player, self.drops,
+            True)
+
+            for drop in player_drop_collision:
+
+                if drop.image_number == 0:
+
+                    self.bullets_left += 50
+
+                elif drop.image_number == 1:
+
+                    settings["coins"] += 1
+
+                elif drop.image_number == 2:
+
+                    self.lives += 1
+
+        return
 
             # TODO: spawn aliens on increasingly fast time-based interval
 
@@ -105,6 +134,8 @@ class Game(object):
         bullet = Bullet(self.type_bullet_string)
         self.bullets.add(bullet)
         self.bullets_left -= 1
+
+        return
 
     def process_user_events(self):
         """ Process user imput. """
@@ -138,6 +169,16 @@ class Game(object):
 
                     settings["active_screen"] = "done"
 
+                elif event.key == pygame.K_p:
+
+                    if self.paused:
+
+                        self.paused = False
+
+                    else:
+
+                        self.paused = True
+
                 else:
 
                     pass
@@ -168,8 +209,14 @@ class Game(object):
 
                     pass
 
+        return
+
     def display_frame(self, surface):
         """ Draw the appropriate sprites for the current screen. """
+
+        for drop in self.drops:
+
+            draw_sprite(drop, surface)
 
         for alien in self.aliens:
 
@@ -184,3 +231,7 @@ class Game(object):
             draw_sprite(explosion, surface)
 
         draw_sprite(self.player, surface)
+
+        draw_sprite(self.cursor, surface)
+
+        return
