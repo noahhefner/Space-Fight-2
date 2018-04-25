@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Game Class
-# Last Edit: 1/2/2017
+# Last Edit: 4/25/2018
 
 import math
 import pygame
@@ -41,29 +41,80 @@ class Game(object):
             type_bullet_string, player_speed]
         """
 
-        self.bullets_left = 100
         self.score = 0
-        self.lives = settings["player_lives"]
         self.paused = False
+
+        # Load player, bullet, and cursor settings
         self.type_player_string = settings["player_type_string"]
         self.type_bullet_string = settings["bullet_type_string"]
         self.type_cursor_string = settings["cursor_type_string"]
+
+        # Create player and cursor with those settings
         self.player = Player(self.type_player_string)
         self.cursor = Cursor(self.type_cursor_string)
-        self.player.speed = settings["player_speed"]
+
+        # Load starting bullets count settings, start live settings, player
+        # speed settings
+        self.bullet_amount = settings["start_ammo"]
+        self.lives = settings["start_lives"]
+        self.player.speed = settings["start_speed"]
+
         self.time = time.clock()
 
+        # Create the groups to hold game items
         self.bullets = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.explosions = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.drops = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
         self.hud = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
 
+        string_score_counter = "SCORE: " + str(self.score)
+        string_ammo_counter = "BULLETS: " + str(self.bullet_amount)
+
+        self.bullet_counter = Button(string_ammo_counter)
+        self.score_counter = Button(string_score_counter)
+
+        self.hud.add(self.bullet_counter)
+        self.hud.add(self.score_counter)
+
+        self.score_counter.rect.y = 10
+        self.score_counter.rect.x = 10
+        self.bullet_counter.rect.y = self.score_counter.rect.y + self.score_counter.rect.height + 10
+        self.bullet_counter.rect.x = 10
+
+        # Make cursor invisible
+        pygame.mouse.set_visible(False)
+
         return
+
+    def update_hud(self):
+        """ Update the items in the hud. """
+
+        self.hud.empty()
+
+        string_score_counter = "SCORE: " + str(self.score)
+        string_live_counter = "LIVES: " + str(self.lives)
+        string_ammo_counter = "BULLETS: " + str(self.bullet_amount)
+
+        self.bullet_counter = Button(string_ammo_counter)
+        self.live_counter = Button(string_live_counter)
+        self.score_counter = Button(string_score_counter)
+
+        self.score_counter.rect.y = 10
+        self.score_counter.rect.x = 10
+        self.live_counter.rect.y = self.score_counter.rect.y + self.score_counter.rect.height + 10
+        self.live_counter.rect.x = 10
+        self.bullet_counter.rect.y = self.live_counter.rect.y + self.live_counter.rect.height + 10
+        self.bullet_counter.rect.x = 10
+
+        self.hud.add(self.bullet_counter)
+        self.hud.add(self.live_counter)
+        self.hud.add(self.score_counter)
 
     def run_game_logic(self):
         """ Handles game logic. """
 
+        # While the game is not paused
         if not self.paused:
 
             # Keep the number of aliens at a constant 20
@@ -79,42 +130,50 @@ class Game(object):
             self.explosions.update()
             self.drops.update()
             self.cursor.update()
+            self.update_hud()
 
-            # Then see what happened
+            # Get goup of aliens and bullets that collide
             alien_bullet_collision = pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
 
             for alien in alien_bullet_collision:
 
+                    # Spawn an explosion in that area
                     explosion = Explosion(alien.rect.x, alien.rect.y)
                     self.explosions.add(explosion)
                     self.score += 1
                     alien.kill()
 
+                    # Make a new alien to take its place
                     new_alien = Alien()
                     self.aliens.add(new_alien)
 
+                    # Drop the perk if the alien was a perk carrier
                     if alien.drop <= 2:
 
                         drop = Drop(alien)
                         self.drops.add(drop)
 
+            # Get group of player and aliens that collide
             alien_player_collision = pygame.sprite.spritecollide(self.player, self.aliens,
             True)
 
             for alien in alien_player_collision:
 
+                # Spawn an explosion in that area and subtract one player life
                 explosion = Explosion(alien.rect.x, alien.rect.y)
                 self.explosions.add(explosion)
                 self.lives -= 1
 
+            # Get group of player and drops that collide
             player_drop_collision = pygame.sprite.spritecollide(self.player, self.drops,
             True)
 
             for drop in player_drop_collision:
 
+                # Perform the perks ability/benefit
                 if drop.image_number == 0:
 
-                    self.bullets_left += 50
+                    self.bullet_amount += 50
 
                 elif drop.image_number == 1:
 
@@ -133,7 +192,7 @@ class Game(object):
 
         bullet = Bullet(self.type_bullet_string)
         self.bullets.add(bullet)
-        self.bullets_left -= 1
+        self.bullet_amount -= 1
 
         return
 
@@ -142,13 +201,15 @@ class Game(object):
 
         for event in pygame.event.get():
 
+            # Shoot a bullet with left mouse click
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
-            self.bullets_left > 0:
+            self.bullet_amount > 0:
 
                 self.spawn_bullet()
 
             if event.type == pygame.KEYDOWN:
 
+                # WASD for up down left right
                 if event.key == pygame.K_w:
 
                     self.player.change_speed(0, -1 * self.player.speed)
@@ -165,10 +226,12 @@ class Game(object):
 
                     self.player.change_speed(self.player.speed, 0)
 
+                # Escape to kill the program
                 elif event.key == pygame.K_ESCAPE:
 
                     settings["active_screen"] = "done"
 
+                # P to pause, p again to un-pause
                 elif event.key == pygame.K_p:
 
                     if self.paused:
@@ -179,12 +242,9 @@ class Game(object):
 
                         self.paused = True
 
-                else:
-
-                    pass
-
             if event.type == pygame.KEYUP:
 
+                # Stop movement when key is released
                 if event.key == pygame.K_w:
 
                     self.player.change_speed(0, self.player.speed)
@@ -201,37 +261,40 @@ class Game(object):
 
                     self.player.change_speed(-1 * self.player.speed, 0)
 
-                elif event.key == pygame.K_ESCAPE:
-
-                    settings["active_screen"] = "done"
-
-                else:
-
-                    pass
-
         return
 
     def display_frame(self, surface):
         """ Draw the appropriate sprites for the current screen. """
 
+        # Draw hud items
+        for item in self.hud:
+
+            draw_sprite(item, surface)
+
+        # Draw drops, if any
         for drop in self.drops:
 
             draw_sprite(drop, surface)
 
+        # Draw aliens, if any
         for alien in self.aliens:
 
             draw_sprite(alien, surface)
 
+        # Draw bullets, if any
         for bullet in self.bullets:
 
             draw_sprite(bullet, surface)
 
+        # Draw explosions, if any
         for explosion in self.explosions:
 
             draw_sprite(explosion, surface)
 
+        # Draw player
         draw_sprite(self.player, surface)
 
+        # Draw cursor
         draw_sprite(self.cursor, surface)
 
         return

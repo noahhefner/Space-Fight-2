@@ -32,7 +32,7 @@ class Button(pygame.sprite.Sprite):
 
         if image.find(".png") == -1 and image.find(".jpeg") == -1 and image.find(".jpg") == -1:
 
-            self.font = pygame.font.SysFont('ARCADECLASSIC', 25, False, False)
+            self.font = pygame.font.SysFont('04B', 80, False, False)
             self.default_color = WHITE
             self.color = WHITE
             self.text = str(image)
@@ -79,8 +79,8 @@ class Button(pygame.sprite.Sprite):
             rect values will be assigned
         """
 
-        self.rect.x = position[0] - ((1/2) * self.rect.x)
-        self.rect.y = position[1] - ((1/2) * self.rect.y)
+        self.rect.x = position[0]
+        self.rect.y = position[1]
 
         return
 
