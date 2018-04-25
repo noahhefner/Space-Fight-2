@@ -31,7 +31,7 @@ class Star(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(0, screen_width)
         self.rect.y = random.randrange(0, screen_height)
-        self.vely = random.randrange(-3,0)
+        self.vely = random.randrange(-3,1)
 
     def update(self):
         """ Add the velx and vely attributes to the rect.x and rect.y

@@ -161,7 +161,6 @@ class Menu(object):
                 # If the current screen is the home screen
                 if settings["active_submenu"] == "home":
 
-                    print("YEAH")
                     if self.button_quit.is_clicked(mouse_pos):
 
                         settings["active_screen"] = "done"
@@ -175,7 +174,7 @@ class Menu(object):
                         settings["active_submenu"] = "upgrades"
 
                 # If the current screen is the upgrades screen
-                if settings["active_submenu"] == "upgrades":
+                elif settings["active_submenu"] == "upgrades":
 
                     if self.back_button.is_clicked(mouse_pos):
 

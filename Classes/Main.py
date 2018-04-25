@@ -45,6 +45,7 @@ game = Game()
 cursor = Cursor(settings["cursor_type_string"])
 
 menu_done = False
+reset = False
 
 # Stars are not part of menu or game
 star_group = pygame.sprite.Group()
@@ -80,9 +81,14 @@ while settings["active_screen"] != "done":
     # Draw settings items if settings is active screen
     if settings["active_screen"] == "game":
 
-        game.run_game_logic()
         game.process_user_events()
+        reset = game.run_game_logic()
         game.display_frame(screen)
+
+
+    if reset:
+
+        game.__init__()
 
     pygame.display.flip()
     clock.tick(60)

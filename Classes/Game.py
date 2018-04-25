@@ -85,6 +85,20 @@ class Game(object):
         # Make cursor invisible
         pygame.mouse.set_visible(False)
 
+        self.heart_image = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/heart.png").convert()
+
+        return
+
+    def draw_lives(self, surface):
+        """ Draw he players live count in hearts. """
+
+        x_coord = settings["screen_width"] - 48
+        y_coord = 10
+
+        for i in range(self.lives):
+
+            surface.blit(self.heart_image, [x_coord - ((i + 1) * 48), y_coord])
+
         return
 
     def update_hud(self):
@@ -113,6 +127,11 @@ class Game(object):
 
     def run_game_logic(self):
         """ Handles game logic. """
+
+        if self.lives <= 0:
+
+            settings["active_screen"] = "menu"
+            return True
 
         # While the game is not paused
         if not self.paused:
@@ -183,7 +202,7 @@ class Game(object):
 
                     self.lives += 1
 
-        return
+        return False
 
             # TODO: spawn aliens on increasingly fast time-based interval
 
@@ -270,6 +289,9 @@ class Game(object):
         for item in self.hud:
 
             draw_sprite(item, surface)
+
+        # Draw player lives
+        self.draw_lives(surface)
 
         # Draw drops, if any
         for drop in self.drops:
