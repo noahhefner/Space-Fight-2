@@ -29,10 +29,13 @@ class Button(pygame.sprite.Sprite):
         super(Button, self).__init__()
 
         self.is_text = False
+        self.font = '04B'
+        self.font_size = 80
+        self.scale = scale
 
         if image.find(".png") == -1 and image.find(".jpeg") == -1 and image.find(".jpg") == -1:
 
-            self.font = pygame.font.SysFont('04B', 80, False, False)
+            self.font = pygame.font.SysFont(self.font, self.font_size, False, False)
             self.default_color = WHITE
             self.color = WHITE
             self.text = str(image)

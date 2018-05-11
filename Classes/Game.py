@@ -74,6 +74,9 @@ class Game(object):
         self.bullet_counter = Button(string_ammo_counter)
         self.score_counter = Button(string_score_counter)
 
+        self.bullet_counter.scale = .25
+        self.score_counter.scale = .25
+
         self.hud.add(self.bullet_counter)
         self.hud.add(self.score_counter)
 
@@ -92,12 +95,12 @@ class Game(object):
     def draw_lives(self, surface):
         """ Draw he players live count in hearts. """
 
-        x_coord = settings["screen_width"] - 48
+        x_coord = settings["screen_width"] - 100
         y_coord = 10
 
         for i in range(self.lives):
 
-            surface.blit(self.heart_image, [x_coord - ((i + 1) * 48), y_coord])
+            surface.blit(self.heart_image, [x_coord - ((i + 1) * 100), y_coord])
 
         return
 
@@ -113,6 +116,9 @@ class Game(object):
         self.bullet_counter = Button(string_ammo_counter)
         self.live_counter = Button(string_live_counter)
         self.score_counter = Button(string_score_counter)
+
+        self.bullet_counter.scale = .25
+        self.score_counter.scale = .25
 
         self.score_counter.rect.y = 10
         self.score_counter.rect.x = 10
