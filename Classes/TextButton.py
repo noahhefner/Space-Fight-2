@@ -21,6 +21,8 @@ class TextButton(pygame.sprite.Sprite):
 
         return self.to_page
 
+        return
+
     def __hover(self):
 
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
@@ -35,10 +37,16 @@ class TextButton(pygame.sprite.Sprite):
 
         self.image = self.font.render(self.text, False, self.color)
 
+        return
+
     def display(self, surface):
 
         surface.blit(self.image, [self.rect.x, self.rect.y])
 
+        return
+
     def update(self):
 
         self.__hover()
+
+        return

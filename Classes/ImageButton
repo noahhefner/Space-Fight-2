@@ -28,11 +28,13 @@ class ImageButton(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+        return
+
     def __hover(self):
 
         if self.hover_image_string == "NONE":
 
-            return
+            pass
 
         else:
 
@@ -47,10 +49,16 @@ class ImageButton(pygame.sprite.Sprite):
 
                 self.image = self.base_image
 
+        return
+
     def display(self, surface):
 
         surface.blit(self.image, [self.rect.x, self.rect.y])
 
+        return
+
     def update(self):
 
         self.__hover()
+
+        return

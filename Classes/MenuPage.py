@@ -17,9 +17,13 @@ class MenuPage():
 
         self.x_positioning = x_positioning
 
+        return
+
     def set_y_positioning(self, y_positioning):
 
         self.y_positioning = y_positioning
+
+        return
 
     def add_text_button(self, button):
 
@@ -28,9 +32,13 @@ class MenuPage():
         # Readjust coordinates for the buttons every time we add a button
         self.__set_coords()
 
+        return
+
     def add_image_button(self, image_button):
 
         self.image_buttons.append(image_button)
+
+        return
 
     def __set_coords(self):
 
@@ -97,6 +105,8 @@ class MenuPage():
 
                 print("Invalid y axis positioning")
 
+        return
+
     def show_page(self, surface):
 
         for text_button in self.text_buttons:
@@ -106,3 +116,5 @@ class MenuPage():
         for image_button in self.image_buttons:
 
             image_button.display(surface)
+
+        return
