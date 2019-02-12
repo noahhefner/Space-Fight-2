@@ -25,6 +25,7 @@ from Player import Player
 from Settings import settings
 from Array import Array
 from random import *
+import Constants
 
 # Constants
 YELLOW = [255, 255, 0]
@@ -64,7 +65,7 @@ while settings["active_screen"] != "done":
     cursor.update()
 
     # Draw background first
-    screen.fill(BLACK)
+    screen.fill(Constants.BLACK)
 
     # Draw active elements
     star_group.draw(screen)
