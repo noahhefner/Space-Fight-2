@@ -59,17 +59,17 @@ class Button(pygame.sprite.Sprite):
 
         if self.is_text:
 
-            (mouse_x, mouse_y) = pygame.mouse.get_pos()
+        (mouse_x, mouse_y) = pygame.mouse.get_pos()
 
-            if mouse_x in range(self.rect.x, self.rect.x + self.rect.width) \
-            and mouse_y in range(self.rect.y, self.rect.y + self.rect.height) and self.highlight:
+        if mouse_x in range(self.rect.x, self.rect.x + self.rect.width) \
+        and mouse_y in range(self.rect.y, self.rect.y + self.rect.height) and self.highlight:
 
-                self.color = self.highlight_color
+            self.color = self.highlight_color
 
-            else:
-                self.color = self.default_color
+        else:
+            self.color = self.default_color
 
-            self.image = self.font.render(self.text, False, self.color)
+        self.image = self.font.render(self.text, False, self.color)
 
         else:
 

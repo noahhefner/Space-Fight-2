@@ -45,3 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=self.rect.center)
 
         return
+
+    def update(self):
+
+        self.rotate()
