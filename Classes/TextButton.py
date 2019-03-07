@@ -1,19 +1,20 @@
+import pygame
+import Constants
 
+pygame.init()
 
 class TextButton(pygame.sprite.Sprite):
 
     def __init__(self, text = "UNNAMED", to_page = "NONE"):
 
-        super(Button, self).__init__()
+        super(TextButton, self).__init__()
 
-        self.text = text
+        self.text = str(text)
         self.to_page = to_page
         self.color = Constants.BUTTONCOLOR
+        self.font = Constants.BUTTONFONT
         self.image = self.font.render(self.text, False, self.color)
-        self.image = pygame.transform.scale(self.image, \
-        [self.rect.width * Constants.BUTTONTEXTSCALE, \
-        self.rect.height * Constants.BUTTONTEXTSCALE])
-        self.image = self.image.get_rect()
+        self.rect = self.image.get_rect()
 
         return
 

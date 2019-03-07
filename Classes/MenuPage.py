@@ -1,4 +1,4 @@
-
+import Constants
 
 class MenuPage():
 
@@ -28,58 +28,50 @@ class MenuPage():
     def add_text_button(self, button):
 
         self.text_buttons.append(button)
-
-        # Readjust coordinates for the buttons every time we add a button
-        self.__set_coords()
+        self.set_coords()
 
         return
 
     def add_image_button(self, image_button):
 
         self.image_buttons.append(image_button)
+        self.set_coords()
 
         return
 
-    def __set_coords(self):
+    def set_coords(self):
 
         # Set x coordinates for all the buttons
-        for i in range(len(self.text_buttons) - 1):
+        for button in self.text_buttons:
 
             if self.x_positioning == "left":
 
-                for button in self.text_buttons:
-
-                    button.rect.x = x_spacing
+                button.rect.x = self.x_spacing
 
             elif self.x_positioning == "mid":
 
-                for button in self.text_buttons:
-
-                    button.rect.x = (Constants.SCREEN_WIDTH / 2) - \
-                    (button.rect.width / 2)
+                button.rect.x = (Constants.SCREEN_WIDTH / 2) - \
+                (button.rect.width / 2)
 
             elif self.x_positioning == "right":
 
-                for button in self.text_buttons:
+                button.rect.x = Constants.SCREEN_WIDTH - \
+                self.x_spacing - button.rect.width
 
-                    button.rect.x = Constants.SCREEN_WIDTH - \
-                    self.x_spacing - button.rect.width
-
-            else
+            else:
 
                 print("Invalid x axis positioning")
 
         # Set y coordinates for all the buttons
-        for i in range(len(self.text_buttons) - 1):
+        count = 0
+        for button in self.text_buttons:
 
-            if self.y_positioning = "top":
+            if self.y_positioning == "top":
 
-                for button in self.text_buttons:
+                button.rect.y = ((count + 1) * self.y_spacing) + \
+                (count * self.text_buttons[0].rect.height)
 
-                    button.rect.y = ((i + 1) * self.y_spacing) + \
-                    i * self.text_buttons[0].rect.height
-
-            elif self.y_positioning = "mid":
+            elif self.y_positioning == "mid":
 
                 # Calculations for mid positioning
                 total_height = self.text_buttons[0].rect.height * \
@@ -87,27 +79,26 @@ class MenuPage():
                 self.y_spacing * (len(self.text_buttons) + 1)
                 top_y = (1/2) * Constants.SCREEN_HEIGHT - (1/2) * total_height
 
-                for button in self.text_buttons:
+                button.rect.y = top_y + ((count + 1) * self.y_spacing) + \
+                count * self.text_buttons[0].rect.height
 
-                    button.rect.y = top_y + ((i + 1) * self.y_spacing) + \
-                    i * self.text_buttons[0].rect.height
+            elif self.y_positioning == "bot":
 
-            elif self.y_positioning = "bot":
+                button.rect.y = Constants.SCREEN_HEIGHT - \
+                (((len(self.text_buttons) - count) * self.y_spacing) + \
+                (len(self.text_buttons) - count) * \
+                button.rect.height)
 
-                for button in self.text_buttons:
+            else:
 
-                    button.rect.y.rect.y = \
-                    ((len(self.text_buttons) + 1 - i) * self.y_spacing) + \
-                    (len(self.text_buttons) - i) * \
-                    self.text_buttons[0].rect.height
+                print("ERROR: INVALID Y AXIS POSITIONING")
 
-            else
+            count += 1
 
-                print("Invalid y axis positioning")
-
+        count = None
         return
 
-    def show_page(self, surface):
+    def display(self, surface):
 
         for text_button in self.text_buttons:
 
@@ -118,3 +109,13 @@ class MenuPage():
             image_button.display(surface)
 
         return
+
+    def update(self):
+
+        for text_button in self.text_buttons:
+
+            text_button.update()
+
+        for image_button in self.image_buttons:
+
+            image_button.update()
