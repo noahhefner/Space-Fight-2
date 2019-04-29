@@ -23,12 +23,12 @@ RED = [255, 0, 0]
 class Alien(pygame.sprite.Sprite):
     """ In game alien entity. """
 
-    def __init__(self):
+    def __init__(self, image_string):
         """ Initiate alien class. """
 
         super(Alien, self).__init__()
 
-        self.image = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/alien_level_one.png").convert()
+        self.image = pygame.image.load(image_string).convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.pos_initial = random_alien_spawn(settings["screen_width"], settings["screen_height"])
