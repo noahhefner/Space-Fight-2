@@ -5,12 +5,8 @@
 
 import math
 import pygame
-import time
-import Constants
-
-from Settings import settings
-
 pygame.init()
+
 
 class Player(pygame.sprite.Sprite):
     """ In-game player entity. """
@@ -24,25 +20,29 @@ class Player(pygame.sprite.Sprite):
         super(Player, self).__init__()
 
         self.image = pygame.image.load(image_string).convert()
-        self.image.set_colorkey(Constants.BLACK)
+        self.image.set_colorkey([0, 0, 0])
         self.original = self.image
         self.rect = self.image.get_rect()
-        self.rect.x = (settings["screen_height"] / 2) - (self.rect.width / 2)
-        self.rect.y = (settings["screen_width"] / 2) - (self.rect.height / 2)
         self.vel_x = 0
         self.vel_y = 0
         self.ammo = 100
-        self.special = "special image"
 
-    def change_speed(self, x, y):
-        """ Adds an int value to the vel_x and vel_y attributes.
-        Args:
-            x (int): pixel amount to be added to the vel_x attribute.
-            y (int): pixel amount to be added to the vel_y attribute.
-        """
+    def set_x(self, new_x):
+        self.rect.x = new_x
 
-        self.vel_x += x
-        self.vel_y += y
+    def set_y(self, new_y):
+        self.rect.y = new_y
+
+    def get_x(self):
+        return self.rect.x
+
+    def get_y(self):
+        return self.rect.y
+
+    def move(self, x, y):
+
+        # Check
+        return None
 
     def check_screen_edge_hit(self):
         """ Check if the player is colliding with the edge of the screen. If so, stop the player from going off the
@@ -66,7 +66,7 @@ class Player(pygame.sprite.Sprite):
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
         angle = 360 - (math.degrees(math.atan2(self.rect.center[1] - mouse_y, self.rect.center[0] - mouse_x)) + 180)
         self.image = pygame.transform.rotate(self.original, angle)
-        self.rect = self.image.get_rect(center=self.rect.center)
+        self.rect = self.image.get_rect(center = self.rect.center)
 
     def move_player(self):
         """ Move the position of the player. """

@@ -1,4 +1,4 @@
-
+import pygame
 
 class ImageButton(pygame.sprite.Sprite):
 
@@ -11,7 +11,7 @@ class ImageButton(pygame.sprite.Sprite):
 
         if hover_image_string != "NONE":
             self.hover_image = pygame.image.load(hover_image_string)
-        else
+        else:
             self.hover_image_string = hover_image_string
 
         self.to_page = to_page
@@ -45,7 +45,7 @@ class ImageButton(pygame.sprite.Sprite):
 
                 self.image = self.hover_image
 
-            else
+            else:
 
                 self.image = self.base_image
 
