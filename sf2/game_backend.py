@@ -19,7 +19,12 @@ class GameBackend:
 
         for i in range(20):
 
-            self.aliens.append(Alien(self.find_lvl_1_alien_image()))
+            self.aliens.append(self.__make_alien(self.__find_lvl_1_alien_image()))
+
+    def update(self):
+
+        # Move aliens
+        return "boi"
 
     def __find_player_image(self):
         return "player image"
@@ -43,6 +48,6 @@ class GameBackend:
         bullet = Bullet(self.__find_bullet_image())
         self.bullets.append(bullet)
 
-    def __make_alien(self):
+    def __make_alien(self, image_string):
 
-        alien = Alien()
+        return Alien(image_string)
