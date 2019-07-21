@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Drop Class
-# Last Edit: 1/2/2017
+# Last Edit: 7/21/2019
 
 import math
 import pygame
@@ -17,11 +17,11 @@ class Drop(pygame.sprite.Sprite):
 
         super(Drop, self).__init__()
 
-        drop_image_list = ["/home/noahhefner/Git/Space-Fight-2/Images/drop_ammo.png", \
-        "/home/noahhefner/Git/Space-Fight-2/Images/drop_coin.png", \
-         "/home/noahhefner/Git/Space-Fight-2/Images/drop_life.png"]
+        drop_image_list = ["/Space-Fight-2/Images/drop_ammo.png", \
+        "/Space-Fight-2/Images/drop_coin.png", \
+         "/Space-Fight-2/Images/drop_life.png"]
 
-        self.image_number = alien.drop
+        self.image_number = random.randrange(0, 3)
         self.image = pygame.image.load(drop_image_list[self.image_number])
         self.rect = self.image.get_rect()
         self.rect.x = (alien.rect.x + (alien.rect.width / 2)) - self.rect.width /  2

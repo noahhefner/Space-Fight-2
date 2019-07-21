@@ -1,4 +1,9 @@
+# Noah Hefner
+# Space Fight 2.0
+# GameBackend Class
+# Last Edit: 7/21/2019
 
+# Imports
 from .player import Player
 from .bullet import Bullet
 from .alien import Alien
@@ -6,7 +11,6 @@ from .settings import settings
 import pygame
 
 pygame.init()
-
 
 class GameBackend:
 
@@ -16,6 +20,8 @@ class GameBackend:
 
         self.bullets = []
         self.aliens = []
+        self.explosions = []
+        self.drops = []
 
         for i in range(20):
 
@@ -23,8 +29,26 @@ class GameBackend:
 
     def update(self):
 
-        # Move aliens
-        return "boi"
+        """
+        Things that should happen here:
+            - Get user input
+
+            - Move Player
+            - Move aliens
+                - Calculate trajectory towards player
+            - Move bullets
+
+            - Hit detection
+
+            - Update player lives
+            - Update player bullets
+            - Update explosions
+            - Update remaining time for any drops
+
+        Returns:
+            - True if the game should continue
+            - False if the game should be ended
+        """
 
     def __find_player_image(self):
         return "player image"

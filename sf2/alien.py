@@ -8,6 +8,7 @@ import pygame
 import time
 
 from Functions import *
+from drop import Drop
 from Settings import settings
 
 pygame.init()
@@ -34,16 +35,35 @@ class Alien(pygame.sprite.Sprite):
         self.pos_initial = random_alien_spawn(settings["screen_width"], settings["screen_height"])
         self.rect.x, self.rect.y = self.pos_initial[0], self.pos_initial[1]
         self.speed = settings["alien_speed"]
-        self.drop = random.randrange(0,10)
+        self.drop = None
+
+        if random.randrange(0,settings.drop_probability) == 1:
+            self.drop = Drop()
 
         return
 
-    def update(self):
-        """ Moves the alien. """
+    def set_x(self, new_x):
 
-        new_vel = get_alien_vel(self)
+        self.rect.x = new_x
 
-        self.rect.x += new_vel[0]
-        self.rect.y += new_vel[1]
+    def set_y(self, new_y):
 
-        return
+        self.rect.y = new_y
+
+    def get_x(self):
+
+        return self.rect.x
+
+    def get_y(self):
+
+        return self.rect.y
+
+    """
+    Precondition: x and y are integers
+    """
+    def move(self, x, y):
+
+        self.rect.x += x
+        self.rect.y += y
+
+        return True

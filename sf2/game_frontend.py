@@ -12,3 +12,12 @@ class GameFrontend:
         # pass input from player to backend
         return
 
+    def update(self):
+
+        # Update the backend
+        return
+
+    def display(self):
+
+        # Show everything
+        return

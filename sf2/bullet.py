@@ -9,24 +9,19 @@ import time
 
 from Functions import *
 from Settings import settings
+from constants import *
 
 pygame.init()
-
-# Constants
-YELLOW = [255, 255, 0]
-BLACK = [0, 0, 0]
-WHITE = [255, 255, 255]
-GREEN = [0, 255, 0]
-GREY = [105, 105, 105]
-RED = [255, 0, 0]
 
 class Bullet(pygame.sprite.Sprite):
     """ In-game bullet entity. """
 
-    def __init__(self, image_string):
+    def __init__(self, image_string, x_traj, y_traj):
         """ Initiate bullet class.
         Args:
-            image_string (string): name of image file to be used for bullet image.
+            image_string (string): image path to be used for bullet image.
+            x_traj (int): x axis trajectory of the bullet.
+            y_traj (int): y axis trajectory of the bullet.
         """
 
         super(Bullet, self).__init__()
@@ -36,22 +31,24 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = settings["player_x_center"]
         self.rect.y = settings["player_y_center"]
-        self.vel = get_bullet_vel(20)
+        self.trajectory = [x_traj, y_traj]
 
-        return
+        return True
 
     def update(self):
-        """ Move bullet and check for kill. """
+        """ Move bullet. This method has an auto-kill. """
 
-        self.rect.x += self.vel[0]
-        self.rect.y += self.vel[1]
+        self.rect.x += self.trajectory[0]
+        self.rect.y += self.trajectory[1]
 
-        if self.rect.x + self.rect.width < 0 or self.rect.y + self.rect.height < 0:
-
-            self.kill()
-
-        elif self.rect.y > settings["screen_height"] or self.rect.x > settings["screen_width"]:
+        if self.rect.x + self.rect.width < 0 or
+        self.rect.y + self.rect.height < 0:
 
             self.kill()
 
-        return
+        elif self.rect.y > settings["screen_height"] or
+        self.rect.x > settings["screen_width"]:
+
+            self.kill()
+
+        return True
