@@ -1,16 +1,16 @@
 # Noah Hefner
 # Space Fight 2.0
 # Alien Class
-# Last Edit: 4/24/2018s
+# Last Edit: 7/21/2019
 
 import math
 import pygame
 import time
 
 from Functions import *
-from .drop import Drop
-from .constants import *
-from .settings import settings
+from drop import Drop
+from constants import *
+from settings import settings
 
 pygame.init()
 
@@ -56,8 +56,8 @@ class Alien(pygame.sprite.Sprite):
         Auto-calculates path towards player.
         """
 
-        diff_x = settings["player_x_center"] - alien.rect.center[0]
-        diff_y = settings["player_y_center"] - alien.rect.center[1]
+        diff_x = settings["player_x_center"] - self.rect.center[0]
+        diff_y = settings["player_y_center"] - self.rect.center[1]
 
         angle = math.atan2(diff_y, diff_x)
 

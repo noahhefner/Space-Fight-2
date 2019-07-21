@@ -8,7 +8,7 @@ import pygame
 import time
 
 from Functions import *
-from Settings import settings
+from settings import settings
 from constants import *
 
 pygame.init()

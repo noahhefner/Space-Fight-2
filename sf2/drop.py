@@ -11,16 +11,19 @@ import settings
 pygame.init()
 
 class Drop(pygame.sprite.Sprite):
-    """ Powerups that drop when an alien is killed. """
-    """ Restrict usage of this method to only recieve sprites with drops. """
+    """
+    Powerups that drop when an alien is killed.
+    """
 
     def __init__(self, x_coord, y_coord):
 
         super(Drop, self).__init__()
 
-        drop_image_list = ["/Space-Fight-2/sf2/resources/images/drop_ammo.png",
+        drop_image_list = [
+        "/Space-Fight-2/sf2/resources/images/drop_ammo.png",
         "/Space-Fight-2/sf2/resources/images/drop_coin.png",
-        "/Space-Fight-2/sf2/resources/images/drop_life.png"]
+        "/Space-Fight-2/sf2/resources/images/drop_life.png"
+        ]
 
         self.image_number = random.randrange(0, 3)
         self.image = pygame.image.load(drop_image_list[self.image_number])

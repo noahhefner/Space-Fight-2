@@ -1,28 +1,19 @@
 # Noah Hefner
 # Space Fight 2.0
 # Star Class
-# Last Edit: 1/2/2017
+# Last Edit: 7/21/2019
 
-import math
 import pygame
-import time
 import random
 from Settings import settings
-
-# Constants
-YELLOW = [255, 255, 0]
-BLACK = [0, 0, 0]
-WHITE = [255, 255, 255]
-GREEN = [0, 255, 0]
-GREY = [105, 105, 105]
-RED = [255, 0, 0]
+from constants import *
 
 pygame.init()
 
 class Star(pygame.sprite.Sprite):
     """ Star sprite images used for background. """
 
-    def __init__ (self, image_string, screen_width, screen_height):
+    def __init__ (self, image_string):
 
         super(Star, self).__init__()
 

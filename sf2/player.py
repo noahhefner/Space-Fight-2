@@ -1,12 +1,13 @@
 # Noah Hefner
 # Space Fight 2.0
 # Player Class
-# Last Edit: 1/2/2017
+# Last Edit: 7/21/2019
 
+# Imports
 import math
 import pygame
-pygame.init()
 
+pygame.init()
 
 class Player(pygame.sprite.Sprite):
     """ In-game player entity. """
@@ -79,6 +80,6 @@ class Player(pygame.sprite.Sprite):
         """ Rotate player to face the cursor. """
 
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
-        angle = 360 - (math.degrees(math.atan2(self.rect.center[1] - mouse_y, self.rect.center[0] - mouse_x)) + 180)
+        angle = math.degrees(math.atan2(self.rect.center[1] - mouse_y, self.rect.center[0] - mouse_x)) - 180
         self.image = pygame.transform.rotate(self.original, angle)
         self.rect = self.image.get_rect(center = self.rect.center)

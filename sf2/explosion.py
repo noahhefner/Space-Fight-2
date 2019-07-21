@@ -7,14 +7,6 @@ import math
 import pygame
 import time
 
-# Constants
-YELLOW = [255, 255, 0]
-BLACK = [0, 0, 0]
-WHITE = [255, 255, 255]
-GREEN = [0, 255, 0]
-GREY = [105, 105, 105]
-RED = [255, 0, 0]
-
 pygame.init()
 
 class Explosion(pygame.sprite.Sprite):
@@ -29,11 +21,11 @@ class Explosion(pygame.sprite.Sprite):
 
         super(Explosion, self).__init__()
 
-        self.e1 = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/e1.png").convert()
-        self.e2 = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/e2.png").convert()
-        self.e3 = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/e3.png").convert()
-        self.e4 = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/e4.png").convert()
-        self.e5 = pygame.image.load("/home/noahhefner/Git/Space-Fight-2/Images/e5.png").convert()
+        self.e1 = pygame.image.load("Space-Fight-2/sf2/resources/images/e1.png").convert()
+        self.e2 = pygame.image.load("Space-Fight-2/sf2/resources/images/e2.png").convert()
+        self.e3 = pygame.image.load("Space-Fight-2/sf2/resources/images/e3.png").convert()
+        self.e4 = pygame.image.load("Space-Fight-2/sf2/resources/images/e4.png").convert()
+        self.e5 = pygame.image.load("Space-Fight-2/sf2/resources/images/e5.png").convert()
 
         self.e1.set_colorkey(BLACK)
         self.e2.set_colorkey(BLACK)
