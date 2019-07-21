@@ -8,18 +8,11 @@ import pygame
 import time
 
 from Functions import *
-from drop import Drop
-from Settings import settings
+from .drop import Drop
+from .constants import *
+from .settings import settings
 
 pygame.init()
-
-# Constants
-YELLOW = [255, 255, 0]
-BLACK = [0, 0, 0]
-WHITE = [255, 255, 255]
-GREEN = [0, 255, 0]
-GREY = [105, 105, 105]
-RED = [255, 0, 0]
 
 class Alien(pygame.sprite.Sprite):
     """ In game alien entity. """
@@ -37,7 +30,7 @@ class Alien(pygame.sprite.Sprite):
         self.speed = settings["alien_speed"]
         self.drop = None
 
-        if random.randrange(0,settings.drop_probability) == 1:
+        if random.randrange(0, settings.drop_probability) == 1:
             self.drop = Drop()
 
         return
@@ -58,12 +51,20 @@ class Alien(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    """
-    Precondition: x and y are integers
-    """
-    def move(self, x, y):
+    def move(self):
+        """
+        Auto-calculates path towards player.
+        """
 
-        self.rect.x += x
-        self.rect.y += y
+        diff_x = settings["player_x_center"] - alien.rect.center[0]
+        diff_y = settings["player_y_center"] - alien.rect.center[1]
+
+        angle = math.atan2(diff_y, diff_x)
+
+        vel_y = math.sin(angle) * settings["alien_speed"]
+        vel_x = math.cos(angle) * settings["alien_speed"]
+
+        self.rect.x += vel_x
+        self.rect.y += vel_y
 
         return True

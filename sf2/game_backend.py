@@ -15,7 +15,6 @@ pygame.init()
 class GameBackend:
 
     def __init__(self):
-        self.settings = settings
         self.player = Player(self.__find_player_image())
 
         self.bullets = []
@@ -39,6 +38,8 @@ class GameBackend:
             - Move bullets
 
             - Hit detection
+                - Player and alien
+                - Player and drop
 
             - Update player lives
             - Update player bullets

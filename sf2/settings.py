@@ -20,3 +20,4 @@ settings["player_x_center"] = 0
 settings["player_y_center"] = 0
 settings["alien_speed"] = 2
 settings["drop_probability"] = 10
+settings["drop_frames"] = 600
