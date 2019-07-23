@@ -61,10 +61,10 @@ class Alien(pygame.sprite.Sprite):
 
         angle = math.atan2(diff_y, diff_x)
 
-        vel_y = math.sin(angle) * settings["alien_speed"]
-        vel_x = math.cos(angle) * settings["alien_speed"]
+        traj_y = math.sin(angle) * settings["alien_speed"]
+        traj_x = math.cos(angle) * settings["alien_speed"]
 
-        self.rect.x += vel_x
-        self.rect.y += vel_y
+        self.rect.x += traj_x
+        self.rect.y += traj_y
 
         return True

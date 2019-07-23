@@ -24,8 +24,8 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey([0, 0, 0])
         self.original = self.image
         self.rect = self.image.get_rect()
-        self.ammo = 100
-        self.lives = 3
+        self.bullets = settings["start_ammo"]
+        self.lives = settings["start_lives"]
 
         return True
 
@@ -53,14 +53,14 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += x
         self.rect.y += y
 
-        self.check_screen_edge_hit()
+        self.__check_screen_edge_hit()
 
         settings["player_x_center"] = self.rect.center[0]
         settings["player_y_center"] = self.rect.center[1]
 
         return True
 
-    def check_screen_edge_hit(self):
+    def __check_screen_edge_hit(self):
         """ Check if the player is colliding with the edge of the screen. If so, stop the player from going off the
         screen. """
 

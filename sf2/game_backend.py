@@ -36,12 +36,14 @@ class GameBackend:
 
         """
         Things that should happen here:
+
+            DONE
             - Get user input
 
+            DONE
             - Move Player
-            - Move aliens
-                - Calculate trajectory towards player
             - Move bullets
+            - Move aliens
 
             DONE
             - Hit detection
@@ -49,11 +51,14 @@ class GameBackend:
                 - Player and drop
                 - Alien and bullet
 
+            DONE
             - Update player lives
             - Update player bullets
-            - Update alien speed
             - Update explosions
             - Update remaining time for any drops
+
+            NOT DONE
+            - Update alien speed
 
         Returns:
             - True if the game should continue
@@ -62,7 +67,46 @@ class GameBackend:
 
         """"
         ------------------------------------------------------------------------
-        COLLISION DETECTION
+        HANDLE USER INPUT
+        ------------------------------------------------------------------------
+        """
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT:
+
+                # End game
+                return False
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
+            self.player.bullets > 0:
+
+                self.__spawn_bullet()
+
+            if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_ESCAPE:
+
+                    return False # Kill switch
+
+                elif event.key == pygame.K_w:
+
+                    self.player.move(0, -1 * settings["player_speed"])
+
+                elif event.key == pygame.K_a:
+
+                    self.player.move(settings["player_speed"], 0)
+
+                elif event.key == pygame.K_s:
+
+                    self.player.move(0, settings["player_speed"])
+
+                elif event.key == pygame.K_d:
+
+                    self.player.move(settings["player_speed"], 0)
+
+        """"
+        ------------------------------------------------------------------------
+        COLLISION DETECTION AND COLLISION EFFECTS
         ------------------------------------------------------------------------
         """
         # Bullet-Alien collision
@@ -107,7 +151,7 @@ class GameBackend:
             # Perform the perks ability/benefit
             if drop.image_number == 0:
 
-                self.bullet_amount += settings["drop_bullets"]
+                self.player.bullets += settings["drop_bullets"]
 
             elif drop.image_number == 1:
 
@@ -129,6 +173,29 @@ class GameBackend:
         # Drop update
         for drop in self.drops:
             drop.update()
+
+        # Bullet update
+        for bullet in self.bullets:
+            bullet.update()
+
+        # Alien update
+        for alien in self.aliens:
+            alien.update()
+
+    def __spawn_bullet(self):
+        """ Spawns a bullet if there are bullets left. """
+
+        angle = math.atan2(self.player.rect.center[1] - mouse_y,
+        self.player.rect.center[0] - mouse_x)
+
+        x_traj = math.cos(angle) * settings["bullet_speed"] * -1
+        y_traj = math.sin(angle) * settings["bullet_speed"] * -1
+
+        new_bullet = Bullet(settings["bullet_type_string"], x_traj, y_traj)
+        self.bullets.add(new_bullet)
+        self.bullet_amount -= 1
+
+        return
 
     def __find_player_image(self):
         return "player image"
