@@ -7,6 +7,7 @@
 import math
 import os
 import pygame
+from settings import settings
 
 pygame.init()
 
@@ -29,7 +30,7 @@ class Player(pygame.sprite.Sprite):
         self.bullets = settings["start_ammo"]
         self.lives = settings["start_lives"]
 
-        return True
+        return
 
     def set_x(self, new_x):
 

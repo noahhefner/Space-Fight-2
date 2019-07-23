@@ -6,6 +6,7 @@
 import math
 import pygame
 import time
+import random
 
 from drop import Drop
 from constants import *
@@ -78,7 +79,8 @@ class Alien(pygame.sprite.Sprite):
 
         else:
 
-            x = random.randrange(screen_width + 100, screen_width + 600)
+            x = random.randrange(settings["screen_width"] + \
+            100, settings["screen_width"] + 600)
 
         position.append(x)
 
@@ -88,7 +90,8 @@ class Alien(pygame.sprite.Sprite):
 
         else:
 
-            y = random.randrange(screen_height + 100, screen_height + 600)
+            y = random.randrange(settings["screen_height"] + \
+            100, settings["screen_height"] + 600)
 
         position.append(y)
 

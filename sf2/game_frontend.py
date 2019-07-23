@@ -1,6 +1,7 @@
 
 from game_backend import GameBackend
 import pygame
+from settings import settings
 
 pygame.init()
 
@@ -8,9 +9,9 @@ class GameFrontend:
 
     def __init__(self):
 
-        self.backend = GameBackend()
         self.screen = pygame.display.set_mode([settings["screen_width"], settings["screen_height"]], pygame.FULLSCREEN)
         self.clock = pygame.time.Clock()
+        self.backend = GameBackend()
 
     def update(self):
 

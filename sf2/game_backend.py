@@ -8,6 +8,7 @@ from player import Player
 from bullet import Bullet
 from alien import Alien
 from settings import settings
+from star import Star
 import pygame
 
 pygame.init()
@@ -17,25 +18,25 @@ class GameBackend:
     def __init__(self):
         self.player = Player(settings["player_type_string"])
 
-        self.bullets = []
-        self.aliens = []
-        self.explosions = []
-        self.drops = []
-        self.stars = []
+        self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+        self.explosions = pygame.sprite.Group()
+        self.drops = pygame.sprite.Group()
+        self.stars = pygame.sprite.Group()
         self.score = 0
-        self.lives = settings["player_lives"]
+        self.lives = settings["start_lives"]
         self.coins = settings["coins"]
 
         # Create stars for background
         for i in range(settings["screen_width"]):
             new_star = Star(settings["image_string_star"])
-            self.stars.append(star)
+            self.stars.add(new_star)
 
         # Make the aliens
         for i in range(20):
 
             new_alien = Alien(settings["image_string_alien1"])
-            self.aliens.append(new_alien)
+            self.aliens.add(new_alien)
 
     def update(self, user_events):
 
