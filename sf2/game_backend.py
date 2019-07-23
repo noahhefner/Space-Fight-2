@@ -182,6 +182,7 @@ class GameBackend:
         for alien in self.aliens:
             alien.update()
 
+    ## TODO: move this method to bullet class
     def __spawn_bullet(self):
         """ Spawns a bullet if there are bullets left. """
 

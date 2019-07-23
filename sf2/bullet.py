@@ -16,7 +16,7 @@ pygame.init()
 class Bullet(pygame.sprite.Sprite):
     """ In-game bullet entity. """
 
-    def __init__(self, image_string, x_traj, y_traj):
+    def __init__(self, image_string, mouse_pos):
         """ Initiate bullet class.
         Args:
             image_string (string): image path to be used for bullet image.
@@ -31,7 +31,12 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = settings["player_x_center"]
         self.rect.y = settings["player_y_center"]
-        self.trajectory = [x_traj, y_traj]
+        self.trajectory = self.__calculate_trajectory()
+
+        return True
+
+    ## TODO: Complete this method
+    def __calculate_trajectory(self):
 
         return True
 
