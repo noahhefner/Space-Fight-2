@@ -6,14 +6,15 @@
 import pygame
 import random
 from settings import settings
-from constants import *
+from constants import BLACK
 
 pygame.init()
+
 
 class Star(pygame.sprite.Sprite):
     """ Star sprite images used for background. """
 
-    def __init__ (self, image_string):
+    def __init__(self, image_string):
 
         super(Star, self).__init__()
 
@@ -22,7 +23,7 @@ class Star(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(0, settings["screen_width"])
         self.rect.y = random.randrange(0, settings["screen_height"])
-        self.vely = random.randrange(-3,1)
+        self.vely = random.randrange(-3, 1)
 
     def get_x(self):
 

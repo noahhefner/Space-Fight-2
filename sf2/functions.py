@@ -8,11 +8,11 @@
 
 import math
 import pygame
-import time
 from Settings import settings
 import random
 
 pygame.init()
+
 
 def get_bullet_vel(speed):
     """ Returns vel_x and vel_y attributes for bullets. """
@@ -20,17 +20,19 @@ def get_bullet_vel(speed):
     [mouse_x, mouse_y] = pygame.mouse.get_pos()
 
     angle = math.atan2(settings["player_y_center"]-mouse_y,
-    settings["player_x_center"]-mouse_x)
+                       settings["player_x_center"]-mouse_x)
 
     x_vel = math.cos(angle) * (-1 * speed)
-    y_vel = math.sin(angle)  * (-1 * speed)
+    y_vel = math.sin(angle) * (-1 * speed)
 
     return [x_vel, y_vel]
+
 
 def get_alien_multiplier(total_frames):
     """ Returns appropriate speed multiplier for aliens given time. """
 
     return round(total_frames / 3600)
+
 
 def get_alien_vel(alien):
     """ Returns vel_x and vel_y attributes for alien. """
@@ -44,6 +46,7 @@ def get_alien_vel(alien):
 
     return [vel_x, vel_y]
 
+
 def set_coords(sprite, x, y):
     """ Sets sprite ract.x and rect.y to x and y respectively. """
 
@@ -51,6 +54,7 @@ def set_coords(sprite, x, y):
     sprite.rect.y = y
 
     return sprite
+
 
 def sprite_array(sprite_list, screen_width, screen_height, rows, columns):
     """ Returns an array of x and y positions for the given rows and columns
@@ -80,6 +84,7 @@ def sprite_array(sprite_list, screen_width, screen_height, rows, columns):
 
     return sprite_array
 
+
 def random_alien_spawn(screen_width, screen_height):
     """ Returns a random position off-screen for alien spawn. """
 
@@ -87,8 +92,8 @@ def random_alien_spawn(screen_width, screen_height):
     x = None
     y = None
 
-    left_right = random.randrange(0,2)
-    top_bottom = random.randrange(0,2)
+    left_right = random.randrange(0, 2)
+    top_bottom = random.randrange(0, 2)
 
     if left_right == 0:
 
@@ -102,7 +107,7 @@ def random_alien_spawn(screen_width, screen_height):
 
     if top_bottom == 0:
 
-        y = random.randrange(-600,-100)
+        y = random.randrange(-600, -100)
 
     else:
 
@@ -111,6 +116,7 @@ def random_alien_spawn(screen_width, screen_height):
     position.append(y)
 
     return position
+
 
 def draw_sprite(sprite, surface):
     """ Draw image to the screen.

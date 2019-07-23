@@ -1,13 +1,13 @@
 # Noah Hefner
 # Space Fight 2.0
 # Explosion Class
-# Last Edit: 12/17/2017
+# Last Edit: 7/23/2019
 
-import math
 import pygame
-import time
+from constants import BLACK
 
 pygame.init()
+
 
 class Explosion(pygame.sprite.Sprite):
     """ Spawns an explosion at the given location. """
@@ -21,11 +21,16 @@ class Explosion(pygame.sprite.Sprite):
 
         super(Explosion, self).__init__()
 
-        self.e1 = pygame.image.load("Space-Fight-2/sf2/resources/images/e1.png").convert()
-        self.e2 = pygame.image.load("Space-Fight-2/sf2/resources/images/e2.png").convert()
-        self.e3 = pygame.image.load("Space-Fight-2/sf2/resources/images/e3.png").convert()
-        self.e4 = pygame.image.load("Space-Fight-2/sf2/resources/images/e4.png").convert()
-        self.e5 = pygame.image.load("Space-Fight-2/sf2/resources/images/e5.png").convert()
+        self.e1 = pygame.image.load(
+            "Space-Fight-2/sf2/resources/images/e1.png").convert()
+        self.e2 = pygame.image.load(
+            "Space-Fight-2/sf2/resources/images/e2.png").convert()
+        self.e3 = pygame.image.load(
+            "Space-Fight-2/sf2/resources/images/e3.png").convert()
+        self.e4 = pygame.image.load(
+            "Space-Fight-2/sf2/resources/images/e4.png").convert()
+        self.e5 = pygame.image.load(
+            "Space-Fight-2/sf2/resources/images/e5.png").convert()
 
         self.e1.set_colorkey(BLACK)
         self.e2.set_colorkey(BLACK)
@@ -33,7 +38,7 @@ class Explosion(pygame.sprite.Sprite):
         self.e4.set_colorkey(BLACK)
         self.e5.set_colorkey(BLACK)
 
-        self.image_list = [self.e1,self.e2,self.e3,self.e4,self.e5]
+        self.image_list = [self.e1, self.e2, self.e3, self.e4, self.e5]
         self.frame = 0
         self.exp_num = 0
 

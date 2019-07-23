@@ -11,13 +11,14 @@ from settings import settings
 
 pygame.init()
 
+
 class Player(pygame.sprite.Sprite):
     """ In-game player entity. """
 
     def __init__(self, image_string):
         """ Instantiate player class.
         Args:
-            image_string (string): name of image file to be used for player image.
+            image_string (string): name of image file to be used for player.
         """
 
         super(Player, self).__init__()
@@ -51,6 +52,7 @@ class Player(pygame.sprite.Sprite):
     """
     Precondition: x and y are integers
     """
+
     def move(self, x, y):
 
         self.rect.x += x
@@ -64,7 +66,8 @@ class Player(pygame.sprite.Sprite):
         return True
 
     def __check_screen_edge_hit(self):
-        """ Check if the player is colliding with the edge of the screen. If so, stop the player from going off the
+        """ Check if the player is colliding with the edge of the screen. If so,
+        stop the player from going off the
         screen. """
 
         if self.rect.x + self.rect.width >= settings["screen_width"]:
@@ -83,6 +86,8 @@ class Player(pygame.sprite.Sprite):
         """ Rotate player to face the cursor. """
 
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
-        angle = math.degrees(math.atan2(self.rect.center[1] - mouse_y, self.rect.center[0] - mouse_x)) - 180
+        diff_y = self.rect.center[1] - mouse_y
+        diff_x = self.rect.center[0] - mouse_x
+        angle = math.degrees(math.atan2(diff_y, diff_x)) - 180
         self.image = pygame.transform.rotate(self.original, angle)
-        self.rect = self.image.get_rect(center = self.rect.center)
+        self.rect = self.image.get_rect(center=self.rect.center)

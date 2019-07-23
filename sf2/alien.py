@@ -1,18 +1,17 @@
 # Noah Hefner
 # Space Fight 2.0
 # Alien Class
-# Last Edit: 7/21/2019
+# Last Edit: 7/23/2019
 
 import math
 import pygame
-import time
 import random
 
-from drop import Drop
-from constants import *
+from constants import BLACK
 from settings import settings
 
 pygame.init()
+
 
 class Alien(pygame.sprite.Sprite):
     """ In game alien entity. """
@@ -48,11 +47,11 @@ class Alien(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def is_drop_carrier (self):
+    def is_drop_carrier(self):
 
         return self.drop_carrier
 
-    def __drop_carrier_chance (self):
+    def __drop_carrier_chance(self):
 
         cary = random.randrange(0, settings["drop_probability"])
 
@@ -64,14 +63,14 @@ class Alien(pygame.sprite.Sprite):
 
             return False
 
-    def __random_spawn (self):
+    def __random_spawn(self):
 
         position = []
         x = None
         y = None
 
-        left_right = random.randrange(0,2)
-        top_bottom = random.randrange(0,2)
+        left_right = random.randrange(0, 2)
+        top_bottom = random.randrange(0, 2)
 
         if left_right == 0:
 
@@ -79,19 +78,19 @@ class Alien(pygame.sprite.Sprite):
 
         else:
 
-            x = random.randrange(settings["screen_width"] + \
-            100, settings["screen_width"] + 600)
+            x = random.randrange(settings["screen_width"] +
+                                 100, settings["screen_width"] + 600)
 
         position.append(x)
 
         if top_bottom == 0:
 
-            y = random.randrange(-600,-100)
+            y = random.randrange(-600, -100)
 
         else:
 
-            y = random.randrange(settings["screen_height"] + \
-            100, settings["screen_height"] + 600)
+            y = random.randrange(settings["screen_height"] +
+                                 100, settings["screen_height"] + 600)
 
         position.append(y)
 

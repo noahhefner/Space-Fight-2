@@ -1,16 +1,15 @@
 # Noah Hefner
 # Space Fight 2.0
 # Bullet Class
-# Last Edit: 4/24/2018
+# Last Edit: 7/23/2019
 
-import math
 import pygame
-import time
 
 from settings import settings
-from constants import *
+from constants import BLACK
 
 pygame.init()
+
 
 class Bullet(pygame.sprite.Sprite):
     """ In-game bullet entity. """
@@ -34,16 +33,16 @@ class Bullet(pygame.sprite.Sprite):
 
         return True
 
-    ## TODO: Complete this method
+    # TODO: Complete this method
     def __calculate_trajectory(self):
 
         return True
 
-    def get_x (self):
+    def get_x(self):
 
         return self.rect.x
 
-    def get_y (self):
+    def get_y(self):
 
         return self.rect.y
 
@@ -54,12 +53,12 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y += self.trajectory[1]
 
         if self.rect.x + self.rect.width < 0 or \
-        self.rect.y + self.rect.height < 0:
+                self.rect.y + self.rect.height < 0:
 
             self.kill()
 
         elif self.rect.y > settings["screen_height"] or \
-        self.rect.x > settings["screen_width"]:
+                self.rect.x > settings["screen_width"]:
 
             self.kill()
 

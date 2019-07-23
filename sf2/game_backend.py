@@ -8,10 +8,14 @@ from player import Player
 from bullet import Bullet
 from alien import Alien
 from settings import settings
+from explosion import Explosion
 from star import Star
+import math
+from drop import Drop
 import pygame
 
 pygame.init()
+
 
 class GameBackend:
 
@@ -39,7 +43,6 @@ class GameBackend:
             self.aliens.add(new_alien)
 
     def update(self, user_events):
-
         """
         Things that should happen here:
 
@@ -84,7 +87,7 @@ class GameBackend:
                 return False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
-            self.player.bullets > 0:
+                    self.player.bullets > 0:
 
                 self.__spawn_bullet()
 
@@ -92,7 +95,7 @@ class GameBackend:
 
                 if event.key == pygame.K_ESCAPE:
 
-                    return False # Kill switch
+                    return False  # Kill switch
 
                 elif event.key == pygame.K_w:
 
@@ -117,30 +120,30 @@ class GameBackend:
         """
         # Bullet-Alien collision
         alien_bullet_collision = \
-        pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
+            pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
 
         for alien in alien_bullet_collision:
 
-                # Spawn an explosion in that area
-                explosion = Explosion(alien.rect.x, alien.rect.y)
-                self.explosions.add(explosion)
-                self.score += 1
-                alien.kill()
+            # Spawn an explosion in that area
+            explosion = Explosion(alien.rect.x, alien.rect.y)
+            self.explosions.add(explosion)
+            self.score += 1
+            alien.kill()
 
-                # Make a new alien to take its place
-                self.__update_alien_speed()
-                new_alien = Alien(settings["image_string_alien1"])
-                self.aliens.add(new_alien)
+            # Make a new alien to take its place
+            self.__update_alien_speed()
+            new_alien = Alien(settings["image_string_alien1"])
+            self.aliens.add(new_alien)
 
-                # Spawn drop if the alien was a carrier
-                if alien.is_drop_carrier():
+            # Spawn drop if the alien was a carrier
+            if alien.is_drop_carrier():
 
-                    drop = Drop(alien.get_x(), alien.get_y())
-                    self.drops.add(drop)
+                drop = Drop(alien.get_x(), alien.get_y())
+                self.drops.add(drop)
 
         # Player-Alien collision
         alien_player_collision = \
-        pygame.sprite.spritecollide(self.player, self.aliens, True)
+            pygame.sprite.spritecollide(self.player, self.aliens, True)
 
         for alien in alien_player_collision:
 
@@ -151,7 +154,7 @@ class GameBackend:
 
         # Player-Drop collision
         player_drop_collision = \
-        pygame.sprite.spritecollide(self.player, self.drops, True)
+            pygame.sprite.spritecollide(self.player, self.drops, True)
 
         for drop in player_drop_collision:
 
@@ -175,7 +178,7 @@ class GameBackend:
         """
         # Explosion update
         for explosion in self.explosions:
-            explostion.update()
+            explosion.update()
 
         # Drop update
         for drop in self.drops:
@@ -193,12 +196,14 @@ class GameBackend:
 
             return False
 
-    ## TODO: move this method to bullet class
+    # TODO: move this method to bullet class
     def __spawn_bullet(self):
         """ Spawns a bullet if there are bullets left. """
 
-        angle = math.atan2(self.player.rect.center[1] - mouse_y,
-        self.player.rect.center[0] - mouse_x)
+        mouse_pos = pygame.mouse.get_pos()
+
+        angle = math.atan2(self.player.rect.center[1] - mouse_pos[0],
+                           self.player.rect.center[0] - mouse_pos[1])
 
         x_traj = math.cos(angle) * settings["bullet_speed"] * -1
         y_traj = math.sin(angle) * settings["bullet_speed"] * -1
@@ -209,23 +214,23 @@ class GameBackend:
 
         return
 
-    def get_stars (self):
+    def get_stars(self):
 
         return self.stars
 
-    def get_bullets (self):
+    def get_bullets(self):
 
         return self.bullets
 
-    def get_explosions (self):
+    def get_explosions(self):
 
         return self.explosions
 
-    def get_drops (self):
+    def get_drops(self):
 
         return self.drops
 
-    def get_aliens (self):
+    def get_aliens(self):
 
         return self.aliens
 

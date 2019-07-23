@@ -1,10 +1,10 @@
 # Header here
 
+from game_frontend import GameFrontend
 import pygame
 
 pygame.init()
 
-from game_frontend import GameFrontend
 
 game = GameFrontend()
 

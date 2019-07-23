@@ -5,11 +5,14 @@ from settings import settings
 
 pygame.init()
 
+
 class GameFrontend:
 
     def __init__(self):
 
-        self.screen = pygame.display.set_mode([settings["screen_width"], settings["screen_height"]], pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode(
+            [settings["screen_width"], settings["screen_height"]],
+            pygame.FULLSCREEN)
         self.clock = pygame.time.Clock()
         self.backend = GameBackend()
 
@@ -32,7 +35,8 @@ class GameFrontend:
 
         for explosion in self.backend.get_explosions():
 
-            self.screen.blit(explosion.image, [explosion.get_x(), explosion.get_y()])
+            self.screen.blit(explosion.image, [explosion.get_x(),
+                                               explosion.get_y()])
 
         for drop in self.backend.get_drops():
 
