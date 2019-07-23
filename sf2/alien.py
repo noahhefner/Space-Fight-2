@@ -7,7 +7,6 @@ import math
 import pygame
 import time
 
-from Functions import *
 from drop import Drop
 from constants import *
 from settings import settings
@@ -25,13 +24,10 @@ class Alien(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_string).convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.pos_initial = random_alien_spawn(settings["screen_width"], settings["screen_height"])
+        self.pos_initial = self.__random_spawn()
         self.rect.x, self.rect.y = self.pos_initial[0], self.pos_initial[1]
         self.speed = settings["alien_speed"]
-        self.drop = None
-
-        if random.randrange(0, settings.drop_probability) == 1:
-            self.drop = Drop()
+        self.drop_carrier = self.__drop_carrier_chance()
 
         return
 
@@ -51,7 +47,54 @@ class Alien(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def move(self):
+    def is_drop_carrier (self):
+
+        return self.drop_carrier
+
+    def __drop_carrier_chance (self):
+
+        cary = random.randrange(0, settings["drop_probability"])
+
+        if not cary:
+
+            return True
+
+        else:
+
+            return False
+
+    def __random_spawn (self):
+
+        position = []
+        x = None
+        y = None
+
+        left_right = random.randrange(0,2)
+        top_bottom = random.randrange(0,2)
+
+        if left_right == 0:
+
+            x = random.randrange(-600, -100)
+
+        else:
+
+            x = random.randrange(screen_width + 100, screen_width + 600)
+
+        position.append(x)
+
+        if top_bottom == 0:
+
+            y = random.randrange(-600,-100)
+
+        else:
+
+            y = random.randrange(screen_height + 100, screen_height + 600)
+
+        position.append(y)
+
+        return position
+
+    def update(self):
         """
         Auto-calculates path towards player.
         """
@@ -61,8 +104,8 @@ class Alien(pygame.sprite.Sprite):
 
         angle = math.atan2(diff_y, diff_x)
 
-        traj_y = math.sin(angle) * settings["alien_speed"]
-        traj_x = math.cos(angle) * settings["alien_speed"]
+        traj_y = math.sin(angle) * self.speed
+        traj_x = math.cos(angle) * self.speed
 
         self.rect.x += traj_x
         self.rect.y += traj_y

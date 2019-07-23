@@ -7,6 +7,8 @@ import math
 import pygame
 import time
 import settings
+from drop_image_strings import drop_image_strings
+import random
 
 pygame.init()
 
@@ -19,18 +21,21 @@ class Drop(pygame.sprite.Sprite):
 
         super(Drop, self).__init__()
 
-        drop_image_list = [
-        "/Space-Fight-2/sf2/resources/images/drop_ammo.png",
-        "/Space-Fight-2/sf2/resources/images/drop_coin.png",
-        "/Space-Fight-2/sf2/resources/images/drop_life.png"
-        ]
-
-        self.image_number = random.randrange(0, 3)
+        self.drop_type, self.image_string = \
+        random.choice(list(drop_image_strings.items()))
         self.image = pygame.image.load(drop_image_list[self.image_number])
         self.rect = self.image.get_rect()
         self.rect.x = x_coord
         self.rect.y = y_coord
         self.dropped_frames = 0
+
+    def get_x (self):
+
+        return self.rect.x
+
+    def get_y (self):
+
+        return self.rect.y
 
     def update(self):
         """ Times the drop for dropped_frames. """

@@ -4,9 +4,11 @@
 # Last Edit: 7/21/2019
 
 settings = {
-    "player_type_string" : "Space-Fight-2/Images/player_white.png",
-    "bullet_type_string" : "Space-Fight-2/Images/bullet_red.png",
-    "cursor_type_string" : "Space-Fight-2/Images/cursor_red.png",
+    "player_type_string" : "Space-Fight-2/sf2/resources/images/player_white.png",
+    "bullet_type_string" : "Space-Fight-2/sf2/resources/images/bullet_green.png",
+    "cursor_type_string" : "Space-Fight-2/sf2/resources/images/cursor_red.png",
+    "image_string_alien1" : "Space-Fight-2/sf2/resources/images/alien_level_one.png",
+    "image_string_star" : "Space-Fight-2/sf2/resources/images/star.png",
     "start_ammo" : 100,
     "player_lives" : 3,
     "player_speed" : 5,

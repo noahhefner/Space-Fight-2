@@ -7,7 +7,6 @@ import math
 import pygame
 import time
 
-from Functions import *
 from settings import settings
 from constants import *
 
@@ -40,18 +39,26 @@ class Bullet(pygame.sprite.Sprite):
 
         return True
 
+    def get_x (self):
+
+        return self.rect.x
+
+    def get_y (self):
+
+        return self.rect.y
+
     def update(self):
         """ Move bullet. This method has an auto-kill. """
 
         self.rect.x += self.trajectory[0]
         self.rect.y += self.trajectory[1]
 
-        if self.rect.x + self.rect.width < 0 or
+        if self.rect.x + self.rect.width < 0 or \
         self.rect.y + self.rect.height < 0:
 
             self.kill()
 
-        elif self.rect.y > settings["screen_height"] or
+        elif self.rect.y > settings["screen_height"] or \
         self.rect.x > settings["screen_width"]:
 
             self.kill()

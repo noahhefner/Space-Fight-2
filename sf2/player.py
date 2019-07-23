@@ -5,6 +5,7 @@
 
 # Imports
 import math
+import os
 import pygame
 
 pygame.init()
@@ -20,6 +21,7 @@ class Player(pygame.sprite.Sprite):
 
         super(Player, self).__init__()
 
+        print(os.getcwd())
         self.image = pygame.image.load(image_string).convert()
         self.image.set_colorkey([0, 0, 0])
         self.original = self.image

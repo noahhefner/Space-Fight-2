@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # GameBackend Class
-# Last Edit: 7/21/2019
+# Last Edit: 7/23/2019
 
 # Imports
 from player import Player
@@ -15,7 +15,7 @@ pygame.init()
 class GameBackend:
 
     def __init__(self):
-        self.player = Player(self.__find_player_image())
+        self.player = Player(settings["player_type_string"])
 
         self.bullets = []
         self.aliens = []
@@ -26,13 +26,18 @@ class GameBackend:
         self.lives = settings["player_lives"]
         self.coins = settings["coins"]
 
-        for i in range(settings.sc)
+        # Create stars for background
+        for i in range(settings["screen_width"]):
+            new_star = Star(settings["image_string_star"])
+            self.stars.append(star)
 
+        # Make the aliens
         for i in range(20):
 
-            self.aliens.append(self.__make_alien(self.__find_lvl_1_alien_image()))
+            new_alien = Alien(settings["image_string_alien1"])
+            self.aliens.append(new_alien)
 
-    def update(self):
+    def update(self, user_events):
 
         """
         Things that should happen here:
@@ -57,7 +62,7 @@ class GameBackend:
             - Update explosions
             - Update remaining time for any drops
 
-            NOT DONE
+            DONE
             - Update alien speed
 
         Returns:
@@ -70,7 +75,7 @@ class GameBackend:
         HANDLE USER INPUT
         ------------------------------------------------------------------------
         """
-        for event in pygame.event.get():
+        for event in user_events:
 
             if event.type == pygame.QUIT:
 
@@ -110,7 +115,7 @@ class GameBackend:
         ------------------------------------------------------------------------
         """
         # Bullet-Alien collision
-        alien_bullet_collision =
+        alien_bullet_collision = \
         pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
 
         for alien in alien_bullet_collision:
@@ -122,17 +127,18 @@ class GameBackend:
                 alien.kill()
 
                 # Make a new alien to take its place
-                new_alien = Alien()
+                self.__update_alien_speed()
+                new_alien = Alien(settings["image_string_alien1"])
                 self.aliens.add(new_alien)
 
                 # Spawn drop if the alien was a carrier
-                if alien.drop != None:
+                if alien.is_drop_carrier():
 
-                    drop = Drop(alien)
+                    drop = Drop(alien.get_x(), alien.get_y())
                     self.drops.add(drop)
 
         # Player-Alien collision
-        alien_player_collision =
+        alien_player_collision = \
         pygame.sprite.spritecollide(self.player, self.aliens, True)
 
         for alien in alien_player_collision:
@@ -143,7 +149,7 @@ class GameBackend:
             self.lives -= 1
 
         # Player-Drop collision
-        player_drop_collision =
+        player_drop_collision = \
         pygame.sprite.spritecollide(self.player, self.drops, True)
 
         for drop in player_drop_collision:
@@ -182,6 +188,10 @@ class GameBackend:
         for alien in self.aliens:
             alien.update()
 
+        if self.player.lives <= 0:
+
+            return False
+
     ## TODO: move this method to bullet class
     def __spawn_bullet(self):
         """ Spawns a bullet if there are bullets left. """
@@ -197,6 +207,30 @@ class GameBackend:
         self.bullet_amount -= 1
 
         return
+
+    def get_stars (self):
+
+        return self.stars
+
+    def get_bullets (self):
+
+        return self.bullets
+
+    def get_explosions (self):
+
+        return self.explosions
+
+    def get_drops (self):
+
+        return self.drops
+
+    def get_aliens (self):
+
+        return self.aliens
+
+    def __update_alien_speed(self):
+
+        settings["alien_speed"] += 0.05
 
     def __find_player_image(self):
         return "player image"
