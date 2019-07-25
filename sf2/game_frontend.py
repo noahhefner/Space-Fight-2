@@ -11,8 +11,7 @@ class GameFrontend:
     def __init__(self):
 
         self.screen = pygame.display.set_mode(
-            [settings["screen_width"], settings["screen_height"]],
-            pygame.FULLSCREEN)
+            [settings["screen_width"], settings["screen_height"]])
         self.clock = pygame.time.Clock()
         self.backend = GameBackend()
 

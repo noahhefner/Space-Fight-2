@@ -43,37 +43,6 @@ class GameBackend:
             self.aliens.add(new_alien)
 
     def update(self, user_events):
-        """
-        Things that should happen here:
-
-            DONE
-            - Get user input
-
-            DONE
-            - Move Player
-            - Move bullets
-            - Move aliens
-
-            DONE
-            - Hit detection
-                - Player and alien
-                - Player and drop
-                - Alien and bullet
-
-            DONE
-            - Update player lives
-            - Update player bullets
-            - Update explosions
-            - Update remaining time for any drops
-
-            DONE
-            - Update alien speed
-
-        Returns:
-            - True if the game should continue
-            - False if the game should be ended
-        """
-
         """"
         ------------------------------------------------------------------------
         HANDLE USER INPUT
@@ -195,6 +164,8 @@ class GameBackend:
         if self.player.lives <= 0:
 
             return False
+
+        return True
 
     # TODO: move this method to bullet class
     def __spawn_bullet(self):
