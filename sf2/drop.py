@@ -4,8 +4,8 @@
 # Last Edit: 7/23/2019
 
 import pygame
-import settings
-from drop_image_strings import drop_image_strings
+from settings import settings
+from strings import strings
 import random
 
 pygame.init()
@@ -20,9 +20,10 @@ class Drop(pygame.sprite.Sprite):
 
         super(Drop, self).__init__()
 
-        self.drop_type, self.image_string = \
-            random.choice(list(drop_image_strings.items()))
-        self.image = pygame.image.load(drop_image_strings[self.image_number])
+        self.image_string = random.choice([strings["drop_life"],
+                                           strings["drop_coin"],
+                                           strings["drop_ammo"]])
+        self.image = pygame.image.load(self.image_string)
         self.rect = self.image.get_rect()
         self.rect.x = x_coord
         self.rect.y = y_coord
@@ -36,9 +37,13 @@ class Drop(pygame.sprite.Sprite):
 
         return self.rect.y
 
+    def get_type(self):
+
+        return self.image_string
+
     def update(self):
         """ Times the drop for dropped_frames. """
 
-        if self.dropped_frames == settings.drop_frames:
+        if self.dropped_frames == int(settings["drop_frames"]):
 
             self.kill()

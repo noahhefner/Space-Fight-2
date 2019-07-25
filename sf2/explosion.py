@@ -47,6 +47,14 @@ class Explosion(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+    def get_x(self):
+
+        return self.rect.x
+
+    def get_y(self):
+
+        return self.rect.y
+
     def update(self):
 
         if self.frame == 16:

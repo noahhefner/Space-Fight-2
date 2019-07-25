@@ -2,6 +2,7 @@
 from game_backend import GameBackend
 import pygame
 from settings import settings
+from constants import BLACK
 
 pygame.init()
 
@@ -24,6 +25,8 @@ class GameFrontend:
 
     def display(self):
 
+        self.screen.fill(BLACK)
+
         for star in self.backend.get_stars():
 
             self.screen.blit(star.image, [star.get_x(), star.get_y()])
@@ -44,5 +47,13 @@ class GameFrontend:
         for alien in self.backend.get_aliens():
 
             self.screen.blit(alien.image, [alien.get_x(), alien.get_y()])
+
+        self.screen.blit(self.backend.player.image,
+                         [self.backend.player.get_x(),
+                          self.backend.player.get_y()])
+
+        pygame.display.flip()
+
+        self.clock.tick(settings["fps"])
 
         return

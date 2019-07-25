@@ -4,6 +4,7 @@
 # Last Edit: 7/23/2019
 
 import pygame
+import math
 
 from settings import settings
 from constants import BLACK
@@ -29,14 +30,21 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = settings["player_x_center"]
         self.rect.y = settings["player_y_center"]
+        self.mouse_pos = mouse_pos
         self.trajectory = self.__calculate_trajectory()
 
-        return True
+        return
 
-    # TODO: Complete this method
     def __calculate_trajectory(self):
 
-        return True
+        angle = math.atan2(
+            settings["player_x_center"] - self.mouse_pos[0],
+            settings["player_y_center"] - self.mouse_pos[1])
+
+        x_traj = math.cos(angle) * settings["bullet_speed"] * -1
+        y_traj = math.sin(angle) * settings["bullet_speed"]
+
+        return [x_traj, y_traj]
 
     def get_x(self):
 

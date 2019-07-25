@@ -26,6 +26,8 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey([0, 0, 0])
         self.original = self.image
         self.rect = self.image.get_rect()
+        self.set_x(settings["screen_width"] / 2)
+        self.set_y(settings["screen_height"] / 2)
         self.bullets = settings["start_ammo"]
         self.lives = settings["start_lives"]
 
@@ -34,10 +36,12 @@ class Player(pygame.sprite.Sprite):
     def set_x(self, new_x):
 
         self.rect.x = new_x
+        settings["player_x_center"] = self.rect.x
 
     def set_y(self, new_y):
 
         self.rect.y = new_y
+        settings["player_y_center"] = self.rect.y
 
     def get_x(self):
 
@@ -80,12 +84,16 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y + self.rect.height >= settings["screen_height"]:
             self.rect.bottom = settings["screen_height"]
 
-    def rotate_player(self):
+    def rotate(self):
         """ Rotate player to face the cursor. """
 
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
         diff_y = self.rect.center[1] - mouse_y
         diff_x = self.rect.center[0] - mouse_x
-        angle = math.degrees(math.atan2(diff_y, diff_x)) - 180
+        angle = math.degrees(math.atan2(-1 * diff_y, diff_x)) - 180
         self.image = pygame.transform.rotate(self.original, angle)
         self.rect = self.image.get_rect(center=self.rect.center)
+
+    def update(self):
+
+        self.rotate()

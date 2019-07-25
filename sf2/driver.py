@@ -10,7 +10,6 @@ import pygame
 
 pygame.init()
 
-
 game = GameFrontend()
 
 playing = True

@@ -9,8 +9,8 @@ from bullet import Bullet
 from alien import Alien
 from settings import settings
 from explosion import Explosion
+from strings import strings
 from star import Star
-import math
 from drop import Drop
 import pygame
 
@@ -32,7 +32,7 @@ class GameBackend:
         self.coins = settings["coins"]
 
         # Create stars for background
-        for i in range(settings["screen_width"]):
+        for i in range(int(settings["screen_width"] / 2)):
             new_star = Star(settings["image_string_star"])
             self.stars.add(new_star)
 
@@ -72,7 +72,7 @@ class GameBackend:
 
                 elif event.key == pygame.K_a:
 
-                    self.player.move(settings["player_speed"], 0)
+                    self.player.move(-1 * settings["player_speed"], 0)
 
                 elif event.key == pygame.K_s:
 
@@ -128,15 +128,15 @@ class GameBackend:
         for drop in player_drop_collision:
 
             # Perform the perks ability/benefit
-            if drop.image_number == 0:
+            if drop.get_type() == strings["drop_bullets"]:
 
                 self.player.bullets += settings["drop_bullets"]
 
-            elif drop.image_number == 1:
+            elif drop.get_type() == strings["drop_coin"]:
 
                 settings["coins"] += 1
 
-            elif drop.image_number == 2:
+            elif drop.get_type() == strings["drop_live"]:
 
                 self.lives += 1
 
@@ -161,27 +161,25 @@ class GameBackend:
         for alien in self.aliens:
             alien.update()
 
+        # Star update
+        for star in self.stars:
+            star.update()
+
+        self.player.update()
+
         if self.player.lives <= 0:
 
             return False
 
         return True
 
-    # TODO: move this method to bullet class
     def __spawn_bullet(self):
-        """ Spawns a bullet if there are bullets left. """
+        """ Spawns a bullet. """
 
         mouse_pos = pygame.mouse.get_pos()
-
-        angle = math.atan2(self.player.rect.center[1] - mouse_pos[0],
-                           self.player.rect.center[0] - mouse_pos[1])
-
-        x_traj = math.cos(angle) * settings["bullet_speed"] * -1
-        y_traj = math.sin(angle) * settings["bullet_speed"] * -1
-
-        new_bullet = Bullet(settings["bullet_type_string"], x_traj, y_traj)
+        new_bullet = Bullet(settings["bullet_type_string"], mouse_pos)
         self.bullets.add(new_bullet)
-        self.bullet_amount -= 1
+        self.player.bullets -= 1
 
         return
 
@@ -228,7 +226,7 @@ class GameBackend:
 
     def __make_bullet(self):
 
-        bullet = Bullet(self.__find_bullet_image())
+        bullet = Bullet(settings["bullet_type_string"])
         self.bullets.append(bullet)
 
     def __make_alien(self, image_string):
