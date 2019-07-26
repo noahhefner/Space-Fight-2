@@ -30,18 +30,20 @@ class Player(pygame.sprite.Sprite):
         self.set_y(settings["screen_height"] / 2)
         self.bullets = settings["start_ammo"]
         self.lives = settings["start_lives"]
+        self.velx = 0
+        self.vely = 0
 
         return
 
     def set_x(self, new_x):
 
         self.rect.x = new_x
-        settings["player_x_center"] = self.rect.x
+        settings["player_x_center"] = self.rect.center[0]
 
     def set_y(self, new_y):
 
         self.rect.y = new_y
-        settings["player_y_center"] = self.rect.y
+        settings["player_y_center"] = self.rect.center[1]
 
     def get_x(self):
 
@@ -51,20 +53,14 @@ class Player(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    """
-    Precondition: x and y are integers
-    """
+    def set_velx(self, velx):
 
-    def move(self, x, y):
+        self.velx += velx
+        return True
 
-        self.rect.x += x
-        self.rect.y += y
+    def set_vely(self, vely):
 
-        self.__check_screen_edge_hit()
-
-        settings["player_x_center"] = self.rect.center[0]
-        settings["player_y_center"] = self.rect.center[1]
-
+        self.vely += vely
         return True
 
     def __check_screen_edge_hit(self):
@@ -97,3 +93,11 @@ class Player(pygame.sprite.Sprite):
     def update(self):
 
         self.rotate()
+
+        settings["player_x_center"] = self.rect.center[0]
+        settings["player_y_center"] = self.rect.center[1]
+
+        self.rect.x += self.velx
+        self.rect.y += self.vely
+
+        self.__check_screen_edge_hit()

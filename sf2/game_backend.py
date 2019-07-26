@@ -66,21 +66,31 @@ class GameBackend:
 
                     return False  # Kill switch
 
-                elif event.key == pygame.K_w:
+                if event.key == pygame.K_w:
 
-                    self.player.move(0, -1 * settings["player_speed"])
+                    self.player.set_vely(-1 * settings["player_speed"])
 
-                elif event.key == pygame.K_a:
+                if event.key == pygame.K_a:
 
-                    self.player.move(-1 * settings["player_speed"], 0)
+                    self.player.set_velx(-1 * settings["player_speed"])
 
-                elif event.key == pygame.K_s:
+                if event.key == pygame.K_s:
 
-                    self.player.move(0, settings["player_speed"])
+                    self.player.set_vely(settings["player_speed"])
 
-                elif event.key == pygame.K_d:
+                if event.key == pygame.K_d:
 
-                    self.player.move(settings["player_speed"], 0)
+                    self.player.set_velx(settings["player_speed"])
+
+            if event.type == pygame.KEYUP:
+
+                if event.key == pygame.K_w or event.key == pygame.K_s:
+
+                    self.player.set_vely(0)
+
+                if event.key == pygame.K_a or event.key == pygame.K_d:
+
+                    self.player.set_velx(0)
 
         """"
         ------------------------------------------------------------------------

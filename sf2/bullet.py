@@ -37,12 +37,10 @@ class Bullet(pygame.sprite.Sprite):
 
     def __calculate_trajectory(self):
 
-        angle = math.atan2(
-            settings["player_x_center"] - self.mouse_pos[0],
-            settings["player_y_center"] - self.mouse_pos[1])
-
-        x_traj = math.cos(angle) * settings["bullet_speed"] * -1
-        y_traj = math.sin(angle) * settings["bullet_speed"]
+        angle = math.atan2(settings["player_y_center"]-self.mouse_pos[1],
+                           settings["player_x_center"]-self.mouse_pos[0])
+        x_traj = math.cos(angle) * (-1 * int(settings["bullet_speed"]))
+        y_traj = math.sin(angle) * (-1 * int(settings["bullet_speed"]))
 
         return [x_traj, y_traj]
 
