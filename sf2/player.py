@@ -28,7 +28,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.set_x(settings["screen_width"] / 2)
         self.set_y(settings["screen_height"] / 2)
-        self.bullets = settings["start_ammo"]
+        self.bullets = settings["start_bullets"]
         self.lives = settings["start_lives"]
         self.velx = 0
         self.vely = 0
@@ -62,6 +62,11 @@ class Player(pygame.sprite.Sprite):
 
         self.vely += vely
         return True
+
+    def change_speed(self, velx, vely):
+
+        self.velx += velx
+        self.vely += vely
 
     def __check_screen_edge_hit(self):
         """ Check if the player is colliding with the edge of the screen. If so,

@@ -20,7 +20,7 @@ strings = {
     "bullet_yellow": os.path.abspath(images_folder + "bullet_yellow.png"),
     "coin": os.path.abspath(images_folder + "coin.png"),
     "cursor_red": os.path.abspath(images_folder + "cursor_red.png"),
-    "drop_ammo": os.path.abspath(images_folder + "drop_ammo.png"),
+    "drop_bullets": os.path.abspath(images_folder + "drop_bullets.png"),
     "drop_coin": os.path.abspath(images_folder + "drop_coin.png"),
     "drop_life": os.path.abspath(images_folder + "drop_life.png"),
     "e1": os.path.abspath(images_folder + "e1.png"),

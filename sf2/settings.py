@@ -4,6 +4,9 @@
 # Last Edit: 7/25/2019
 
 from strings import strings
+import pygame
+
+pygame.init()
 
 settings = {
 
@@ -13,7 +16,7 @@ settings = {
     "image_string_alien1": strings["alien1"],
     "image_string_star": strings["star"],
 
-    "start_ammo": 100,
+    "start_bullets": 100,
     "start_lives": 3,
     "player_speed": 5,
     "bullet_speed": 15,
@@ -28,6 +31,8 @@ settings = {
     "drop_lives": 1,
     "drop_bullets": 50,
     "drop_coins": 2,
-    "fps": 60
+    "fps": 60,
+    "hud_spacing": 10,
+    "font": pygame.font.SysFont('04B_30_', 20, False, False)
 
 }

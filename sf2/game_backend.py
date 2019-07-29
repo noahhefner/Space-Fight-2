@@ -1,9 +1,8 @@
 # Noah Hefner
 # Space Fight 2.0
-# GameBackend Class
-# Last Edit: 7/23/2019
+# Drop Class
+# Last Edit: 7/28/2019
 
-# Imports
 from player import Player
 from bullet import Bullet
 from alien import Alien
@@ -13,6 +12,7 @@ from strings import strings
 from star import Star
 from drop import Drop
 import pygame
+from constants import WHITE
 
 pygame.init()
 
@@ -30,6 +30,8 @@ class GameBackend:
         self.score = 0
         self.lives = settings["start_lives"]
         self.coins = settings["coins"]
+        self.hud = GameBackend.HUD(self.player.lives, self.player.bullets,
+                                   self.coins)
 
         # Create stars for background
         for i in range(int(settings["screen_width"] / 2)):
@@ -68,29 +70,37 @@ class GameBackend:
 
                 if event.key == pygame.K_w:
 
-                    self.player.set_vely(-1 * settings["player_speed"])
+                    self.player.change_speed(0, -1 * settings["player_speed"])
 
                 if event.key == pygame.K_a:
 
-                    self.player.set_velx(-1 * settings["player_speed"])
+                    self.player.change_speed(-1 * settings["player_speed"], 0)
 
                 if event.key == pygame.K_s:
 
-                    self.player.set_vely(settings["player_speed"])
+                    self.player.change_speed(0, settings["player_speed"])
 
                 if event.key == pygame.K_d:
 
-                    self.player.set_velx(settings["player_speed"])
+                    self.player.change_speed(settings["player_speed"], 0)
 
             if event.type == pygame.KEYUP:
 
-                if event.key == pygame.K_w or event.key == pygame.K_s:
+                if event.key == pygame.K_w:
 
-                    self.player.set_vely(0)
+                    self.player.change_speed(0, settings["player_speed"])
 
-                if event.key == pygame.K_a or event.key == pygame.K_d:
+                if event.key == pygame.K_a:
 
-                    self.player.set_velx(0)
+                    self.player.change_speed(settings["player_speed"], 0)
+
+                if event.key == pygame.K_s:
+
+                    self.player.change_speed(0, -1 * settings["player_speed"])
+
+                if event.key == pygame.K_d:
+
+                    self.player.change_speed(-1 * settings["player_speed"], 0)
 
         """"
         ------------------------------------------------------------------------
@@ -103,7 +113,7 @@ class GameBackend:
 
         for alien in alien_bullet_collision:
 
-            # Spawn an explosion in that area
+            # Spawn an explosion and kill the alien sprite
             explosion = Explosion(alien.rect.x, alien.rect.y)
             self.explosions.add(explosion)
             self.score += 1
@@ -114,7 +124,7 @@ class GameBackend:
             new_alien = Alien(settings["image_string_alien1"])
             self.aliens.add(new_alien)
 
-            # Spawn drop if the alien was a carrier
+            # Spawn a drop if the alien was a carrier
             if alien.is_drop_carrier():
 
                 drop = Drop(alien.get_x(), alien.get_y())
@@ -129,7 +139,7 @@ class GameBackend:
             # Spawn an explosion in that area and subtract one player life
             explosion = Explosion(alien.rect.x, alien.rect.y)
             self.explosions.add(explosion)
-            self.lives -= 1
+            self.player.lives -= 1  # Function this into player class
 
         # Player-Drop collision
         player_drop_collision = \
@@ -176,6 +186,7 @@ class GameBackend:
             star.update()
 
         self.player.update()
+        self.hud.update(self.player.lives, self.player.bullets, self.coins)
 
         if self.player.lives <= 0:
 
@@ -217,28 +228,59 @@ class GameBackend:
 
         settings["alien_speed"] += 0.05
 
-    def __find_player_image(self):
-        return "player image"
+    class HUD:
 
-    def __find_bullet_image(self):
+        def __init__(self, lives, bullets, coins):
 
-        return "bullet image"
+            self.hearts = []
 
-    def __find_lvl_1_alien_image(self):
+            self.counter_bullets = pygame.sprite.Sprite()
+            self.counter_bullets.image = settings["font"].render(
+                "BULLETS: " + str(bullets), False, WHITE)
+            self.counter_bullets.rect = self.counter_bullets.image.get_rect()
 
-        return "alien level 1 image"
+            self.counter_coins = pygame.sprite.Sprite()
+            self.counter_coins.image = settings["font"].render(
+                "COINS: " + str(coins), False, WHITE)
+            self.counter_coins.rect = self.counter_coins.image.get_rect()
 
-    def __find_lvl_2_alien_image(self):
-        return "alien level 2 image"
+            return
 
-    def __find_lvl_3_alien_image(self):
-        return "alien level 3 image"
+        def update(self, lives, bullets, coins):
 
-    def __make_bullet(self):
+            # Update bullet counter
+            self.counter_bullets.image = settings["font"].render(
+                "BULLETS: " + str(bullets), False, WHITE)
+            self.counter_bullets.rect = self.counter_bullets.image.get_rect()
+            self.counter_bullets.rect.x = settings["hud_spacing"]
+            self.counter_bullets.rect.y = (settings["hud_spacing"] * 2) + 100
 
-        bullet = Bullet(settings["bullet_type_string"])
-        self.bullets.append(bullet)
+            # Update coin counter
+            self.counter_coins.image = settings["font"].render(
+                "COINS: " + str(coins), False, WHITE)
+            self.counter_coins.rect = self.counter_coins.image.get_rect()
+            self.counter_coins.rect.x = settings["hud_spacing"]
+            self.counter_coins.rect.y = (settings["hud_spacing"] * 3) + 120
 
-    def __make_alien(self, image_string):
+            # Ensure correct number of hearts
+            while len(self.hearts) != lives:
 
-        return Alien(image_string)
+                if len(self.hearts) < lives:
+
+                    heart = pygame.sprite.Sprite()
+                    heart.image = pygame.image.load(strings["heart"])
+                    heart.rect = heart.image.get_rect()
+                    self.hearts.append(heart)
+
+                else:
+
+                    self.hearts.remove(self.hearts[len(self.hearts) - 1])
+
+            # Ensure heart coordinates
+            for i in range(len(self.hearts)):
+
+                self.hearts[i].rect.x = (settings["hud_spacing"] * i) + \
+                    (self.hearts[i].rect.width * i)
+                self.hearts[i].rect.y = settings["hud_spacing"]
+
+            return True

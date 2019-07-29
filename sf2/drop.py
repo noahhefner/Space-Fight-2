@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Drop Class
-# Last Edit: 7/23/2019
+# Last Edit: 7/28/2019
 
 import pygame
 from settings import settings
@@ -22,7 +22,7 @@ class Drop(pygame.sprite.Sprite):
 
         self.image_string = random.choice([strings["drop_life"],
                                            strings["drop_coin"],
-                                           strings["drop_ammo"]])
+                                           strings["drop_bullets"]])
         self.image = pygame.image.load(self.image_string)
         self.rect = self.image.get_rect()
         self.rect.x = x_coord
