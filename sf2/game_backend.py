@@ -30,8 +30,8 @@ class GameBackend:
         self.score = 0
         self.lives = settings["start_lives"]
         self.coins = settings["coins"]
-        self.hud = GameBackend.HUD(self.player.lives, self.player.bullets,
-                                   self.coins)
+        self.hud = GameBackend.HUD(self.score, self.player.lives,
+                                   self.player.bullets, self.coins)
 
         # Create stars for background
         for i in range(int(settings["screen_width"] / 2)):
@@ -154,11 +154,11 @@ class GameBackend:
 
             elif drop.get_type() == strings["drop_coin"]:
 
-                settings["coins"] += 1
+                self.coins += 1
 
-            elif drop.get_type() == strings["drop_live"]:
+            elif drop.get_type() == strings["drop_life"]:
 
-                self.lives += 1
+                self.player.lives += 1
 
         """"
         ------------------------------------------------------------------------
@@ -186,7 +186,8 @@ class GameBackend:
             star.update()
 
         self.player.update()
-        self.hud.update(self.player.lives, self.player.bullets, self.coins)
+        self.hud.update(self.score, self.player.lives, self.player.bullets,
+                        self.coins)
 
         if self.player.lives <= 0:
 
@@ -226,13 +227,18 @@ class GameBackend:
 
     def __update_alien_speed(self):
 
-        settings["alien_speed"] += 0.05
+        settings["alien_speed"] += 0.01
 
     class HUD:
 
-        def __init__(self, lives, bullets, coins):
+        def __init__(self, score, lives, bullets, coins):
 
             self.hearts = []
+
+            self.counter_score = pygame.sprite.Sprite()
+            self.counter_score.image = settings["font"].render(
+                "SCORE: " + str(score), False, WHITE)
+            self.counter_score.rect = self.counter_score.image.get_rect()
 
             self.counter_bullets = pygame.sprite.Sprite()
             self.counter_bullets.image = settings["font"].render(
@@ -246,7 +252,7 @@ class GameBackend:
 
             return
 
-        def update(self, lives, bullets, coins):
+        def update(self, score, lives, bullets, coins):
 
             # Update bullet counter
             self.counter_bullets.image = settings["font"].render(
@@ -261,6 +267,13 @@ class GameBackend:
             self.counter_coins.rect = self.counter_coins.image.get_rect()
             self.counter_coins.rect.x = settings["hud_spacing"]
             self.counter_coins.rect.y = (settings["hud_spacing"] * 3) + 120
+
+            # Update score counter
+            self.counter_score.image = settings["font"].render(
+                "SCORE: " + str(score), False, WHITE)
+            self.counter_score.rect = self.counter_score.image.get_rect()
+            self.counter_score.rect.x = settings["hud_spacing"]
+            self.counter_score.rect.y = (settings["hud_spacing"] * 3) + 140
 
             # Ensure correct number of hearts
             while len(self.hearts) != lives:

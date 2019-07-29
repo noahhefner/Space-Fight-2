@@ -69,29 +69,35 @@ class Alien(pygame.sprite.Sprite):
         x = None
         y = None
 
-        left_right = random.randrange(0, 2)
-        top_bottom = random.randrange(0, 2)
+        left_right = random.randrange(0, 3)
 
         if left_right == 0:
 
             x = random.randrange(-600, -100)
+            y = random.randrange(-600, settings["screen_height"] + 600)
+
+        elif left_right == 1:
+
+            x = random.randrange(0, settings["screen_width"])
+
+            top_bottom = random.randrange(0, 2)
+
+            if top_bottom == 0:
+
+                y = random.randrange(-600, -100)
+
+            else:
+
+                y = random.randrange(settings["screen_height"] + 100,
+                                     settings["screen_height"] + 700)
 
         else:
 
-            x = random.randrange(settings["screen_width"] +
-                                 100, settings["screen_width"] + 600)
+            x = random.randrange(settings["screen_width"] + 100,
+                                 settings["screen_width"] + 700)
+            y = random.randrange(-600, settings["screen_height"] + 600)
 
         position.append(x)
-
-        if top_bottom == 0:
-
-            y = random.randrange(-600, -100)
-
-        else:
-
-            y = random.randrange(settings["screen_height"] +
-                                 100, settings["screen_height"] + 600)
-
         position.append(y)
 
         return position

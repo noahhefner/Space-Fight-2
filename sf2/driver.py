@@ -1,9 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Driver Script
-# Last Edit: 7/23/2019
-
-# Run with SF2Runner Script Profile
+# Last Edit: 7/29/2019
 
 from game_frontend import GameFrontend
 import pygame

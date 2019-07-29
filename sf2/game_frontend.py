@@ -47,6 +47,11 @@ class GameFrontend:
         self.screen.blit(self.backend.hud.counter_coins.image,
                          [self.backend.hud.counter_coins.rect.x,
                           self.backend.hud.counter_coins.rect.y])
+
+        self.screen.blit(self.backend.hud.counter_score.image,
+                         [self.backend.hud.counter_score.rect.x,
+                          self.backend.hud.counter_score.rect.y])
+
         for heart in self.backend.hud.hearts:
 
             self.screen.blit(heart.image, [heart.rect.x, heart.rect.y])
