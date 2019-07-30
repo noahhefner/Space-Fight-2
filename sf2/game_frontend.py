@@ -35,9 +35,7 @@ class GameFrontend:
         self.screen.fill(BLACK)
 
         # Blit stars
-        for star in self.backend.get_stars():
-
-            self.screen.blit(star.image, [star.get_x(), star.get_y()])
+        self.backend.get_stars().draw(self.screen)
 
         # Blit HUD
         self.screen.blit(self.backend.hud.counter_bullets.image,

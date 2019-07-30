@@ -6,7 +6,7 @@
 import os
 
 images_folder = "Space-Fight-2/sf2/resources/images/"
-sounds_folder = "Space-Fight-2/sf2/resources/sounds/"
+audio_folder = "Space-Fight-2/sf2/resources/audio/"
 
 strings = {
 

@@ -5,6 +5,7 @@
 
 from game_frontend import GameFrontend
 import pygame
+import time
 
 pygame.init()
 
@@ -15,5 +16,4 @@ playing = True
 while playing:
 
     playing = game.update()
-
     game.display()

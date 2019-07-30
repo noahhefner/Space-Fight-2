@@ -1,17 +1,10 @@
 # Noah Hefner
 # Space Fight 2.0
 # Menu Class
-# Last Edit: 7/23/2019
+# Last Edit: 7/29/2019
 
 import pygame
-
-# Constants
-YELLOW = [255, 255, 0]
-BLACK = [0, 0, 0]
-WHITE = [255, 255, 255]
-GREEN = [0, 255, 0]
-GREY = [105, 105, 105]
-RED = [255, 0, 0]
+from constants import BLACK
 
 pygame.init()
 
@@ -49,4 +42,4 @@ class Cursor(pygame.sprite.Sprite):
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
         self.rect.center = (mouse_x, mouse_y)
 
-        return
+        return True

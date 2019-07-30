@@ -68,6 +68,8 @@ class Player(pygame.sprite.Sprite):
         self.velx += velx
         self.vely += vely
 
+        return True
+
     def __check_screen_edge_hit(self):
         """ Check if the player is colliding with the edge of the screen. If so,
         stop the player from going off the
@@ -85,6 +87,8 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y + self.rect.height >= settings["screen_height"]:
             self.rect.bottom = settings["screen_height"]
 
+        return True
+
     def rotate(self):
         """ Rotate player to face the cursor. """
 
@@ -94,6 +98,8 @@ class Player(pygame.sprite.Sprite):
         angle = math.degrees(math.atan2(-1 * diff_y, diff_x)) - 180
         self.image = pygame.transform.rotate(self.original, angle)
         self.rect = self.image.get_rect(center=self.rect.center)
+
+        return True
 
     def update(self):
 
@@ -106,3 +112,5 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.vely
 
         self.__check_screen_edge_hit()
+
+        return True
