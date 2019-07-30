@@ -37,5 +37,10 @@ strings = {
     "star": os.path.abspath(images_folder + "star.png"),
 
     # Audio path strings
-
+    "bullet_fire": os.path.abspath(audio_folder + "bullet_fire.ogg"),
+    "explosion": os.path.abspath(audio_folder + "explosion.ogg"),
+    "pickup_bullets": os.path.abspath(audio_folder + "pickup_bullets.ogg"),
+    "pickup_coin": os.path.abspath(audio_folder + "pickup_coin.ogg"),
+    "pickup_life": os.path.abspath(audio_folder + "pickup_life.ogg"),
+    "theme": os.path.abspath(audio_folder + "theme.ogg")
 }

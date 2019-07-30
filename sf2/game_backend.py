@@ -10,6 +10,7 @@ from settings import settings
 from explosion import Explosion
 from strings import strings
 from star import Star
+from audio_player import AudioPlayer
 from drop import Drop
 import pygame
 from constants import WHITE
@@ -43,6 +44,9 @@ class GameBackend:
 
             new_alien = Alien(settings["image_string_alien1"])
             self.aliens.add(new_alien)
+
+        self.audio_player = AudioPlayer()
+        self.audio_player.play_theme()
 
     def update(self, user_events):
         """"
