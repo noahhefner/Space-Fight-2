@@ -102,13 +102,13 @@ class Alien(pygame.sprite.Sprite):
 
         return position
 
-    def update(self):
+    def update(self, player_center):
         """
         Auto-calculates path towards player.
         """
 
-        diff_x = settings["player_x_center"] - self.rect.center[0]
-        diff_y = settings["player_y_center"] - self.rect.center[1]
+        diff_x = player_center[0] - self.rect.center[0]
+        diff_y = player_center[1] - self.rect.center[1]
 
         angle = math.atan2(diff_y, diff_x)
 

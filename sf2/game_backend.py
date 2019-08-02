@@ -183,7 +183,7 @@ class GameBackend:
 
         # Alien update
         for alien in self.aliens:
-            alien.update()
+            alien.update(self.player.rect.center)
 
         # Star update
         for star in self.stars:

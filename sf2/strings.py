@@ -28,7 +28,7 @@ strings = {
     "e3": os.path.abspath(images_folder + "e3.png"),
     "e4": os.path.abspath(images_folder + "e4.png"),
     "e5": os.path.abspath(images_folder + "e5.png"),
-    "heart": os.path.abspath(images_folder + "heart.png"),
+    "heart": os.path.abspath(images_folder + "drop_life.png"),
     "player_blue": os.path.abspath(images_folder + "player_blue.png"),
     "player_green": os.path.abspath(images_folder + "player_green.png"),
     "player_white": os.path.abspath(images_folder + "player_white.png"),
