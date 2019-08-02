@@ -17,6 +17,8 @@ class GameFrontend:
 
         self.screen = pygame.display.set_mode(
             [settings["screen_width"], settings["screen_height"]])
+        pygame.display.set_caption("SPACE FIGHT 2.0")
+        pygame.mouse.set_visible(False)
         self.clock = pygame.time.Clock()
         self.backend = GameBackend()
 
@@ -28,8 +30,6 @@ class GameFrontend:
         return playing
 
     def display(self):
-
-        # TODO: Use the sprite group draw function instead of loop
 
         # Fill background
         self.screen.fill(BLACK)
@@ -50,35 +50,35 @@ class GameFrontend:
                          [self.backend.hud.counter_score.rect.x,
                           self.backend.hud.counter_score.rect.y])
 
-        for heart in self.backend.hud.hearts:
+        for i in range(self.backend.player.lives):
 
-            self.screen.blit(heart.image, [heart.rect.x, heart.rect.y])
+            x = (settings["hud_spacing"] * (i + 1)) + \
+                (i * self.backend.hud.heart.rect.width)
+            y = settings["hud_spacing"]
+
+            self.screen.blit(self.backend.hud.heart.image, [x, y])
 
         # Blit bullets
-        for bullet in self.backend.get_bullets():
-
-            self.screen.blit(bullet.image, [bullet.get_x(), bullet.get_y()])
+        self.backend.get_bullets().draw(self.screen)
 
         # Blit explosions
-        for explosion in self.backend.get_explosions():
-
-            self.screen.blit(explosion.image, [explosion.get_x(),
-                                               explosion.get_y()])
+        self.backend.get_explosions().draw(self.screen)
 
         # Blit drops
-        for drop in self.backend.get_drops():
-
-            self.screen.blit(drop.image, [drop.get_x(), drop.get_y()])
+        self.backend.get_drops().draw(self.screen)
 
         # Blit aliens
-        for alien in self.backend.get_aliens():
-
-            self.screen.blit(alien.image, [alien.get_x(), alien.get_y()])
+        self.backend.get_aliens().draw(self.screen)
 
         # Blit player
         self.screen.blit(self.backend.player.image,
                          [self.backend.player.get_x(),
                           self.backend.player.get_y()])
+
+        # Blit cursor
+        self.screen.blit(self.backend.cursor.image,
+                         [self.backend.cursor.get_x(),
+                          self.backend.cursor.get_y()])
 
         pygame.display.flip()
 

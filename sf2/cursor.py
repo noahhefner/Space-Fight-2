@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
-# Menu Class
-# Last Edit: 7/29/2019
+# Cursor Class
+# Last Edit: 8/2/2019
 
 import pygame
 from constants import BLACK
@@ -32,6 +32,14 @@ class Cursor(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         return
+
+    def get_x(self):
+
+        return self.rect.x
+
+    def get_y(self):
+
+        return self.rect.y
 
     def update(self):
         """ Get the mouse position. Set the center of the cursor to that

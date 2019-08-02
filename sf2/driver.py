@@ -1,11 +1,10 @@
 # Noah Hefner
 # Space Fight 2.0
 # Driver Script
-# Last Edit: 7/29/2019
+# Last Edit: 8/2/2019
 
 from game_frontend import GameFrontend
 import pygame
-import time
 
 pygame.init()
 

@@ -1,15 +1,16 @@
 # Noah Hefner
 # Space Fight 2.0
-# Drop Class
-# Last Edit: 7/28/2019
+# Game Backend Class
+# Last Edit: 8/2/2019
 
 from player import Player
 from bullet import Bullet
 from alien import Alien
 from settings import settings
 from explosion import Explosion
-from strings import strings
+from strings import image_paths
 from star import Star
+from cursor import Cursor
 from audio_player import AudioPlayer
 from drop import Drop
 import pygame
@@ -21,10 +22,11 @@ pygame.init()
 class GameBackend:
 
     def __init__(self):
-        self.player = Player(settings["player_type_string"])
 
+        self.player = Player(image_paths["player_white"])
+        self.cursor = Cursor(image_paths["cursor_red"])
         self.bullets = pygame.sprite.Group()
-        self.aliens = pygame.sprite.LayeredUpdates([pygame.sprite.Group()])
+        self.aliens = pygame.sprite.Group()
         self.explosions = pygame.sprite.Group()
         self.drops = pygame.sprite.Group()
         self.stars = pygame.sprite.Group()
@@ -36,13 +38,13 @@ class GameBackend:
 
         # Create stars for background
         for i in range(int(settings["screen_width"] / 2)):
-            new_star = Star(settings["image_string_star"])
+            new_star = Star(image_paths["star"])
             self.stars.add(new_star)
 
         # Make the aliens
         for i in range(20):
 
-            new_alien = Alien(settings["image_string_alien1"])
+            new_alien = Alien(image_paths["alien1"])
             self.aliens.add(new_alien)
 
         self.audio_player = AudioPlayer()
@@ -64,6 +66,7 @@ class GameBackend:
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
                     self.player.bullets > 0:
 
+                self.audio_player.play_bullet_fire()
                 self.__spawn_bullet()
 
             if event.type == pygame.KEYDOWN:
@@ -117,6 +120,8 @@ class GameBackend:
 
         for alien in alien_bullet_collision:
 
+            self.audio_player.play_explosion()
+
             # Spawn an explosion and kill the alien sprite
             explosion = Explosion(alien.rect.x, alien.rect.y)
             self.explosions.add(explosion)
@@ -125,7 +130,7 @@ class GameBackend:
 
             # Make a new alien to take its place
             self.__update_alien_speed()
-            new_alien = Alien(settings["image_string_alien1"])
+            new_alien = Alien(image_paths["alien1"])
             self.aliens.add(new_alien)
 
             # Spawn a drop if the alien was a carrier
@@ -140,6 +145,8 @@ class GameBackend:
 
         for alien in alien_player_collision:
 
+            self.audio_player.play_hitmarker()
+
             # Spawn an explosion in that area and subtract one player life
             explosion = Explosion(alien.rect.x, alien.rect.y)
             self.explosions.add(explosion)
@@ -152,16 +159,19 @@ class GameBackend:
         for drop in player_drop_collision:
 
             # Perform the perks ability/benefit
-            if drop.get_type() == strings["drop_bullets"]:
+            if drop.get_type() == image_paths["drop_bullets"]:
 
+                self.audio_player.play_pickup_life()
                 self.player.bullets += settings["drop_bullets"]
 
-            elif drop.get_type() == strings["drop_coin"]:
+            elif drop.get_type() == image_paths["drop_coin"]:
 
+                self.audio_player.play_pickup_coin()
                 self.coins += 1
 
-            elif drop.get_type() == strings["drop_life"]:
+            elif drop.get_type() == image_paths["drop_life"]:
 
+                self.audio_player.play_pickup_life()
                 self.player.lives += 1
 
         """"
@@ -190,6 +200,7 @@ class GameBackend:
             star.update()
 
         self.player.update()
+        self.cursor.update()
         self.hud.update(self.score, self.player.lives, self.player.bullets,
                         self.coins)
 
@@ -237,21 +248,24 @@ class GameBackend:
 
         def __init__(self, score, lives, bullets, coins):
 
-            self.hearts = []
+            self.heart = pygame.sprite.Sprite()
+            self.heart.image = \
+                pygame.image.load(image_paths["heart"]).convert()
+            self.heart.rect = self.heart.image.get_rect()
 
             self.counter_score = pygame.sprite.Sprite()
             self.counter_score.image = settings["font"].render(
-                "SCORE: " + str(score), False, WHITE)
+                "SCORE    " + str(score), False, WHITE)
             self.counter_score.rect = self.counter_score.image.get_rect()
 
             self.counter_bullets = pygame.sprite.Sprite()
             self.counter_bullets.image = settings["font"].render(
-                "BULLETS: " + str(bullets), False, WHITE)
+                "BULLETS    " + str(bullets), False, WHITE)
             self.counter_bullets.rect = self.counter_bullets.image.get_rect()
 
             self.counter_coins = pygame.sprite.Sprite()
             self.counter_coins.image = settings["font"].render(
-                "COINS: " + str(coins), False, WHITE)
+                "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
 
             return
@@ -260,44 +274,26 @@ class GameBackend:
 
             # Update bullet counter
             self.counter_bullets.image = settings["font"].render(
-                "BULLETS: " + str(bullets), False, WHITE)
+                "BULLETS    " + str(bullets), False, WHITE)
             self.counter_bullets.rect = self.counter_bullets.image.get_rect()
             self.counter_bullets.rect.x = settings["hud_spacing"]
-            self.counter_bullets.rect.y = (settings["hud_spacing"] * 2) + 100
+            self.counter_bullets.rect.y = self.heart.rect.y + \
+                self.heart.rect.height + (settings["hud_spacing"] * 2)
 
             # Update coin counter
             self.counter_coins.image = settings["font"].render(
-                "COINS: " + str(coins), False, WHITE)
+                "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
             self.counter_coins.rect.x = settings["hud_spacing"]
-            self.counter_coins.rect.y = (settings["hud_spacing"] * 3) + 120
+            self.counter_coins.rect.y = self.counter_bullets.rect.y + \
+                self.counter_bullets.rect.height + settings["hud_spacing"]
 
             # Update score counter
             self.counter_score.image = settings["font"].render(
-                "SCORE: " + str(score), False, WHITE)
+                "SCORE    " + str(score), False, WHITE)
             self.counter_score.rect = self.counter_score.image.get_rect()
             self.counter_score.rect.x = settings["hud_spacing"]
-            self.counter_score.rect.y = (settings["hud_spacing"] * 3) + 140
-
-            # Ensure correct number of hearts
-            while len(self.hearts) != lives:
-
-                if len(self.hearts) < lives:
-
-                    heart = pygame.sprite.Sprite()
-                    heart.image = pygame.image.load(strings["heart"])
-                    heart.rect = heart.image.get_rect()
-                    self.hearts.append(heart)
-
-                else:
-
-                    self.hearts.remove(self.hearts[len(self.hearts) - 1])
-
-            # Ensure heart coordinates
-            for i in range(len(self.hearts)):
-
-                self.hearts[i].rect.x = (settings["hud_spacing"] * i) + \
-                    (self.hearts[i].rect.width * i)
-                self.hearts[i].rect.y = settings["hud_spacing"]
+            self.counter_score.rect.y = self.counter_coins.rect.y + \
+                self.counter_coins.rect.height + settings["hud_spacing"]
 
             return True

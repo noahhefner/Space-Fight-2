@@ -1,10 +1,11 @@
 # Noah Hefner
 # Space Fight 2.0
 # Explosion Class
-# Last Edit: 7/23/2019
+# Last Edit: 8/2/2019
 
 import pygame
 from constants import BLACK
+from strings import image_paths
 
 pygame.init()
 
@@ -21,16 +22,11 @@ class Explosion(pygame.sprite.Sprite):
 
         super(Explosion, self).__init__()
 
-        self.e1 = pygame.image.load(
-            "Space-Fight-2/sf2/resources/images/e1.png").convert()
-        self.e2 = pygame.image.load(
-            "Space-Fight-2/sf2/resources/images/e2.png").convert()
-        self.e3 = pygame.image.load(
-            "Space-Fight-2/sf2/resources/images/e3.png").convert()
-        self.e4 = pygame.image.load(
-            "Space-Fight-2/sf2/resources/images/e4.png").convert()
-        self.e5 = pygame.image.load(
-            "Space-Fight-2/sf2/resources/images/e5.png").convert()
+        self.e1 = pygame.image.load(image_paths["e1"]).convert()
+        self.e2 = pygame.image.load(image_paths["e2"]).convert()
+        self.e3 = pygame.image.load(image_paths["e3"]).convert()
+        self.e4 = pygame.image.load(image_paths["e4"]).convert()
+        self.e5 = pygame.image.load(image_paths["e5"]).convert()
 
         self.e1.set_colorkey(BLACK)
         self.e2.set_colorkey(BLACK)

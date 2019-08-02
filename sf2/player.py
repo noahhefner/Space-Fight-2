@@ -1,7 +1,7 @@
 # Noah Hefner
 # Space Fight 2.0
 # Player Class
-# Last Edit: 7/21/2019
+# Last Edit: 8.2/2019
 
 # Imports
 import math
@@ -38,12 +38,10 @@ class Player(pygame.sprite.Sprite):
     def set_x(self, new_x):
 
         self.rect.x = new_x
-        settings["player_x_center"] = self.rect.center[0]
 
     def set_y(self, new_y):
 
         self.rect.y = new_y
-        settings["player_y_center"] = self.rect.center[1]
 
     def get_x(self):
 
@@ -104,9 +102,6 @@ class Player(pygame.sprite.Sprite):
     def update(self):
 
         self.rotate()
-
-        settings["player_x_center"] = self.rect.center[0]
-        settings["player_y_center"] = self.rect.center[1]
 
         self.rect.x += self.velx
         self.rect.y += self.vely

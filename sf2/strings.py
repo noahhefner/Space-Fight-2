@@ -1,14 +1,15 @@
 # Noah Hefner
 # Space Fight 2.0
 # Strings Dictionary
-# Last Edit: 7/25/2019
+# Last Edit: 8/2/2019
 
 import os
 
 images_folder = "Space-Fight-2/sf2/resources/images/"
 audio_folder = "Space-Fight-2/sf2/resources/audio/"
+font_folder = "Space-Fight-2/sf2/resources/font/"
 
-strings = {
+image_paths = {
 
     # Image path strings
     "alien1": os.path.abspath(images_folder + "alien_level_one.png"),
@@ -34,13 +35,25 @@ strings = {
     "player_white": os.path.abspath(images_folder + "player_white.png"),
     "player_yellow": os.path.abspath(images_folder + "player_yellow.png"),
     "logo": os.path.abspath(images_folder + "space_fight_logo.png"),
-    "star": os.path.abspath(images_folder + "star.png"),
+    "star": os.path.abspath(images_folder + "star.png")
+
+}
+
+audio_paths = {
 
     # Audio path strings
     "bullet_fire": os.path.abspath(audio_folder + "bullet_fire.ogg"),
     "explosion": os.path.abspath(audio_folder + "explosion.ogg"),
+    "hitmarker": os.path.abspath(audio_folder + "hitmarker.ogg"),
     "pickup_bullets": os.path.abspath(audio_folder + "pickup_bullets.ogg"),
     "pickup_coin": os.path.abspath(audio_folder + "pickup_coin.ogg"),
     "pickup_life": os.path.abspath(audio_folder + "pickup_life.ogg"),
     "theme": os.path.abspath(audio_folder + "theme.ogg")
+
+}
+
+font_paths = {
+
+    # Font path strings
+    "arcade_classic": os.path.abspath(font_folder + "ARCADECLASSIC.TTF")
 }
