@@ -15,3 +15,4 @@ This game is programmed in python using pygame's modules. Space Fight 1 was a hi
 * Player Profiles
 * New drops
 * More player models, bullet types
+* Pause button
