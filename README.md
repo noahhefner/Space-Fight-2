@@ -7,7 +7,7 @@ Space Fight 2 is a single-player, Galaga-inspired shooter game. The objective of
 This game is programmed in python using pygame's modules. Space Fight 1 was a highschool programming course final project, so Space Fight 2.0 is sort of the "remastered" version.
 
 ### How to Play
-Download/clone the repository and run the driver.py file. Make sure your working directory is set to the folder in which the repository is located.
+Download/clone the repository. Make sure your working directory is set to the folder in which the repository is located. Run driver.py.
 
 ### Future Plans (no particular order)
 * Menu System
