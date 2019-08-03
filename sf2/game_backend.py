@@ -1,22 +1,25 @@
-# Noah Hefner
-# Space Fight 2.0
-# Game Backend Class
-# Last Edit: 8/2/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Game Backend Class
+Last Edit: 8/3/2019
+"""
 
-from player import Player
-from bullet import Bullet
-from alien import Alien
-from settings import settings
-from explosion import Explosion
-from strings import image_paths
-from star import Star
-from cursor import Cursor
-from audio_player import AudioPlayer
-from drop import Drop
+# Imports
 import pygame
+from alien import Alien
+from audio_player import AudioPlayer
+from bullet import Bullet
 from constants import WHITE
+from cursor import Cursor
+from drop import Drop
+from explosion import Explosion
+from player import Player
+from settings import settings
+from star import Star
+from strings import image_paths
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
 
 class GameBackend:
@@ -200,7 +203,7 @@ class GameBackend:
             star.update()
 
         self.player.update()
-        self.cursor.update()
+        self.cursor.update(pygame.mouse.get_pos())
         self.hud.update(self.score, self.player.lives, self.player.bullets,
                         self.coins)
 
@@ -211,14 +214,17 @@ class GameBackend:
         return True
 
     def __spawn_bullet(self):
-        """ Spawns a bullet. """
+        """
+        Spawns a bullet and adds it to bullet sprite list.
+        """
 
         mouse_pos = pygame.mouse.get_pos()
-        new_bullet = Bullet(settings["bullet_type_string"], mouse_pos)
+        new_bullet = Bullet(settings["bullet_type_string"], mouse_pos,
+                            self.player.rect.center)
         self.bullets.add(new_bullet)
         self.player.bullets -= 1
 
-        return
+        return True
 
     def get_stars(self):
 

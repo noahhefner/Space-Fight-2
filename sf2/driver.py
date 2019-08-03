@@ -1,18 +1,21 @@
-# Noah Hefner
-# Space Fight 2.0
-# Driver Script
-# Last Edit: 8/2/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Driver Script
+Last Edit: 8/3/2019
+"""
 
+# Imports
 from game_frontend import GameFrontend
 import pygame
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
-game = GameFrontend()
+game = GameFrontend()  # Create a game
 
 playing = True
 
 while playing:
 
-    playing = game.update()
-    game.display()
+    playing = game.update()  # Update game
+    game.display()  # Display game

@@ -1,23 +1,38 @@
-# Noah Hefner
-# Space Fight 2.0
-# Player Class
-# Last Edit: 8.2/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Player Class
+Last Edit: 8/2/2019
+"""
 
 # Imports
 import math
 import pygame
 from settings import settings
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
 
 class Player(pygame.sprite.Sprite):
-    """ In-game player entity. """
+    """
+    In-game player entity.
+
+    Attributes:
+        image (pygame.image): Image for player sprite.
+        original (pygame.image): Same as image. Used for rotation.
+        rect (pygame.image.rect): Position, height, width values for image.
+        bullets (int): Number of bullets the player has.
+        lives (int): Number of lives the player has.
+        velx (int): Velocity of player on x axis.
+        vely (int): Velocity of player on y axis.
+    """
 
     def __init__(self, image_string):
-        """ Instantiate player class.
-        Args:
-            image_string (string): name of image file to be used for player.
+        """
+        Instantiate a player object.
+
+        Parameters:
+            image_string (string): Path of image file to be used for player.
         """
 
         super(Player, self).__init__()
@@ -26,42 +41,81 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey([0, 0, 0])
         self.original = self.image
         self.rect = self.image.get_rect()
-        self.set_x(settings["screen_width"] / 2)
-        self.set_y(settings["screen_height"] / 2)
-        self.bullets = settings["start_bullets"]
-        self.lives = settings["start_lives"]
         self.velx = 0
         self.vely = 0
 
+        self.bullets = settings["start_bullets"]
+        self.lives = settings["start_lives"]
+
+        # Set starting position for player
+        self.set_x(settings["screen_width"] / 2)
+        self.set_y(settings["screen_height"] / 2)
+
         return
 
-    def set_x(self, new_x):
+    def update(self):
+        """
+        Rotate and move player, then check for screen edge collision.
+        """
 
-        self.rect.x = new_x
+        self.__rotate()
+        self.__move()
+        self.__check_screen_edge_hit()
 
-    def set_y(self, new_y):
-
-        self.rect.y = new_y
+        return True
 
     def get_x(self):
+        """
+        Get x value of rect.
+
+        Returns:
+            self.rect.x (int): X value of rect.
+        """
 
         return self.rect.x
 
     def get_y(self):
+        """
+        Get y value of rect.
+
+        Returns:
+            self.rect.y (int): Y value of rect.
+        """
 
         return self.rect.y
 
-    def set_velx(self, velx):
+    def set_x(self, new_x):
+        """
+        Set x value for rect.
 
-        self.velx += velx
+        Parameters:
+            new_x (int): New x value for rect.
+        """
+
+        self.rect.x = new_x
+
         return True
 
-    def set_vely(self, vely):
+    def set_y(self, new_y):
+        """
+        Set y value for rect.
 
-        self.vely += vely
+        Parameters:
+            new_y (int): New y value for rect.
+        """
+
+        self.rect.y = new_y
+
         return True
 
     def change_speed(self, velx, vely):
+        """
+        Change speed of player on x and y axis.
+
+        Parameters:
+            velx (int): X axis velocity for player.
+            vely (int): Y axis velocity for player.
+        """
 
         self.velx += velx
         self.vely += vely
@@ -69,9 +123,9 @@ class Player(pygame.sprite.Sprite):
         return True
 
     def __check_screen_edge_hit(self):
-        """ Check if the player is colliding with the edge of the screen. If so,
-        stop the player from going off the
-        screen. """
+        """
+        Prevents the player from moving off the window.
+        """
 
         if self.rect.x + self.rect.width >= settings["screen_width"]:
             self.rect.right = settings["screen_width"]
@@ -87,8 +141,20 @@ class Player(pygame.sprite.Sprite):
 
         return True
 
-    def rotate(self):
-        """ Rotate player to face the cursor. """
+    def __move(self):
+        """
+        Move the player according to x and y axis velocities.
+        """
+
+        self.rect.x += self.velx
+        self.rect.y += self.vely
+
+        return True
+
+    def __rotate(self):
+        """
+        Rotates the player to face the cursor.
+        """
 
         (mouse_x, mouse_y) = pygame.mouse.get_pos()
         diff_y = self.rect.center[1] - mouse_y
@@ -96,16 +162,5 @@ class Player(pygame.sprite.Sprite):
         angle = math.degrees(math.atan2(-1 * diff_y, diff_x)) - 180
         self.image = pygame.transform.rotate(self.original, angle)
         self.rect = self.image.get_rect(center=self.rect.center)
-
-        return True
-
-    def update(self):
-
-        self.rotate()
-
-        self.rect.x += self.velx
-        self.rect.y += self.vely
-
-        self.__check_screen_edge_hit()
 
         return True

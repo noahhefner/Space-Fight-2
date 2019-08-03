@@ -1,23 +1,42 @@
-# Noah Hefner
-# Space Fight 2.0
-# Explosion Class
-# Last Edit: 8/2/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Explosion Class
+Last Edit: 8/3/2019
+"""
 
+# Imports
 import pygame
 from constants import BLACK
 from strings import image_paths
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
 
 class Explosion(pygame.sprite.Sprite):
-    """ Spawns an explosion at the given location. """
+    """
+    Spawns an explosion at the given location.
+
+    Attributes:
+        e1 (pygame.image): Image path for frame 1/5 of the explosion.
+        e2 (pygame.image): Image path for frame 2/5 of the explosion.
+        e3 (pygame.image): Image path for frame 3/5 of the explosion.
+        e4 (pygame.image): Image path for frame 4/5 of the explosion.
+        e5 (pygame.image): Image path for frame 5/5 of the explosion.
+        image_list (list): A subscriptable list for easily parsing the frames.
+        frame (int): The total frames elapsed in the explosion.
+        exp_num (int): Index of currently showing frame.
+        image (pygame.image): The image object that gets blited by front end.
+        rect (pygame.image.rect): Position, height, width values for image.
+    """
 
     def __init__(self, x, y):
-        """ Initializes explosion class.
-        Args:
-            x (int): x value for the explosion to spawn
-            y (int): y value for the explosion to spawn
+        """
+        Initializes explosion class.
+
+        Parameters:
+            x (int): X value for the explosion to spawn.
+            y (int): Y value for the explosion to spawn.
         """
 
         super(Explosion, self).__init__()
@@ -43,15 +62,13 @@ class Explosion(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-    def get_x(self):
-
-        return self.rect.x
-
-    def get_y(self):
-
-        return self.rect.y
+        return
 
     def update(self):
+        """
+        Cycles through the exp_list to display the correct frame and kills the
+        sprite at the frame limit.
+        """
 
         if self.frame == 16:
 
@@ -63,3 +80,49 @@ class Explosion(pygame.sprite.Sprite):
 
         self.frame += 1
         self.image = self.image_list[self.exp_num]
+
+        return True
+
+    def get_x(self):
+        """
+        Get x value of rect.
+
+        Returns:
+            self.rect.x (int): X value of rect.
+        """
+
+        return self.rect.x
+
+    def get_y(self):
+        """
+        Get y value of rect.
+
+        Returns:
+            self.rect.y (int): Y value of rect.
+        """
+
+        return self.rect.y
+
+    def set_x(self, new_x):
+        """
+        Set x value for rect.
+
+        Parameters:
+            new_x (int): New x value for rect.
+        """
+
+        self.rect.x = new_x
+
+        return True
+
+    def set_y(self, new_y):
+        """
+        Set y value for rect.
+
+        Parameters:
+            new_y (int): New y value for rect.
+        """
+
+        self.rect.y = new_y
+
+        return True

@@ -1,26 +1,33 @@
-# Noah Hefner
-# Space Fight 2.0
-# Bullet Class
-# Last Edit: 7/23/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Bullet Class
+Last Edit: 8/2/2019
+"""
 
-import pygame
 import math
-
-from settings import settings
+import pygame
 from constants import BLACK
+from settings import settings
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
 
 class Bullet(pygame.sprite.Sprite):
-    """ In-game bullet entity. """
+    """
+    In-game bullet entity.
 
-    def __init__(self, image_string, mouse_pos):
+    Attributes:
+        image (pygame.image): Image for Bullet sprite.
+        rect (pygame.image.rect): Position, height, width values for image.
+    """
+
+    def __init__(self, image_string, mouse_pos, player_pos):
         """ Initiate bullet class.
         Args:
-            image_string (string): image path to be used for bullet image.
-            x_traj (int): x axis trajectory of the bullet.
-            y_traj (int): y axis trajectory of the bullet.
+            image_string (string): Image path for bullet image.
+            x_traj (int): X axis trajectory of the bullet.
+            y_traj (int): Y axis trajectory of the bullet.
         """
 
         super(Bullet, self).__init__()
@@ -28,32 +35,18 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_string).convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.x = settings["player_x_center"]
-        self.rect.y = settings["player_y_center"]
+        self.rect.x = player_pos[0]
+        self.rect.y = player_pos[1]
         self.mouse_pos = mouse_pos
-        self.trajectory = self.__calculate_trajectory()
+        self.speed = int(settings["bullet_speed"])
+        self.trajectory = self.__calculate_trajectory(mouse_pos, player_pos)
 
         return
 
-    def __calculate_trajectory(self):
-
-        angle = math.atan2(settings["player_y_center"]-self.mouse_pos[1],
-                           settings["player_x_center"]-self.mouse_pos[0])
-        x_traj = math.cos(angle) * (-1 * int(settings["bullet_speed"]))
-        y_traj = math.sin(angle) * (-1 * int(settings["bullet_speed"]))
-
-        return [x_traj, y_traj]
-
-    def get_x(self):
-
-        return self.rect.x
-
-    def get_y(self):
-
-        return self.rect.y
-
     def update(self):
-        """ Move bullet. This method has an auto-kill. """
+        """
+        Move bullet. Kill bullet when it goes off the screen.
+        """
 
         self.rect.x += self.trajectory[0]
         self.rect.y += self.trajectory[1]
@@ -69,3 +62,65 @@ class Bullet(pygame.sprite.Sprite):
             self.kill()
 
         return True
+
+    def get_x(self):
+        """
+        Get x value of rect.
+
+        Returns:
+            self.rect.x (int): X value of rect.
+        """
+
+        return self.rect.x
+
+    def get_y(self):
+        """
+        Get y value of rect.
+
+        Returns:
+            self.rect.y (int): Y value of rect.
+        """
+
+        return self.rect.y
+
+    def set_x(self, new_x):
+        """
+        Set x value for rect.
+
+        Parameters:
+            new_x (int): New x value for rect.
+        """
+
+        self.rect.x = new_x
+
+        return True
+
+    def set_y(self, new_y):
+        """
+        Set y value for rect.
+
+        Parameters:
+            new_y (int): New y value for rect.
+        """
+
+        self.rect.y = new_y
+
+        return True
+
+    def __calculate_trajectory(self, mouse_pos, player_pos):
+        """
+        Calculate the trajectory of the bullet given player/mouse coordinates.
+
+        Parameters:
+            mouse_pos (list): X and Y coordinates of the mouse.
+            player_pos (list): X and Y coordinates of the player.
+        Returns:
+            list: X and Y axis trajectories.
+        """
+
+        angle = math.atan2(player_pos[1] - mouse_pos[1],
+                           player_pos[0] - mouse_pos[0])
+        x_traj = math.cos(angle) * (-1 * self.speed)
+        y_traj = math.sin(angle) * (-1 * self.speed)
+
+        return [x_traj, y_traj]
