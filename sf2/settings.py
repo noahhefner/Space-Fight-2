@@ -18,7 +18,7 @@ settings = {
     "start_lives": 3,
     "player_speed": 6,
     "bullet_speed": 15,
-    "screen_width": 800,
+    "screen_width": 1000,
     "screen_height": 800,
     "coins": 0,
     "alien_speed": 1.5,

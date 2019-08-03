@@ -23,35 +23,44 @@ pygame.init()  # Initialize pygame
 
 
 class GameBackend:
+    """
+    Handles all sprite movement, collision detection, score, etc.
+
+    Attributes:
+        player (Player): The player.
+        cursor (Cursor): The cursor.
+        bullets (pygame.sprite.Group): Sprite group of all existing bullets.
+        aliens (pygame.sprite.Group): Sprite group of all existing aliens.
+    """
 
     def __init__(self):
 
-        self.player = Player(image_paths["player_white"])
-        self.cursor = Cursor(image_paths["cursor_red"])
-        self.bullets = pygame.sprite.Group()
+        # Sprite Groups
         self.aliens = pygame.sprite.Group()
-        self.explosions = pygame.sprite.Group()
+        self.bullets = pygame.sprite.Group()
         self.drops = pygame.sprite.Group()
+        self.explosions = pygame.sprite.Group()
         self.stars = pygame.sprite.Group()
-        self.score = 0
-        self.lives = settings["start_lives"]
-        self.coins = settings["coins"]
-        self.hud = GameBackend.HUD(self.score, self.player.lives,
-                                   self.player.bullets, self.coins)
 
-        # Create stars for background
+        # Sprites
+        self.cursor = Cursor(image_paths["cursor_red"])
+        self.player = Player(image_paths["player_white"])
+        for i in range(20):
+            new_alien = Alien(image_paths["alien1"])
+            self.aliens.add(new_alien)
         for i in range(int(settings["screen_width"] / 2)):
             new_star = Star(image_paths["star"])
             self.stars.add(new_star)
 
-        # Make the aliens
-        for i in range(20):
-
-            new_alien = Alien(image_paths["alien1"])
-            self.aliens.add(new_alien)
-
+        # AudioPlayer
         self.audio_player = AudioPlayer()
         self.audio_player.play_theme()
+
+        self.lives = settings["start_lives"]
+        self.coins = settings["coins"]
+        self.score = 0
+        self.hud = GameBackend.HUD(self.score, self.player.lives,
+                                   self.player.bullets, self.coins)
 
     def update(self, user_events):
         """"

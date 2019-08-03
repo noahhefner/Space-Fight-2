@@ -16,7 +16,8 @@ class GameFrontend:
     def __init__(self):
 
         self.screen = pygame.display.set_mode(
-            [settings["screen_width"], settings["screen_height"]])
+            [settings["screen_width"], settings["screen_height"]],
+            pygame.FULLSCREEN)
         pygame.display.set_caption("SPACE FIGHT 2.0")
         pygame.mouse.set_visible(False)
         self.clock = pygame.time.Clock()
