@@ -11,7 +11,7 @@ This game is programmed in python using pygame's modules. Space Fight 1 was a hi
 ### How to Play
 Dependencies: PyGame
 
-Download/clone the repository. Make sure your working directory is set to the folder in which the repository is located. Run driver.py.
+Installl dependencies. Download/clone the repository. Make sure your working directory is set to Space-Fight-2. Run driver.py.
 
 ### Future Plans (no particular order)
 * Menu System
