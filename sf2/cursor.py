@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Cursor Class
-Last Edit: 8/2/2019
+Last Edit: 8/4/2019
 """
 
 # Imports
@@ -36,6 +36,15 @@ class Cursor(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         return
+
+    def update(self, mouse_pos):
+        """
+        Set center of cursor to the mouse position.
+        """
+
+        self.rect.center = (mouse_pos[0], mouse_pos[1])
+
+        return True
 
     def get_x(self):
         """
@@ -78,14 +87,5 @@ class Cursor(pygame.sprite.Sprite):
         """
 
         self.rect.y = new_y
-
-        return True
-
-    def update(self, mouse_pos):
-        """
-        Set center of cursor to the mouse position.
-        """
-
-        self.rect.center = (mouse_pos[0], mouse_pos[1])
 
         return True

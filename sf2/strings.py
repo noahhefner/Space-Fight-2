@@ -5,9 +5,9 @@
 
 import os
 
-images_folder = "Space-Fight-2/sf2/resources/images/"
-audio_folder = "Space-Fight-2/sf2/resources/audio/"
-font_folder = "Space-Fight-2/sf2/resources/font/"
+images_folder = "sf2/resources/images/"
+audio_folder = "sf2/resources/audio/"
+font_folder = "sf2/resources/font/"
 
 image_paths = {
 

@@ -7,6 +7,7 @@ Last Edit: 8/3/2019
 
 # Imports
 import pygame
+
 from alien import Alien
 from audio_player import AudioPlayer
 from bullet import Bullet
@@ -27,13 +28,26 @@ class GameBackend:
     Handles all sprite movement, collision detection, score, etc.
 
     Attributes:
-        player (Player): The player.
-        cursor (Cursor): The cursor.
-        bullets (pygame.sprite.Group): Sprite group of all existing bullets.
-        aliens (pygame.sprite.Group): Sprite group of all existing aliens.
+        aliens (pygame.sprite.Group): Sprite group of all aliens.
+        bullets (pygame.sprite.Group): Sprite group of all bullets.
+        drops (pygame.sprite.Group): Sprite group of all drops.
+        explosions (pygame.sprite.Group): Sprite group of all explosions.
+        stars (pygame.sprite.Group): Sprite group of all stars.
+
+        cursor (Cursor): The cursor sprite.
+        player (Player): The player sprite.
+
+        audio_player (AudioPlayer): Handles all audio for the game.
+
+        coins (int): Number of coins the player has.
+        score (int): Current score the player has.
+        hud (HUD): Overlay that contains information for the player.
     """
 
     def __init__(self):
+        """
+        Initialize a GameBackend object.
+        """
 
         # Sprite Groups
         self.aliens = pygame.sprite.Group()
@@ -56,18 +70,23 @@ class GameBackend:
         self.audio_player = AudioPlayer()
         self.audio_player.play_theme()
 
-        self.lives = settings["start_lives"]
         self.coins = settings["coins"]
         self.score = 0
-        self.hud = GameBackend.HUD(self.score, self.player.lives,
-                                   self.player.bullets, self.coins)
+        self.hud = GameBackend.HUD(self.score, self.player.bullets, self.coins)
+
+        return
 
     def update(self, user_events):
         """"
-        ------------------------------------------------------------------------
-        HANDLE USER INPUT
-        ------------------------------------------------------------------------
+        Handles user input, collision detection, and updates all sprites.
+
+        Parameters:
+            user_events (pygame.event): List of user inputs.
+        Returns:
+            boolean: True for continue the game, False to end the game.
         """
+
+        # Handle user input
         for event in user_events:
 
             if event.type == pygame.QUIT:
@@ -121,11 +140,7 @@ class GameBackend:
 
                     self.player.change_speed(-1 * settings["player_speed"], 0)
 
-        """"
-        ------------------------------------------------------------------------
-        COLLISION DETECTION AND COLLISION EFFECTS
-        ------------------------------------------------------------------------
-        """
+        # Collision detection and repercussions
         # Bullet-Alien collision
         alien_bullet_collision = \
             pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
@@ -186,11 +201,7 @@ class GameBackend:
                 self.audio_player.play_pickup_life()
                 self.player.lives += 1
 
-        """"
-        ------------------------------------------------------------------------
-        UPDATES
-        ------------------------------------------------------------------------
-        """
+        # Sprite updates (call update function on everything)
         # Explosion update
         for explosion in self.explosions:
             explosion.update()
@@ -213,14 +224,66 @@ class GameBackend:
 
         self.player.update()
         self.cursor.update(pygame.mouse.get_pos())
-        self.hud.update(self.score, self.player.lives, self.player.bullets,
+        self.hud.update(self.score, self.player.bullets,
                         self.coins)
 
+        # End game if the player is out of lives
         if self.player.lives <= 0:
 
             return False
 
+        # Return True if the game should continue
         return True
+
+    def get_aliens(self):
+        """
+        Gets the aliens sprite group.
+
+        Returns:
+            self aliens (pygame.sprite.Group): Sprite group of aliens.
+        """
+
+        return self.aliens
+
+    def get_bullets(self):
+        """
+        Gets the bullets sprite group.
+
+        Returns:
+            self.bullets (pygame.sprite.Group): Sprite group of bullets.
+        """
+
+        return self.bullets
+
+    def get_drops(self):
+        """
+        Gets the drops sprite group.
+
+        Returns:
+            self.drops (pygame.sprite.Group): Sprite group of drops.
+        """
+
+        return self.drops
+
+    def get_explosions(self):
+        """
+        Gets the explosions sprite group.
+
+        Returns:
+            self.explosions (pygame.sprite.Group): Sprite group of explosions.
+        """
+
+        return self.explosions
+
+    def get_stars(self):
+        """
+        Gets the stars sprite group.
+
+        Returns:
+            self.stars (pygame.sprite.Group): Sprite group of stars.
+        """
+
+        return self.stars
 
     def __spawn_bullet(self):
         """
@@ -235,33 +298,35 @@ class GameBackend:
 
         return True
 
-    def get_stars(self):
-
-        return self.stars
-
-    def get_bullets(self):
-
-        return self.bullets
-
-    def get_explosions(self):
-
-        return self.explosions
-
-    def get_drops(self):
-
-        return self.drops
-
-    def get_aliens(self):
-
-        return self.aliens
-
     def __update_alien_speed(self):
+        """
+        Increment alien speed based on player score.
+        """
 
         settings["alien_speed"] += 0.01
 
-    class HUD:
+        return True
 
-        def __init__(self, score, lives, bullets, coins):
+    class HUD:
+        """
+        Visual overlay that contains player information.
+
+        Attributes:
+            heart (pygame.sprite.Sprite): Heart sprite used to blit lives.
+            counter_score (pygame.sprite.Sprite): Player score counter.
+            counter_bullets (pygame.sprite.Sprite): Player bullet counter.
+            counter_coins (pygame.sprite.Sprite): Player coins counter.
+        """
+
+        def __init__(self, score, bullets, coins):
+            """
+            Initialize a HUD object.
+
+            Parameters:
+                score (int): Current score of player.
+                bullets (int): Current bullet count of player.
+                coins (int): Current coin count of player.
+            """
 
             self.heart = pygame.sprite.Sprite()
             self.heart.image = \
@@ -285,7 +350,15 @@ class GameBackend:
 
             return
 
-        def update(self, score, lives, bullets, coins):
+        def update(self, score, bullets, coins):
+            """
+            Remake counter sprites with appropriate data.
+
+            Parameters:
+                score (int): Current score of player.
+                bullets (int): Current bullet count of player.
+                coins (int): Current coin count of player.
+            """
 
             # Update bullet counter
             self.counter_bullets.image = settings["font"].render(
