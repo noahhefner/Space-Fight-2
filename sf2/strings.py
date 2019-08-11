@@ -1,14 +1,19 @@
-# Noah Hefner
-# Space Fight 2.0
-# Strings Dictionary
-# Last Edit: 8/2/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Strings Dictionary
+Last Edit: 8/11/2019
+"""
 
+# Imports
 import os
 
+# Folder paths within resources
 images_folder = "sf2/resources/images/"
 audio_folder = "sf2/resources/audio/"
 font_folder = "sf2/resources/font/"
 
+# Image paths stored as strings
 image_paths = {
 
     # Image path strings
@@ -39,6 +44,7 @@ image_paths = {
 
 }
 
+# Audio paths stored as strings
 audio_paths = {
 
     # Audio path strings
@@ -52,8 +58,10 @@ audio_paths = {
 
 }
 
+# Font paths stored as strings
 font_paths = {
 
     # Font path strings
     "arcade_classic": os.path.abspath(font_folder + "ARCADECLASSIC.TTF")
+
 }

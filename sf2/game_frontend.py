@@ -1,19 +1,33 @@
-# Noah Hefner
-# Space Fight 2.0
-# Drop Class
-# Last Edit: 7/28/2019
+"""
+Noah Hefner
+Space Fight 2.0
+GameFrontend Class
+Last Edit: 8/11/2019
+"""
 
+# Imports
 from game_backend import GameBackend
 import pygame
 from settings import settings
 from constants import BLACK
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
 
 class GameFrontend:
+    """
+    Handles frontend visuals for GameBackend object.
+
+    Attributes:
+        screen (pygame.display): Surface to blit the game objects to.
+        clock (pygame.time.Clock): Used to set/cap game FPS.
+        backend (GameBackend): The GameBackend object to be shown.
+    """
 
     def __init__(self):
+        """
+        Instantiate a new GameFrontend object.
+        """
 
         self.screen = pygame.display.set_mode(
             [settings["screen_width"], settings["screen_height"]])
@@ -23,6 +37,12 @@ class GameFrontend:
         self.backend = GameBackend()
 
     def update(self):
+        """
+        Get user events, update backend w/ those events.
+
+        Returns:
+            playing (bool): True for continue game, False for end game.
+        """
 
         user_events = pygame.event.get()
         playing = self.backend.update(user_events)
@@ -30,6 +50,9 @@ class GameFrontend:
         return playing
 
     def display(self):
+        """
+        Blit everything from backend to the screen.
+        """
 
         # Fill background
         self.screen.fill(BLACK)
@@ -80,8 +103,10 @@ class GameFrontend:
                          [self.backend.cursor.get_x(),
                           self.backend.cursor.get_y()])
 
+        # Flip the screen
         pygame.display.flip()
 
+        # Tick clock
         self.clock.tick(settings["fps"])
 
         return

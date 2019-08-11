@@ -1,13 +1,18 @@
-# Noah Hefner
-# Space Fight 2.0
-# Settings Dictionary
-# Last Edit: 8/2/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Settings Dictionary
+Last Edit: 8/11/2019
+"""
 
+# Imports
 from strings import image_paths, font_paths
 import pygame
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
+
+# Holds a bunch of values for the game settings
 settings = {
 
     "player_type_string": image_paths["player_white"],

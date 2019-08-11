@@ -94,6 +94,7 @@ class GameBackend:
                 # End game
                 return False
 
+            # Fire bullet when user presses left mouse button
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
                     self.player.bullets > 0:
 

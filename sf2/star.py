@@ -1,20 +1,36 @@
-# Noah Hefner
-# Space Fight 2.0
-# Star Class
-# Last Edit: 7/21/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Star Class
+Last Edit: 8/11/2019
+"""
 
+# Imports
 import pygame
 import random
-from settings import settings
 from constants import BLACK
+from settings import settings
 
-pygame.init()
+pygame.init()  # Initialize pygame
 
 
 class Star(pygame.sprite.Sprite):
-    """ Star sprite images used for background. """
+    """
+    Star image used to create background.
+
+    Attributes:
+        image (pygame.image): Image for Star sprite.
+        rect (pygame sprite rect): Rect attributes for sprite image.
+        velyt (int): Y-axis velocity of star.
+    """
 
     def __init__(self, image_string):
+        """
+        Instantiate a Star object.
+
+        Parameters:
+            image_string (string): Path of image file for the star.
+        """
 
         super(Star, self).__init__()
 
@@ -25,23 +41,59 @@ class Star(pygame.sprite.Sprite):
         self.rect.y = random.randrange(0, settings["screen_height"])
         self.vely = random.randrange(-3, 0)
 
-    def get_x(self):
-
-        return self.rect.x
-
-    def get_y(self):
-
-        return self.rect.y
-
     def update(self):
-        """ Add the velx and vely attributes to the rect.x and rect.y
-        positions, respectively. If the star goes off the top of the screen,
-        reset the posiiton to the bottom of the screen.
-
+        """
+        Move star, reset position if it goes off the top of the screen.
         """
 
         self.rect.y += self.vely
 
         if self.rect.y + self.rect.height < 0:
 
-            self.rect.y = settings["screen_height"]
+            self.set_y(settings["screen_height"])
+
+        return
+
+    def get_x(self):
+        """
+        Get x value of rect.
+
+        Returns:
+            self.rect.x (int): X value of rect.
+        """
+
+        return self.rect.x
+
+    def get_y(self):
+        """
+        Get y value of rect.
+
+        Returns:
+            self.rect.y (int): Y value of rect.
+        """
+
+        return self.rect.y
+
+    def set_x(self, new_x):
+        """
+        Set x value for rect.
+
+        Parameters:
+            new_x (int): New x value for rect.
+        """
+
+        self.rect.x = new_x
+
+        return True
+
+    def set_y(self, new_y):
+        """
+        Set y value for rect.
+
+        Parameters:
+            new_y (int): New y value for rect.
+        """
+
+        self.rect.y = new_y
+
+        return True
