@@ -6,7 +6,7 @@ class ImageButton(pygame.sprite.Sprite):
 
         super(ImageButton, self).__init__()
 
-        self.image = pygame.image.load(image_string)
+        self.image = pygame.image.load(image_string).convert()
         self.rect = self.image.get_rect()
         self.click_action = click_action
 
@@ -72,6 +72,9 @@ class ImageButton(pygame.sprite.Sprite):
 
     def perform_click_action(self):
 
-        self.click_action()
+        if (self.click_action != None):
+            self.click_action()
+        else:
+            pass
 
         return

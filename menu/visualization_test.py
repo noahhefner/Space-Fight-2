@@ -33,7 +33,7 @@ def add_life(lives):
     lives += 1
     return
 
-font = pygame.font.Font('ARCADECLASSIC.TTF', 30)
+font = pygame.font.SysFont('04B_30_', 50, False, False)
 
 # STEP 1: Create a MenuManager
 sf_menus = MenuManager()
@@ -83,32 +83,24 @@ page_settings.add_button(button_mute)
 page_settings.add_button(button_back2)
 
 # Create Customization Page Buttons
-button_player_red    = ImageButton("button_player_red.png")
-button_player_blue   = ImageButton("button_player_blue.png")
-button_player_green  = ImageButton("button_player_green.png")
-button_player_purple = ImageButton("button_player_purple.png")
-button_bullet_red    = ImageButton("button_bullet_red.png")
-button_bullet_blue   = ImageButton("button_bullet_blue.png")
-button_bullet_green  = ImageButton("button_bullet_green.png")
-button_bullet_purple = ImageButton("button_bullet_purple.png")
-button_cursor_red    = ImageButton("button_cursor_red.png")
-button_cursor_blue   = ImageButton("button_cursor_blue.png")
-button_cursor_green  = ImageButton("button_cursor_green.png")
-button_cursor_purple = ImageButton("button_cursor_purple.png")
-button_back3 = TextButton("BACK")
+button_player_white  = ImageButton("player_white.png")
+button_player_yellow = ImageButton("player_yellow.png")
+button_player_green  = ImageButton("player_green.png")
+button_player_blue   = ImageButton("player_blue.png")
+button_bullet_red    = ImageButton("bullet_red.png")
+button_bullet_blue   = ImageButton("bullet_blue.png")
+button_bullet_green  = ImageButton("bullet_green.png")
+button_bullet_purple = ImageButton("bullet_purple.png")
+button_back3         = TextButton("BACK")
 # Add them to the Customization Page
-page_customize.add_button(button_player_red)
-page_customize.add_button(button_player_blue)
+page_customize.add_button(button_player_white)
+page_customize.add_button(button_player_yellow)
 page_customize.add_button(button_player_green)
-page_customize.add_button(button_player_purple)
+page_customize.add_button(button_player_blue)
 page_customize.add_button(button_bullet_red)
 page_customize.add_button(button_bullet_blue)
 page_customize.add_button(button_bullet_green)
 page_customize.add_button(button_bullet_purple)
-page_customize.add_button(button_cursor_red)
-page_customize.add_button(button_cursor_blue)
-page_customize.add_button(button_cursor_green)
-page_customize.add_button(button_cursor_purple)
 page_customize.add_button(button_back3)
 
 size = [800, 800]
@@ -128,6 +120,8 @@ while not done:
         if event.type == pygame.QUIT:
 
             done = True
+
+    sf_menus.display(screen)
 
     clock.tick(60)
     pygame.display.flip()

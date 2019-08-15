@@ -34,7 +34,7 @@ class MenuManager():
 
         for page in self.pages:
 
-            if page.name == page_name:
+            if page.page_name == page_name:
 
                 self.current_page = page
                 success = True

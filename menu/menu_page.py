@@ -1,5 +1,3 @@
-import Constants
-
 class MenuPage():
 
     def __init__(self, page_name = "UNNAMED"):

@@ -71,7 +71,12 @@ class TextButton(pygame.sprite.Sprite):
 
     def perform_click_action(self):
 
-        self.click_action()
+        if (self.click_action != None):
+            self.click_action()
+        else:
+            pass
+
+        return
 
     def is_clicked(self, x, y):
 
