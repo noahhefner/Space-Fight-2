@@ -8,13 +8,14 @@ pygame.init()
 
 class ImageButton(pygame.sprite.Sprite):
 
-    def __init__(self, image_string, click_action = None):
+    def __init__(self, image_string, click_action_function = None, click_action_args = None):
 
         super(ImageButton, self).__init__()
 
         self.image = pygame.image.load(os.path.abspath("menu/" + image_string)).convert()
         self.rect = self.image.get_rect()
-        self.click_action = click_action
+        self.click_action_function = click_action_function
+        self.click_action_args = click_action_args
 
         return
 
@@ -78,8 +79,8 @@ class ImageButton(pygame.sprite.Sprite):
 
     def perform_click_action(self):
 
-        if (self.click_action != None):
-            self.click_action()
+        if (self.click_action_function != None):
+            self.click_action_function(self.click_action_args)
         else:
             pass
 

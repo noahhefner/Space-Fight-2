@@ -11,13 +11,14 @@ pygame.init()
 
 class TextButton(pygame.sprite.Sprite):
 
-    def __init__(self, font, text = "NOTEXT", click_action = None, color = [255, 255, 255]):
+    def __init__(self, font, text = "NOTEXT", click_action_function = None, click_action_args = None, color = [255, 255, 255]):
 
         super(TextButton, self).__init__()
 
         self.image = font.render(text, False, color)
         self.rect = self.image.get_rect()
-        self.click_action = click_action
+        self.click_action_function = click_action_function
+        self.click_action_args = click_action_args
 
         return
 
@@ -71,8 +72,8 @@ class TextButton(pygame.sprite.Sprite):
 
     def perform_click_action(self):
 
-        if (self.click_action != None):
-            self.click_action()
+        if (self.click_action_function != None):
+            self.click_action_function(self.click_action_args)
         else:
             pass
 

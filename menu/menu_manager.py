@@ -30,22 +30,19 @@ class MenuManager():
     # Precondition: page_name is in the menumanager
     def go_to(self, page_name):
 
-        def action():
+        success = False
 
-            success = False
+        for page in self.pages:
 
-            for page in self.pages:
+            if page.page_name == page_name:
 
-                if page.page_name == page_name:
+                self.current_page = page
+                success = True
 
-                    self.current_page = page
-                    success = True
+        if not success:
 
-            if not success:
+            print("ERROR: " , page_name, "NOT IN MENU MANAGER")
 
-                print("ERROR: " , page_name, "NOT IN MENU MANAGER")
-
-        return action
 
     # Arg: menu_page Menu page to be added to the MenuManager
     def add_menu_page(self, menu_page):

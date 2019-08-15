@@ -10,6 +10,7 @@ from menu_page import MenuPage
 from menu_manager import MenuManager
 from text_button import TextButton
 from image_button import ImageButton
+from functools import partial
 
 pygame.init()
 
@@ -25,21 +26,18 @@ player_lives = 3
 
 def increase_player_speed(speed):
 
-    speed += 1
-    print(speed)
-    return
+    player_speed += 1
+    return speed
 
-def increase_player_bullets(bullets):
+def increase_player_bullets():
 
     bullets += 25
-    return
+    return bullets
 
-def increase_player_lives(lives):
+def increase_player_lives():
 
     lives += 1
-    return
-
-add_speed = increase_player_speed
+    return lives
 
 font = pygame.font.SysFont('04B_30_', 50, False, False)
 
@@ -58,14 +56,14 @@ sf_menus.add_menu_page(page_upgrades)
 sf_menus.add_menu_page(page_settings)
 sf_menus.add_menu_page(page_customize)
 
-sf_menus.go_to("home")()  # Set the starting page to the home page
+sf_menus.go_to("home")  # Set the starting page to the home page
 
 # STEP 4: Create buttons and add them to the pages you just created
 # Create Home Page Buttons
 button_play = TextButton(font, "PLAY")
-button_upgrades = TextButton(font, "UPGRADES", sf_menus.go_to("upgrades"))
-button_settings = TextButton(font, "SETTINGS", sf_menus.go_to("settings"))
-button_customize = TextButton(font, "CUSTOMIZATION", sf_menus.go_to("customization"))
+button_upgrades = TextButton(font, "UPGRADES", sf_menus.go_to, "upgrades")
+button_settings = TextButton(font, "SETTINGS", sf_menus.go_to, "settings")
+button_customize = TextButton(font, "CUSTOMIZATION", sf_menus.go_to, "cusomization")
 # Add them to the Home Page
 page_home.add_button(button_play)
 page_home.add_button(button_upgrades)
@@ -73,11 +71,11 @@ page_home.add_button(button_settings)
 page_home.add_button(button_customize)
 
 # Create Upgrades Page Buttons
-button_speed = TextButton(font, "+SPEED (-10 Coins)", add_speed(player_speed))
-button_ammo = TextButton(font, "+AMMO (-20 Coins)", increase_player_bullets(player_bullets))
-button_lives = TextButton(font, "+LIFE (-30 Coins)", increase_player_lives(player_lives))
-button_back1 = TextButton(font, "BACK", sf_menus.go_to("home"))
-# Add them to the Upgrades Page
+button_speed = TextButton(font, "+SPEED (-10 Coins)", lambda x: x + 2, player_speed)
+button_ammo = TextButton(font, "+AMMO (-20 Coins)", lambda x: x + 50, player_bullets)
+button_lives = TextButton(font, "+LIFE (-30 Coins)", lambda x: x + 1, player_lives)
+button_back1 = TextButton(font, "BACK", sf_menus.go_to, "home")
+# Add them to the Upgra eedes Page
 page_upgrades.add_button(button_speed)
 page_upgrades.add_button(button_ammo)
 page_upgrades.add_button(button_lives)
@@ -85,7 +83,7 @@ page_upgrades.add_button(button_back1)
 
 # Create Settings Page Buttons
 button_mute = TextButton(font, "MUTE")
-button_back2 = TextButton(font, "BACK", sf_menus.go_to("home"))
+button_back2 = TextButton(font, "BACK", sf_menus.go_to, "home")
 # Add them to the Settings Page
 page_settings.add_button(button_mute)
 page_settings.add_button(button_back2)
@@ -99,7 +97,7 @@ button_bullet_red    = ImageButton("bullet_red.png")
 button_bullet_blue   = ImageButton("bullet_blue.png")
 button_bullet_green  = ImageButton("bullet_green.png")
 button_bullet_purple = ImageButton("bullet_purple.png")
-button_back3         = TextButton(font, "BACK", sf_menus.go_to("home"))
+button_back3         = TextButton(font, "BACK", sf_menus.go_to, "home")
 # Add them to the Customization Page
 page_customize.add_button(button_player_white)
 page_customize.add_button(button_player_yellow)
@@ -129,3 +127,7 @@ while not done:
 
     clock.tick(60)
     pygame.display.flip()
+
+print(player_lives)
+print(player_bullets)
+print(player_speed)
