@@ -2,54 +2,63 @@ import pygame
 
 class ImageButton(pygame.sprite.Sprite):
 
-    def __init__(self, image_string, to_page = "NONE", hover_image_string = "NONE"):
+    def __init__(self, image_string, click_action = None):
 
         super(ImageButton, self).__init__()
 
         self.image = pygame.image.load(image_string)
-        self.base_image = pygame.image.load(image_string)
-
-        if hover_image_string != "NONE":
-            self.hover_image = pygame.image.load(hover_image_string)
-        else:
-            self.hover_image_string = hover_image_string
-
-        self.to_page = to_page
         self.rect = self.image.get_rect()
+        self.click_action = click_action
 
         return
 
-    def get_to_page(self):
-
-        return self.to_page
-
-    def set_position(self, x, y):
-
-        self.rect.x = x
-        self.rect.y = y
+    def update(self):
 
         return
 
-    def __hover(self):
+    def get_x(self):
+        """
+        Get x value of rect.
 
-        if self.hover_image_string == "NONE":
+        Returns:
+            self.rect.x (int): X value of rect.
+        """
 
-            pass
+        return self.rect.x
 
-        else:
+    def get_y(self):
+        """
+        Get y value of rect.
 
-            (mouse_x, mouse_y) = pygame.mouse.get_pos()
+        Returns:
+            self.rect.y (int): Y value of rect.
+        """
 
-            if mouse_x in range(self.rect.x, self.rect.x + self.rect.width) \
-            and mouse_y in range(self.rect.y, self.rect.y + self.rect.height):
+        return self.rect.y
 
-                self.image = self.hover_image
+    def set_x(self, new_x):
+        """
+        Set x value for rect.
 
-            else:
+        Parameters:
+            new_x (int): New x value for rect.
+        """
 
-                self.image = self.base_image
+        self.rect.x = new_x
 
-        return
+        return True
+
+    def set_y(self, new_y):
+        """
+        Set y value for rect.
+
+        Parameters:
+            new_y (int): New y value for rect.
+        """
+
+        self.rect.y = new_y
+
+        return True
 
     def display(self, surface):
 
@@ -57,8 +66,12 @@ class ImageButton(pygame.sprite.Sprite):
 
         return
 
-    def update(self):
+    def is_clicked(self, x, y):
 
-        self.__hover()
+        return (x  in range(self.rect.x, (self.rect.x + self.rect.width)) and y in range(self.rect.y, (self.rect.y + self.rect.height)))
+
+    def perform_click_action(self):
+
+        self.click_action()
 
         return

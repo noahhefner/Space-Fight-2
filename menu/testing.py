@@ -1,19 +1,14 @@
 """
- Pygame base template for opening a window
-
- Sample Python/Pygame Programs
- Simpson College Computer Science
- http://programarcadegames.com/
- http://simpson.edu/computer-science/
-
- Explanation video: http://youtu.be/vRB_983kUMc
+Noah Hefner
+Space Fight 2.0
+Menu Manager Test
+Last Edit: 8/15/2019
 """
 
 import pygame
-from MenuManager import MenuManager
-import Constants
-from MenuPage import MenuPage
-from TextButton import TextButton
+from menu_manager import MenuManager
+from menu_page import MenuPage
+from button import Button
 
 # Define some colors
 BLACK = (0, 0, 0)

@@ -2,12 +2,10 @@ import Constants
 
 class MenuPage():
 
-    def __init__(self, name = "UNNAMED"):
+    def __init__(self, page_name = "UNNAMED"):
 
-        self.name = name
-        self.text_buttons = []
-        self.image_buttons = []
-
+        self.page_name = page_name
+        self.buttons = []
         self.x_spacing = 10
         self.y_spacing = 10
         self.x_positioning = "left"
@@ -15,8 +13,10 @@ class MenuPage():
 
     def set_x_positioning(self, x_positioning):
 
-        self.x_positioning = x_positioning
-
+        if (x_positioning == "left" or x_positioning == "mid" or x_positioning == "right"):
+            self.x_positioning = x_positioning
+        else:
+            print("Invalid x axis positioning!")
         return
 
     def set_y_positioning(self, y_positioning):
@@ -25,24 +25,15 @@ class MenuPage():
 
         return
 
-    def add_text_button(self, button):
+    def add_button(self, button):
 
-        self.text_buttons.append(button)
+        self.buttons.append(button)
         self.set_coords()
-
-        return
-
-    def add_image_button(self, image_button):
-
-        self.image_buttons.append(image_button)
-        self.set_coords()
-
-        return
 
     def set_coords(self):
 
         # Set x coordinates for all the buttons
-        for button in self.text_buttons:
+        for button in self.buttons:
 
             if self.x_positioning == "left":
 
@@ -64,29 +55,29 @@ class MenuPage():
 
         # Set y coordinates for all the buttons
         count = 0
-        for button in self.text_buttons:
+        for button in self.buttons:
 
             if self.y_positioning == "top":
 
                 button.rect.y = ((count + 1) * self.y_spacing) + \
-                (count * self.text_buttons[0].rect.height)
+                (count * self.buttons[0].rect.height)
 
             elif self.y_positioning == "mid":
 
                 # Calculations for mid positioning
-                total_height = self.text_buttons[0].rect.height * \
-                len(self.text_buttons) + \
-                self.y_spacing * (len(self.text_buttons) + 1)
+                total_height = self.buttons[0].rect.height * \
+                len(self.buttons) + \
+                self.y_spacing * (len(self.buttons) + 1)
                 top_y = (1/2) * Constants.SCREEN_HEIGHT - (1/2) * total_height
 
                 button.rect.y = top_y + ((count + 1) * self.y_spacing) + \
-                count * self.text_buttons[0].rect.height
+                count * self.buttons[0].rect.height
 
             elif self.y_positioning == "bot":
 
                 button.rect.y = Constants.SCREEN_HEIGHT - \
-                (((len(self.text_buttons) - count) * self.y_spacing) + \
-                (len(self.text_buttons) - count) * \
+                (((len(self.buttons) - count) * self.y_spacing) + \
+                (len(self.buttons) - count) * \
                 button.rect.height)
 
             else:
@@ -100,22 +91,16 @@ class MenuPage():
 
     def display(self, surface):
 
-        for text_button in self.text_buttons:
+        for button in self.buttons:
 
-            text_button.display(surface)
-
-        for image_button in self.image_buttons:
-
-            image_button.display(surface)
+            button.display(surface)
 
         return
 
     def update(self):
 
-        for text_button in self.text_buttons:
+        for button in self.buttons:
 
-            text_button.update()
+            button.update()
 
-        for image_button in self.image_buttons:
-
-            image_button.update()
+        return
