@@ -11,7 +11,7 @@ pygame.init()
 
 class TextButton(pygame.sprite.Sprite):
 
-    def __init__(self, font, click_action = None, text = "NOTEXT", color = [255, 255, 255]):
+    def __init__(self, font, text = "NOTEXT", click_action = None, color = [255, 255, 255]):
 
         super(TextButton, self).__init__()
 
@@ -80,7 +80,8 @@ class TextButton(pygame.sprite.Sprite):
 
     def is_clicked(self, x, y):
 
-        return (x  in range(self.rect.x, (self.rect.x + self.rect.width)) and y in range(self.rect.y, (self.rect.y + self.rect.height)))
+        clicked = (x  in range(self.rect.x, (self.rect.x + self.rect.width)) and y in range(self.rect.y, (self.rect.y + self.rect.height)))
+        return clicked
 
     def display(self, surface):
 

@@ -1,4 +1,10 @@
+"""
+"""
+
 import pygame
+import os
+
+pygame.init()
 
 class ImageButton(pygame.sprite.Sprite):
 
@@ -6,7 +12,7 @@ class ImageButton(pygame.sprite.Sprite):
 
         super(ImageButton, self).__init__()
 
-        self.image = pygame.image.load(image_string).convert()
+        self.image = pygame.image.load(os.path.abspath("menu/" + image_string)).convert()
         self.rect = self.image.get_rect()
         self.click_action = click_action
 
