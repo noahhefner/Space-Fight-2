@@ -37,10 +37,7 @@ class Player(pygame.sprite.Sprite):
 
         super(Player, self).__init__()
 
-        self.image = pygame.image.load(image_string).convert()
-        self.image.set_colorkey([0, 0, 0])
-        self.original = self.image
-        self.rect = self.image.get_rect()
+        self.set_image(image_string)
         self.velx = 0
         self.vely = 0
 
@@ -83,6 +80,15 @@ class Player(pygame.sprite.Sprite):
         """
 
         return self.rect.y
+
+    def set_image(self, image_string):
+
+        self.image = pygame.image.load(image_string).convert()
+        self.image.set_colorkey([0, 0, 0])
+        self.original = self.image
+        self.rect = self.image.get_rect()
+
+        return True
 
     def set_x(self, new_x):
         """

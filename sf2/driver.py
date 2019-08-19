@@ -11,11 +11,19 @@ import pygame
 
 pygame.init()  # Initialize pygame
 
-game = GameFrontend()  # Create a game
+size = [800, 800]
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Menu Demo")
+clock = pygame.time.Clock()
+
+game = GameFrontend(screen)  # Create a game
 
 playing = True
 
 while playing:
 
-    playing = game.update()  # Update game
+    user_events = pygame.event.get()
+
+    playing = game.update(user_events)  # Update game
+
     game.display()  # Display game

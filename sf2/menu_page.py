@@ -1,3 +1,12 @@
+"""
+Noah Hefner
+Space Fight 2.0
+MenuPage Class
+Last Edit: 8/16/2019
+"""
+
+from settings import settings
+
 class MenuPage():
 
     def __init__(self, page_name = "UNNAMED"):
@@ -12,16 +21,28 @@ class MenuPage():
     def set_x_positioning(self, x_positioning):
 
         if (x_positioning == "left" or x_positioning == "mid" or x_positioning == "right"):
+
             self.x_positioning = x_positioning
+            self.set_coords()
+            return True
+
         else:
+
             print("Invalid x axis positioning!")
-        return
+            return False
 
     def set_y_positioning(self, y_positioning):
 
-        self.y_positioning = y_positioning
+        if (y_positioning == "top" or y_positioning == "mid" or y_positioning == "bot"):
 
-        return
+            self.y_positioning = y_positioning
+            self.set_coords()
+            return True
+
+        else:
+
+            print("Invalid x axis positioning!")
+            return False
 
     def add_button(self, button):
 
@@ -39,12 +60,12 @@ class MenuPage():
 
             elif self.x_positioning == "mid":
 
-                button.rect.x = (Constants.SCREEN_WIDTH / 2) - \
+                button.rect.x = (int(settings["screen_width"]) / 2) - \
                 (button.rect.width / 2)
 
             elif self.x_positioning == "right":
 
-                button.rect.x = Constants.SCREEN_WIDTH - \
+                button.rect.x = int(settings["screen_width"]) - \
                 self.x_spacing - button.rect.width
 
             else:
@@ -66,14 +87,14 @@ class MenuPage():
                 total_height = self.buttons[0].rect.height * \
                 len(self.buttons) + \
                 self.y_spacing * (len(self.buttons) + 1)
-                top_y = (1/2) * Constants.SCREEN_HEIGHT - (1/2) * total_height
+                top_y = (1/2) * int(settings["screen_height"]) - (1/2) * total_height
 
                 button.rect.y = top_y + ((count + 1) * self.y_spacing) + \
                 count * self.buttons[0].rect.height
 
             elif self.y_positioning == "bot":
 
-                button.rect.y = Constants.SCREEN_HEIGHT - \
+                button.rect.y = int(settings["screen_height"]) - \
                 (((len(self.buttons) - count) * self.y_spacing) + \
                 (len(self.buttons) - count) * \
                 button.rect.height)

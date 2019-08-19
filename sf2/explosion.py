@@ -18,11 +18,11 @@ class Explosion(pygame.sprite.Sprite):
     Spawns an explosion at the given location.
 
     Attributes:
-        e1 (pygame.image): Image path for frame 1/5 of the explosion.
-        e2 (pygame.image): Image path for frame 2/5 of the explosion.
-        e3 (pygame.image): Image path for frame 3/5 of the explosion.
-        e4 (pygame.image): Image path for frame 4/5 of the explosion.
-        e5 (pygame.image): Image path for frame 5/5 of the explosion.
+        e1 (pygame.image): Image for frame 1/5 of the explosion.
+        e2 (pygame.image): Image for frame 2/5 of the explosion.
+        e3 (pygame.image): Image for frame 3/5 of the explosion.
+        e4 (pygame.image): Image for frame 4/5 of the explosion.
+        e5 (pygame.image): Image for frame 5/5 of the explosion.
         image_list (list): A subscriptable list for easily parsing the frames.
         frame (int): The total frames elapsed in the explosion.
         exp_num (int): Index of currently showing frame.

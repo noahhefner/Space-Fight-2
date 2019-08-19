@@ -13,18 +13,24 @@ pygame.init()
 class MenuManager():
 
     # Must have home_screen created first before creating menu
-    def __init__(self):
+    def __init__(self, surface):
 
+        self.screen = surface
         self.pages = []
         self.current_page = None
+        self.in_menus = True
 
         return
 
-    def display(self, surface):
+    def display(self):
 
-        self.current_page.display(surface)
+        self.current_page.display(self.screen)
 
         return
+
+    def is_in_menus(self):
+
+        return self.in_menus
 
     # Arg: page_name The string name of the next page
     # Precondition: page_name is in the menumanager
@@ -43,6 +49,7 @@ class MenuManager():
 
             print("ERROR: " , page_name, "NOT IN MENU MANAGER")
 
+        return
 
     # Arg: menu_page Menu page to be added to the MenuManager
     def add_menu_page(self, menu_page):
@@ -51,18 +58,32 @@ class MenuManager():
 
         return
 
-    def update(self, event):
+    def exit_menus(self):
+
+        self.in_menus = False
+
+    def enter_menus(self, to_page = None):
+
+        self.in_menus = True
+
+        if to_page != None:
+
+            self.go_to(to_page)
+
+    def update(self, user_events):
 
         self.current_page.update()
 
         mouse = pygame.mouse.get_pos()
 
-        if (event.type == pygame.MOUSEBUTTONUP):
+        for event in user_events:
 
-            for button in self.current_page.buttons:
+            if (event.type == pygame.MOUSEBUTTONUP):
 
-                if (button.is_clicked(mouse[0], mouse[1])):
+                for button in self.current_page.buttons:
 
-                    button.perform_click_action()
+                    if (button.is_clicked(mouse[0], mouse[1])):
+
+                        button.perform_click_action()
 
         return

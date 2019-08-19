@@ -11,7 +11,7 @@ import pygame
 from alien import Alien
 from audio_player import AudioPlayer
 from bullet import Bullet
-from constants import WHITE
+from constants import WHITE, BLACK
 from cursor import Cursor
 from drop import Drop
 from explosion import Explosion
@@ -23,7 +23,7 @@ from strings import image_paths
 pygame.init()  # Initialize pygame
 
 
-class GameBackend:
+class Game:
     """
     Handles all sprite movement, collision detection, score, etc.
 
@@ -44,10 +44,13 @@ class GameBackend:
         hud (HUD): Overlay that contains information for the player.
     """
 
-    def __init__(self):
+    def __init__(self, surface):
         """
-        Initialize a GameBackend object.
+        Initialize a Game object.
         """
+
+        # Surface to blit everything to
+        self.surface = surface
 
         # Sprite Groups
         self.aliens = pygame.sprite.Group()
@@ -68,11 +71,10 @@ class GameBackend:
 
         # AudioPlayer
         self.audio_player = AudioPlayer()
-        self.audio_player.play_theme()
 
         self.coins = settings["coins"]
         self.score = 0
-        self.hud = GameBackend.HUD(self.score, self.player.bullets, self.coins)
+        self.hud = Game.HUD(self.score, self.player.bullets, self.coins)
 
         return
 
@@ -285,6 +287,68 @@ class GameBackend:
         """
 
         return self.stars
+
+    def display(self):
+        """
+        Draw everything to the surface.
+        """
+
+        # Fill background
+        self.surface.fill(BLACK)
+
+        # Blit stars
+        self.get_stars().draw(self.surface)
+
+        # Blit HUD
+        self.surface.blit(self.hud.counter_bullets.image,
+                         [self.hud.counter_bullets.rect.x,
+                          self.hud.counter_bullets.rect.y])
+
+        self.surface.blit(self.hud.counter_coins.image,
+                         [self.hud.counter_coins.rect.x,
+                          self.hud.counter_coins.rect.y])
+
+        self.surface.blit(self.hud.counter_score.image,
+                         [self.hud.counter_score.rect.x,
+                          self.hud.counter_score.rect.y])
+
+        for i in range(self.player.lives):
+
+            x = (settings["hud_spacing"] * (i + 1)) + \
+                (i * self.hud.heart.rect.width)
+            y = settings["hud_spacing"]
+
+            self.surface.blit(self.hud.heart.image, [x, y])
+
+        # Blit bullets
+        self.get_bullets().draw(self.surface)
+
+        # Blit explosions
+        self.get_explosions().draw(self.surface)
+
+        # Blit drops
+        self.get_drops().draw(self.surface)
+
+        # Blit aliens
+        self.get_aliens().draw(self.surface)
+
+        # Blit player
+        self.surface.blit(self.player.image,
+                         [self.player.get_x(),
+                          self.player.get_y()])
+
+        # Blit cursor
+        self.surface.blit(self.cursor.image,
+                         [self.cursor.get_x(),
+                          self.cursor.get_y()])
+
+        return
+
+    def reset(self, surface):
+
+        self.__init__(surface)
+
+        return
 
     def __spawn_bullet(self):
         """
