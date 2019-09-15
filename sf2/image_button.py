@@ -21,7 +21,7 @@ class ImageButton(pygame.sprite.Sprite):
         click_actions_args (list of lists): Lists of parameters that go with the click_actions.
     """
 
-    def __init__(self, image_string, click_actions = None, click_actions_args = None):
+    def __init__(self, image_folder, image_string, click_actions = [], click_actions_args = []):
         """
         Initialize an ImageButton object.
 
@@ -33,14 +33,11 @@ class ImageButton(pygame.sprite.Sprite):
 
         super(ImageButton, self).__init__()
 
-        self.image = pygame.image.load(os.path.abspath("sf2/" + image_string)).convert()
+        print(str(os.path.abspath(image_folder + "/" + image_string)))
+        self.image = pygame.image.load(str(os.path.abspath(image_folder + "/" + image_string))).convert()
         self.rect = self.image.get_rect()
         self.click_actions = click_actions
         self.click_actions_args = click_actions_args
-
-        return
-
-    def update(self):
 
         return
 

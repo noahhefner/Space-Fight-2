@@ -8,6 +8,7 @@ Last Edit: 8/2/2019
 # Imports
 import math
 import pygame
+from constants import BLACK
 from settings import settings
 
 pygame.init()  # Initialize pygame
@@ -82,11 +83,19 @@ class Player(pygame.sprite.Sprite):
         return self.rect.y
 
     def set_image(self, image_string):
+        """
+        Change the image used for the Player.
+
+        Parameters:
+            image_string (str): Image path for the new Player image.
+        """
 
         self.image = pygame.image.load(image_string).convert()
-        self.image.set_colorkey([0, 0, 0])
+        self.image.set_colorkey(BLACK)
         self.original = self.image
         self.rect = self.image.get_rect()
+
+        settings["player_type_string"] = image_string
 
         return True
 

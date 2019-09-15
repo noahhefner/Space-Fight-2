@@ -1,8 +1,7 @@
 """
 Noah Hefner
-Space Fight 2.0
 MenuPage Class
-Last Edit: 8/16/2019
+Last Edit: 9/15/2019
 """
 
 from settings import settings
@@ -28,7 +27,7 @@ class MenuPage():
 
         else:
 
-            print("Invalid x axis positioning!")
+            print(str(x_positioning) + "is invalid x axis positioning!")
             return False
 
     def set_y_positioning(self, y_positioning):
@@ -41,7 +40,7 @@ class MenuPage():
 
         else:
 
-            print("Invalid x axis positioning!")
+            print(str(y_positioning) + "is invalid y axis positioning!")
             return False
 
     def add_button(self, button):

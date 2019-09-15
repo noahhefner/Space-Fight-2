@@ -2,11 +2,11 @@
 Noah Hefner
 Space Fight 2.0
 Driver Script
-Last Edit: 8/3/2019
+Last Edit: 9/15/2019
 """
 
 # Imports
-from game_frontend import GameFrontend
+from game import Game
 import pygame
 
 pygame.init()  # Initialize pygame
@@ -16,7 +16,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Menu Demo")
 clock = pygame.time.Clock()
 
-game = GameFrontend(screen)  # Create a game
+game = Game(screen)  # Create a game
 
 playing = True
 

@@ -1,8 +1,7 @@
 """
 Noah Hefner
-Space Fight 2.0
 Text Button Class
-Last Edit: 8/15/2019
+Last Edit: 9/15/2019
 """
 
 import pygame
@@ -10,8 +9,26 @@ import pygame
 pygame.init()
 
 class TextButton(pygame.sprite.Sprite):
+    """
+    Text Button for the MenuManager.
+
+        image (pygame.image): Image of the text for the button.
+        rect (pygame.image.rect): Position, height, width values for image.
+        click_actions (list): Functions to run when the button is pressed.
+        click_actions_args (list of lists): Lists of parameters that go with the click_actions.
+    """
 
     def __init__(self, font, text = "NOTEXT", click_actions = [], click_actions_args = [[]], color = [255, 255, 255]):
+        """
+        Initialize an ImageButton object.
+
+        Parameters:
+            font (pygame.font.SysFont): Font to render the button in.
+            text (str): The text of the button.
+            click_actions (list): Functions to run when the button is pressed.
+            click_actions_args (list of lists): Lists of parameters that go with the click_actions.
+            color (list): List containing R,G, and B values for the color of the text.
+        """
 
         super(TextButton, self).__init__()
 
@@ -19,10 +36,6 @@ class TextButton(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.click_actions = click_actions
         self.click_actions_args = click_actions_args
-
-        return
-
-    def update(self):
 
         return
 

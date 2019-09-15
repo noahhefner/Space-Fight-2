@@ -83,6 +83,23 @@ class Bullet(pygame.sprite.Sprite):
 
         return self.rect.y
 
+    def set_image(self, image_string):
+        """
+        Change the image used for the Bullet.
+
+        Parameters:
+            image_string (str): Image path for the new Bullet image.
+        """
+
+        self.image = pygame.image.load(image_string).convert()
+        self.image.set_colorkey(BLACK)
+        self.rect = self.image.get_rect()
+
+        # Update this change in settings
+        settings["bullet_type_string"] = image_string
+
+        return True
+
     def set_x(self, new_x):
         """
         Set x value for rect.
@@ -115,7 +132,7 @@ class Bullet(pygame.sprite.Sprite):
             mouse_pos (list): X and Y coordinates of the mouse.
             player_pos (list): X and Y coordinates of the player.
         Returns:
-            list: X and Y axis trajectories.
+            list: X and Y axis trajectories, respectively, in a list.
         """
 
         angle = math.atan2(player_pos[1] - mouse_pos[1],

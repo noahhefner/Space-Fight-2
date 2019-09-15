@@ -61,7 +61,8 @@ class Game:
 
         # Sprites
         self.cursor = Cursor(image_paths["cursor_red"])
-        self.player = Player(image_paths["player_white"])
+        self.player = Player(settings["player_type_string"])
+        self.bullet_image = settings["bullet_type_string"]
         for i in range(20):
             new_alien = Alien(image_paths["alien1"])
             self.aliens.add(new_alien)
@@ -288,6 +289,12 @@ class Game:
 
         return self.stars
 
+    def set_bullet_image(self, image_string):
+
+        self.bullet_image = image_string
+
+        return True
+
     def display(self):
         """
         Draw everything to the surface.
@@ -356,7 +363,7 @@ class Game:
         """
 
         mouse_pos = pygame.mouse.get_pos()
-        new_bullet = Bullet(settings["bullet_type_string"], mouse_pos,
+        new_bullet = Bullet(self.bullet_image, mouse_pos,
                             self.player.rect.center)
         self.bullets.add(new_bullet)
         self.player.bullets -= 1
