@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Alien Class
-Last Edit: 8/2/2019
+Last Edit: 6/16/2020
 """
 
 import math
@@ -144,7 +144,7 @@ class Alien(pygame.sprite.Sprite):
         Generate random spawn point.
 
         Returns:
-            list (int): X and Y coordinates for random spawn location.
+            tuple (int): X and Y coordinates for random spawn location.
         """
 
         position = []
@@ -153,11 +153,15 @@ class Alien(pygame.sprite.Sprite):
 
         left_right = random.randrange(0, 3)
 
+        # Left side of screen
         if left_right == 0:
 
             x = random.randrange(-600, -100)
             y = random.randrange(-600, settings["screen_height"] + 600)
 
+        # Middle portion of screen
+        # This one is tricky because we have to avoid spawning the alien in the
+        # field of play. We want to ensure we only spawn aliens off-screen.
         elif left_right == 1:
 
             x = random.randrange(0, settings["screen_width"])
@@ -173,6 +177,7 @@ class Alien(pygame.sprite.Sprite):
                 y = random.randrange(settings["screen_height"] + 100,
                                      settings["screen_height"] + 700)
 
+        # Right side of screen
         else:
 
             x = random.randrange(settings["screen_width"] + 100,

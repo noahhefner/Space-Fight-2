@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 AudioPlayer Class
-Last Edit: 8/2/2019
+Last Edit: 6/16/2020
 """
 
 import pygame
@@ -40,65 +40,21 @@ class AudioPlayer:
 
         return
 
-    def play_bullet_fire(self):
+    def play_sound (self, audio_file_name, repeat = False):
         """
-        Play bullet firing sound effect.
-        """
+        Plays an audio clip.
 
-        self.bullet_fire.play()
-
-        return
-
-    def play_explosion(self):
-        """
-        Play explosion sound effect.
+        Arguments:
+            audio_file_name: Name of audio file. Must be one of the files in the
+                             resources/audio folder.
+            repeat: Triggers repeat of the sound (use for theme song).
         """
 
-        self.explosion.play()
+        sound = pygame.mixer.Sound(audio_paths[audio_file_name])
 
-        return
-
-    def play_hitmarker(self):
-        """
-        Play hitmarker sound effect.
-        """
-
-        self.hitmarker.play()
-
-        return
-
-    def play_pickup_bullets(self):
-        """
-        Play pickup bullets sound effect.
-        """
-
-        self.pickup_bullets.play()
-
-        return
-
-    def play_pickup_coin(self):
-        """
-        Play pickup coin sound effect.
-        """
-
-        self.pickup_coin.play()
-
-        return
-
-    def play_pickup_life(self):
-        """
-        Play pickup life sound effect.
-        """
-
-        self.pickup_life.play()
-
-        return
-
-    def play_theme(self):
-        """
-        Play theme song.
-        """
-
-        self.theme.play(-1)  # -1 plays the song on repeat
+        if repeat:
+            sound.play(-1)
+        else:
+            sound.play()
 
         return

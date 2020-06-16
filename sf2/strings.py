@@ -2,16 +2,16 @@
 Noah Hefner
 Space Fight 2.0
 Strings Dictionary
-Last Edit: 8/11/2019
+Last Edit: 6/16/2020
 """
 
 # Imports
 import os
 
 # Folder paths within resources
-images_folder = "sf2/resources/images/"
-audio_folder = "sf2/resources/audio/"
-font_folder = "sf2/resources/font/"
+images_folder = "resources/images/"
+audio_folder = "resources/audio/"
+font_folder = "resources/font/"
 
 # Image paths stored as strings
 image_paths = {

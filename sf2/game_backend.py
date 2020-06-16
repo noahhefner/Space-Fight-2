@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Game Backend Class
-Last Edit: 8/3/2019
+Last Edit: 6/16/2020
 """
 
 # Imports
@@ -21,7 +21,6 @@ from star import Star
 from strings import image_paths
 
 pygame.init()  # Initialize pygame
-
 
 class GameBackend:
     """
@@ -68,7 +67,7 @@ class GameBackend:
 
         # AudioPlayer
         self.audio_player = AudioPlayer()
-        self.audio_player.play_theme()
+        self.audio_player.play_sound("theme", True)
 
         self.coins = settings["coins"]
         self.score = 0
@@ -86,6 +85,8 @@ class GameBackend:
             boolean: True for continue the game, False to end the game.
         """
 
+        """ ------------------------ Keyboard Input ------------------------ """
+
         # Handle user input
         for event in user_events:
 
@@ -93,13 +94,6 @@ class GameBackend:
 
                 # End game
                 return False
-
-            # Fire bullet when user presses left mouse button
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
-                    self.player.bullets > 0:
-
-                self.audio_player.play_bullet_fire()
-                self.__spawn_bullet()
 
             if event.type == pygame.KEYDOWN:
 
@@ -141,68 +135,14 @@ class GameBackend:
 
                     self.player.change_speed(-1 * settings["player_speed"], 0)
 
-        # Collision detection and repercussions
-        # Bullet-Alien collision
-        alien_bullet_collision = \
-            pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
+            # Fire bullet when user presses left mouse button
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
+                    self.player.bullets > 0:
 
-        for alien in alien_bullet_collision:
+                self.audio_player.play_sound("bullet_fire")
+                self.__spawn_bullet()
 
-            self.audio_player.play_explosion()
-
-            # Spawn an explosion and kill the alien sprite
-            explosion = Explosion(alien.rect.x, alien.rect.y)
-            self.explosions.add(explosion)
-            self.score += 1
-            alien.kill()
-
-            # Make a new alien to take its place
-            self.__update_alien_speed()
-            new_alien = Alien(image_paths["alien1"])
-            self.aliens.add(new_alien)
-
-            # Spawn a drop if the alien was a carrier
-            if alien.is_drop_carrier():
-
-                drop = Drop(alien.get_x(), alien.get_y())
-                self.drops.add(drop)
-
-        # Player-Alien collision
-        alien_player_collision = \
-            pygame.sprite.spritecollide(self.player, self.aliens, True)
-
-        for alien in alien_player_collision:
-
-            self.audio_player.play_hitmarker()
-
-            # Spawn an explosion in that area and subtract one player life
-            explosion = Explosion(alien.rect.x, alien.rect.y)
-            self.explosions.add(explosion)
-            self.player.lives -= 1  # Function this into player class
-
-        # Player-Drop collision
-        player_drop_collision = \
-            pygame.sprite.spritecollide(self.player, self.drops, True)
-
-        for drop in player_drop_collision:
-
-            # Perform the perks ability/benefit
-            if drop.get_type() == image_paths["drop_bullets"]:
-
-                self.audio_player.play_pickup_life()
-                self.player.bullets += settings["drop_bullets"]
-
-            elif drop.get_type() == image_paths["drop_coin"]:
-
-                self.audio_player.play_pickup_coin()
-                self.coins += 1
-
-            elif drop.get_type() == image_paths["drop_life"]:
-
-                self.audio_player.play_pickup_life()
-                self.player.lives += 1
-
-        # Sprite updates (call update function on everything)
+        """ ------------------------ Sprite Updates ------------------------ """
         # Explosion update
         for explosion in self.explosions:
             explosion.update()
@@ -227,6 +167,68 @@ class GameBackend:
         self.cursor.update(pygame.mouse.get_pos())
         self.hud.update(self.score, self.player.bullets,
                         self.coins)
+
+        """ --------------------- Collision Detection --------------------- """
+
+        # Bullet-Alien collision
+        alien_bullet_collision = \
+            pygame.sprite.groupcollide(self.aliens, self.bullets, False, True)
+
+        for alien in alien_bullet_collision:
+
+            self.audio_player.play_sound("explosion")
+
+            # Spawn an explosion and kill the alien sprite
+            explosion = Explosion(alien.rect.x, alien.rect.y)
+            self.explosions.add(explosion)
+            self.score += 1
+            alien.kill()
+
+            # Make a new alien to take its place
+            self.__update_alien_speed()
+            new_alien = Alien(image_paths["alien1"])
+            self.aliens.add(new_alien)
+
+            # Spawn a drop if the alien was a carrier
+            if alien.is_drop_carrier():
+
+                drop = Drop(alien.get_x(), alien.get_y())
+                self.drops.add(drop)
+
+        # Player-Alien collision
+        alien_player_collision = \
+            pygame.sprite.spritecollide(self.player, self.aliens, True)
+
+        for alien in alien_player_collision:
+
+            self.audio_player.play_sound("hitmarker")
+
+            # Spawn an explosion in that area and subtract one player life
+            explosion = Explosion(alien.rect.x, alien.rect.y)
+            self.explosions.add(explosion)
+            self.player.lives -= 1  # Function this into player class
+
+        # Player-Drop collision
+        player_drop_collision = \
+            pygame.sprite.spritecollide(self.player, self.drops, True)
+
+        for drop in player_drop_collision:
+
+            # Perform the perks ability/benefit
+            if drop.get_type() == image_paths["drop_bullets"]:
+
+                self.audio_player.play_sound("pickup_bullets")
+                self.player.bullets += settings["drop_bullets"]
+
+            elif drop.get_type() == image_paths["drop_coin"]:
+
+                self.audio_player.play_sound("pickup_coin")
+                self.coins += 1
+
+            elif drop.get_type() == image_paths["drop_life"]:
+
+                self.audio_player.play_sound("pickup_life")
+                self.player.lives += 1
 
         # End game if the player is out of lives
         if self.player.lives <= 0:
