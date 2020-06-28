@@ -1,7 +1,9 @@
-# Noah Hefner
-# Space Fight 2.0
-# Constants
-# Last Edit: 7/23/2019
+"""
+Noah Hefner
+Space Fight 2.0
+Constants File
+Last Edit: 6/28/2020
+"""
 
 YELLOW = [255, 255, 0]
 BLACK = [0, 0, 0]

@@ -2,14 +2,15 @@
 Noah Hefner
 Space Fight 2.0
 Settings Dictionary
-Last Edit: 8/11/2019
+Last Edit: 6/28/2020
 """
 
 # Imports
 from strings import image_paths, font_paths
 import pygame
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 
 # Holds a bunch of values for the game settings

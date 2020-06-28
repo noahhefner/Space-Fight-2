@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Drop Class
-Last Edit: 8/3/2019
+Last Edit: 6/28/2020
 """
 
 # Imports
@@ -11,7 +11,8 @@ import random
 from settings import settings
 from strings import image_paths
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 
 class Drop(pygame.sprite.Sprite):
@@ -45,8 +46,6 @@ class Drop(pygame.sprite.Sprite):
         if self.dropped_frames == int(settings["drop_frames"]):
 
             self.kill()
-
-        return
 
     def get_type(self):
         """
@@ -88,8 +87,6 @@ class Drop(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-        return True
-
     def set_y(self, new_y):
         """
         Set y value for rect.
@@ -99,5 +96,3 @@ class Drop(pygame.sprite.Sprite):
         """
 
         self.rect.y = new_y
-
-        return True

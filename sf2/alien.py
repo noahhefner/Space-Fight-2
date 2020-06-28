@@ -2,17 +2,18 @@
 Noah Hefner
 Space Fight 2.0
 Alien Class
-Last Edit: 6/16/2020
+Last Edit: 6/28/2020
 """
 
+# Imports
 import math
 import pygame
 import random
-
 from constants import BLACK
 from settings import settings
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 
 class Alien(pygame.sprite.Sprite):
@@ -44,8 +45,6 @@ class Alien(pygame.sprite.Sprite):
         self.drop_carrier = self.__drop_carrier_chance()
         self.speed = settings["alien_speed"]
 
-        return
-
     def update(self, player_center):
         """
         Calculates path towards player and moves alien.
@@ -59,13 +58,10 @@ class Alien(pygame.sprite.Sprite):
 
         angle = math.atan2(diff_y, diff_x)
 
-        traj_y = math.sin(angle) * self.speed
-        traj_x = math.cos(angle) * self.speed
+        velx = math.cos(angle) * self.speed
+        vely = math.sin(angle) * self.speed
 
-        self.rect.x += traj_x
-        self.rect.y += traj_y
-
-        return True
+        self.__move(velx, vely)
 
     def get_x(self):
         """
@@ -97,8 +93,6 @@ class Alien(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-        return True
-
     def set_y(self, new_y):
         """
         Set y value for rect.
@@ -108,8 +102,6 @@ class Alien(pygame.sprite.Sprite):
         """
 
         self.rect.y = new_y
-
-        return True
 
     def is_drop_carrier(self):
         """
@@ -138,6 +130,14 @@ class Alien(pygame.sprite.Sprite):
         else:
 
             return False
+
+    def __move(self, velx, vely):
+        """
+        Move the alien according to x and y axis velocities.
+        """
+
+        self.rect.x += velx
+        self.rect.y += vely
 
     def __random_spawn(self):
         """

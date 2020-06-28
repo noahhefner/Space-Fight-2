@@ -2,12 +2,11 @@
 Noah Hefner
 Space Fight 2.0
 Game Backend Class
-Last Edit: 6/16/2020
+Last Edit: 6/28/2020
 """
 
 # Imports
 import pygame
-
 from alien import Alien
 from audio_player import AudioPlayer
 from bullet import Bullet
@@ -20,7 +19,8 @@ from settings import settings
 from star import Star
 from strings import image_paths
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 class GameBackend:
     """
@@ -72,8 +72,6 @@ class GameBackend:
         self.coins = settings["coins"]
         self.score = 0
         self.hud = GameBackend.HUD(self.score, self.player.bullets, self.coins)
-
-        return
 
     def update(self, user_events):
         """"
@@ -299,16 +297,12 @@ class GameBackend:
         self.bullets.add(new_bullet)
         self.player.bullets -= 1
 
-        return True
-
     def __update_alien_speed(self):
         """
         Increment alien speed based on player score.
         """
 
         settings["alien_speed"] += 0.01
-
-        return True
 
     class HUD:
         """
@@ -351,8 +345,6 @@ class GameBackend:
                 "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
 
-            return
-
         def update(self, score, bullets, coins):
             """
             Remake counter sprites with appropriate data.
@@ -386,5 +378,3 @@ class GameBackend:
             self.counter_score.rect.x = settings["hud_spacing"]
             self.counter_score.rect.y = self.counter_coins.rect.y + \
                 self.counter_coins.rect.height + settings["hud_spacing"]
-
-            return True

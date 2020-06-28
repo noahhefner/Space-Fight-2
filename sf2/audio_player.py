@@ -2,13 +2,15 @@
 Noah Hefner
 Space Fight 2.0
 AudioPlayer Class
-Last Edit: 6/16/2020
+Last Edit: 6/28/2020
 """
 
+# Imports
 import pygame
 from strings import audio_paths
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 
 class AudioPlayer:
@@ -38,8 +40,6 @@ class AudioPlayer:
         self.pickup_life = pygame.mixer.Sound(audio_paths["pickup_life"])
         self.theme = pygame.mixer.Sound(audio_paths["theme"])
 
-        return
-
     def play_sound (self, audio_file_name, repeat = False):
         """
         Plays an audio clip.
@@ -56,5 +56,3 @@ class AudioPlayer:
             sound.play(-1)
         else:
             sound.play()
-
-        return

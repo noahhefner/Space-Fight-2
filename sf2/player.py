@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Player Class
-Last Edit: 8/2/2019
+Last Edit: 6/28/2020
 """
 
 # Imports
@@ -10,7 +10,8 @@ import math
 import pygame
 from settings import settings
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 
 class Player(pygame.sprite.Sprite):
@@ -51,8 +52,6 @@ class Player(pygame.sprite.Sprite):
         self.set_x(settings["screen_width"] / 2)
         self.set_y(settings["screen_height"] / 2)
 
-        return
-
     def update(self):
         """
         Rotate and move player, then check for screen edge collision.
@@ -61,8 +60,6 @@ class Player(pygame.sprite.Sprite):
         self.__rotate()
         self.__move()
         self.__check_screen_edge_hit()
-
-        return True
 
     def get_x(self):
         """
@@ -94,8 +91,6 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-        return True
-
     def set_y(self, new_y):
         """
         Set y value for rect.
@@ -105,8 +100,6 @@ class Player(pygame.sprite.Sprite):
         """
 
         self.rect.y = new_y
-
-        return True
 
     def change_speed(self, velx, vely):
         """
@@ -119,8 +112,6 @@ class Player(pygame.sprite.Sprite):
 
         self.velx += velx
         self.vely += vely
-
-        return True
 
     def __check_screen_edge_hit(self):
         """
@@ -139,8 +130,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y + self.rect.height >= settings["screen_height"]:
             self.rect.bottom = settings["screen_height"]
 
-        return True
-
     def __move(self):
         """
         Move the player according to x and y axis velocities.
@@ -148,8 +137,6 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.x += self.velx
         self.rect.y += self.vely
-
-        return True
 
     def __rotate(self):
         """
@@ -162,5 +149,3 @@ class Player(pygame.sprite.Sprite):
         angle = math.degrees(math.atan2(-1 * diff_y, diff_x)) - 180
         self.image = pygame.transform.rotate(self.original, angle)
         self.rect = self.image.get_rect(center=self.rect.center)
-
-        return True

@@ -5,12 +5,14 @@ Bullet Class
 Last Edit: 8/2/2019
 """
 
+# Imports
 import math
 import pygame
 from constants import BLACK
 from settings import settings
 
-pygame.init()  # Initialize pygame
+# Initialize pygame
+pygame.init()
 
 
 class Bullet(pygame.sprite.Sprite):

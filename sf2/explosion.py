@@ -10,7 +10,8 @@ import pygame
 from constants import BLACK
 from strings import image_paths
 
-pygame.init()  # Initialize pygame
+  # Initialize pygame
+pygame.init()
 
 
 class Explosion(pygame.sprite.Sprite):

@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 GameFrontend Class
-Last Edit: 8/11/2019
+Last Edit: 6/28/2020
 """
 
 # Imports
@@ -11,7 +11,8 @@ import pygame
 from settings import settings
 from constants import BLACK
 
-pygame.init()  # Initialize pygame
+  # Initialize pygame
+pygame.init()
 
 
 class GameFrontend:
@@ -44,6 +45,7 @@ class GameFrontend:
             playing (bool): True for continue game, False for end game.
         """
 
+        self.__update_window_title()
         user_events = pygame.event.get()
         playing = self.backend.update(user_events)
 
@@ -109,4 +111,10 @@ class GameFrontend:
         # Tick clock
         self.clock.tick(settings["fps"])
 
-        return
+    def __update_window_title (self):
+        """
+        Update the window title to include fps count.
+        """
+
+        fps = str(int(self.clock.get_fps()))
+        pygame.display.set_caption("SPACE FIGHT 2.0 - FPS: " + fps)
