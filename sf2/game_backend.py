@@ -90,14 +90,10 @@ class GameBackend:
 
             if event.type == pygame.QUIT:
 
-                # End game
-                return False
+                # Kill program
+                exit()
 
             if event.type == pygame.KEYDOWN:
-
-                if event.key == pygame.K_ESCAPE:
-
-                    return False  # Kill switch
 
                 if event.key == pygame.K_w:
 

@@ -7,6 +7,7 @@ Last Edit: 6/29/2020
 
 # Imports
 import pygame
+from button import Button
 from constants import BLACK
 from settings import settings
 
@@ -26,18 +27,17 @@ class MenuManager:
         start_page_set (Boolean): Switch that checks if start page has been set.
     """
 
-    def __init__ (self):
+    def __init__ (self, screen, clock):
         """
         Instantiate a MenuManager object.
         """
 
         self.pages = []
         self.current_page = None
-        self.screen = pygame.display.set_mode(
-            [settings["screen_width"], settings["screen_height"]])
-        pygame.display.set_caption("SPACE FIGHT 2.0")
-        self.clock = pygame.time.Clock()
+        self.screen = screen
+        self.clock = clock
         self.start_page_set = False
+        self.exiting = False
 
     def add_page (self, new_page):
         """
@@ -93,13 +93,19 @@ class MenuManager:
         if not self.start_page_set:
 
             print("Start page not set!")
+            exit()
+
+        if self.exiting:
+
+            self.exiting = False
+
             return False
 
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
 
-                return False
+                exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -107,11 +113,21 @@ class MenuManager:
 
                 for element in self.current_page.elements:
 
-                    if element.is_clicked(mouse_pos):
+                    if isinstance(element, Button):
 
-                        element.execute_action()
+                        if element.is_clicked(mouse_pos):
+
+                            element.execute_action()
 
         return True
+
+    def exit_menu (self):
+
+        self.exiting = True
+
+    def kill_program (self):
+
+        exit()
 
     def display (self):
         """

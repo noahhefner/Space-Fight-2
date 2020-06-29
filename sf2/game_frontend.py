@@ -25,16 +25,13 @@ class GameFrontend:
         backend (GameBackend): The GameBackend object to be shown.
     """
 
-    def __init__(self):
+    def __init__(self, screen, clock):
         """
         Instantiate a new GameFrontend object.
         """
 
-        self.screen = pygame.display.set_mode(
-            [settings["screen_width"], settings["screen_height"]])
-        pygame.display.set_caption("SPACE FIGHT 2.0")
-        pygame.mouse.set_visible(False)
-        self.clock = pygame.time.Clock()
+        self.screen = screen
+        self.clock = clock
         self.backend = GameBackend()
 
     def update(self):
