@@ -1,28 +1,63 @@
+"""
+Noah Hefner
+Space Fight 2.0
+Page Class
+Last Edit: 6/29/2020
+"""
 
+# Imports
 import pygame
 from constants import BLACK
 from settings import settings
+
+# Initialize pygame
 pygame.init()
 
+
 class MenuManager:
+    """
+    Menu manager for pygame.
+
+    Attributes:
+        pages (List): List of pages in the menu manager.
+        current_page (Page): Page currently being displayed.
+        screen (pygame.display): Surface to blit the pages and game to.
+        clock (pygame.time.Clock): Used to set/cap game FPS.
+        start_page_set (Boolean): Switch that checks if start page has been set.
+    """
 
     def __init__ (self):
+        """
+        Instantiate a MenuManager object.
+        """
 
         self.pages = []
         self.current_page = None
-
         self.screen = pygame.display.set_mode(
             [settings["screen_width"], settings["screen_height"]])
         pygame.display.set_caption("SPACE FIGHT 2.0")
         self.clock = pygame.time.Clock()
-
         self.start_page_set = False
 
     def add_page (self, new_page):
+        """
+        Adds a page to the menu manager.
+
+        Arguments:
+            new_page (Page): Page to be added to the menu manager.
+        """
 
         self.pages.append(new_page)
 
     def navigate (self, page_id):
+        """
+        Sets the currently showing page using the id attribute of Page class.
+
+        Arguments:
+            page_id (String/Int): ID of the desired page destination.
+
+        NOTE: See Page class for more info on page id's.
+        """
 
         for page in self.pages:
 
@@ -46,6 +81,14 @@ class MenuManager:
                 self.start_page_set = True
 
     def update (self):
+        """
+        Handles user events. Also checks if a start page has been set. This
+        function will prevent the program from running if a sart page has not
+        beem set.
+
+        Returns:
+            Boolean: True if program execution should continue, False otherwise.
+        """
 
         if not self.start_page_set:
 
@@ -80,7 +123,5 @@ class MenuManager:
 
         # Display current screen
         self.current_page.display(self.screen)
-
         pygame.display.flip()
-
         self.clock.tick(settings["fps"])

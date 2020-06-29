@@ -11,7 +11,7 @@ import pygame
 from settings import settings
 from constants import BLACK
 
-  # Initialize pygame
+# Initialize pygame
 pygame.init()
 
 
