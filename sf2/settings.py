@@ -35,6 +35,7 @@ settings = {
     "drop_coins": 2,
     "fps": 60,
     "hud_spacing": 10,
-    "font": pygame.font.Font(font_paths["arcade_classic"], 40)
+    "font": pygame.font.Font(font_paths["arcade_classic"], 40),
+    "random_value" : 6
 
 }
