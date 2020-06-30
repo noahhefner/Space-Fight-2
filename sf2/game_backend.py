@@ -227,6 +227,7 @@ class GameBackend:
         # End game if the player is out of lives
         if self.player.lives <= 0:
 
+            self.audio_player.stop()
             return False
 
         # Return True if the game should continue

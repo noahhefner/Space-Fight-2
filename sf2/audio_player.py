@@ -32,13 +32,12 @@ class AudioPlayer:
         Instantiate a new AudioPlayer object.
         """
 
-        self.bullet_fire = pygame.mixer.Sound(audio_paths["bullet_fire"])
-        self.explosion = pygame.mixer.Sound(audio_paths["explosion"])
-        self.hitmarker = pygame.mixer.Sound(audio_paths["hitmarker"])
-        self.pickup_bullets = pygame.mixer.Sound(audio_paths["pickup_bullets"])
-        self.pickup_coin = pygame.mixer.Sound(audio_paths["pickup_coin"])
-        self.pickup_life = pygame.mixer.Sound(audio_paths["pickup_life"])
-        self.theme = pygame.mixer.Sound(audio_paths["theme"])
+    def stop (self):
+        """
+        End all audio from the mixer.
+        """
+
+        pygame.mixer.stop()
 
     def play_sound (self, audio_file_name, repeat = False):
         """
