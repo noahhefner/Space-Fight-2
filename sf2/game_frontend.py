@@ -110,7 +110,7 @@ class GameFrontend:
 
     def __update_window_title (self):
         """
-        Update the window title to include fps count.
+        Update the window title to include current fps count.
         """
 
         fps = str(int(self.clock.get_fps()))
