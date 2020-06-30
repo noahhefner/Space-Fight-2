@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Explosion Class
-Last Edit: 8/3/2019
+Last Edit: 6/30/2020
 """
 
 # Imports
@@ -10,7 +10,7 @@ import pygame
 from constants import BLACK
 from strings import image_paths
 
-  # Initialize pygame
+# Initialize pygame
 pygame.init()
 
 
@@ -63,8 +63,6 @@ class Explosion(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-        return
-
     def update(self):
         """
         Cycles through the exp_list to display the correct frame and kills the
@@ -81,8 +79,6 @@ class Explosion(pygame.sprite.Sprite):
 
         self.frame += 1
         self.image = self.image_list[self.exp_num]
-
-        return True
 
     def get_x(self):
         """
@@ -114,8 +110,6 @@ class Explosion(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-        return True
-
     def set_y(self, new_y):
         """
         Set y value for rect.
@@ -125,5 +119,3 @@ class Explosion(pygame.sprite.Sprite):
         """
 
         self.rect.y = new_y
-
-        return True

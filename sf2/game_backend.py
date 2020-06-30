@@ -15,7 +15,8 @@ from cursor import Cursor
 from drop import Drop
 from explosion import Explosion
 from player import Player
-from settings import settings
+from settings import settings_game
+from settings import settings_program
 from star import Star
 from strings import image_paths
 
@@ -61,7 +62,7 @@ class GameBackend:
         for i in range(20):
             new_alien = Alien(image_paths["alien1"])
             self.aliens.add(new_alien)
-        for i in range(int(settings["screen_width"] / 2)):
+        for i in range(int(settings_program["screen_width"] / 2)):
             new_star = Star(image_paths["star"])
             self.stars.add(new_star)
 
@@ -69,7 +70,7 @@ class GameBackend:
         self.audio_player = AudioPlayer()
         self.audio_player.play_sound("theme", True)
 
-        self.coins = settings["coins"]
+        self.coins = settings_game["coins"]
         self.score = 0
         self.hud = GameBackend.HUD(self.score, self.player.bullets, self.coins)
 
@@ -97,37 +98,37 @@ class GameBackend:
 
                 if event.key == pygame.K_w:
 
-                    self.player.change_speed(0, -1 * settings["player_speed"])
+                    self.player.change_speed(0, -1 * settings_game["player_speed"])
 
                 if event.key == pygame.K_a:
 
-                    self.player.change_speed(-1 * settings["player_speed"], 0)
+                    self.player.change_speed(-1 * settings_game["player_speed"], 0)
 
                 if event.key == pygame.K_s:
 
-                    self.player.change_speed(0, settings["player_speed"])
+                    self.player.change_speed(0, settings_game["player_speed"])
 
                 if event.key == pygame.K_d:
 
-                    self.player.change_speed(settings["player_speed"], 0)
+                    self.player.change_speed(settings_game["player_speed"], 0)
 
             if event.type == pygame.KEYUP:
 
                 if event.key == pygame.K_w:
 
-                    self.player.change_speed(0, settings["player_speed"])
+                    self.player.change_speed(0, settings_game["player_speed"])
 
                 if event.key == pygame.K_a:
 
-                    self.player.change_speed(settings["player_speed"], 0)
+                    self.player.change_speed(settings_game["player_speed"], 0)
 
                 if event.key == pygame.K_s:
 
-                    self.player.change_speed(0, -1 * settings["player_speed"])
+                    self.player.change_speed(0, -1 * settings_game["player_speed"])
 
                 if event.key == pygame.K_d:
 
-                    self.player.change_speed(-1 * settings["player_speed"], 0)
+                    self.player.change_speed(-1 * settings_game["player_speed"], 0)
 
             # Fire bullet when user presses left mouse button
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and \
@@ -212,7 +213,7 @@ class GameBackend:
             if drop.get_type() == image_paths["drop_bullets"]:
 
                 self.audio_player.play_sound("pickup_bullets")
-                self.player.bullets += settings["drop_bullets"]
+                self.player.bullets += settings_game["drop_bullets"]
 
             elif drop.get_type() == image_paths["drop_coin"]:
 
@@ -289,7 +290,7 @@ class GameBackend:
         """
 
         mouse_pos = pygame.mouse.get_pos()
-        new_bullet = Bullet(settings["bullet_type_string"], mouse_pos,
+        new_bullet = Bullet(settings_game["bullet_type_string"], mouse_pos,
                             self.player.rect.center)
         self.bullets.add(new_bullet)
         self.player.bullets -= 1
@@ -299,7 +300,7 @@ class GameBackend:
         Increment alien speed based on player score.
         """
 
-        settings["alien_speed"] += 0.01
+        settings_game["alien_speed"] += 0.01
 
     class HUD:
         """
@@ -328,17 +329,17 @@ class GameBackend:
             self.heart.rect = self.heart.image.get_rect()
 
             self.counter_score = pygame.sprite.Sprite()
-            self.counter_score.image = settings["font"].render(
+            self.counter_score.image = settings_game["font"].render(
                 "SCORE    " + str(score), False, WHITE)
             self.counter_score.rect = self.counter_score.image.get_rect()
 
             self.counter_bullets = pygame.sprite.Sprite()
-            self.counter_bullets.image = settings["font"].render(
+            self.counter_bullets.image = settings_game["font"].render(
                 "BULLETS    " + str(bullets), False, WHITE)
             self.counter_bullets.rect = self.counter_bullets.image.get_rect()
 
             self.counter_coins = pygame.sprite.Sprite()
-            self.counter_coins.image = settings["font"].render(
+            self.counter_coins.image = settings_game["font"].render(
                 "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
 
@@ -353,25 +354,25 @@ class GameBackend:
             """
 
             # Update bullet counter
-            self.counter_bullets.image = settings["font"].render(
+            self.counter_bullets.image = settings_game["font"].render(
                 "BULLETS    " + str(bullets), False, WHITE)
             self.counter_bullets.rect = self.counter_bullets.image.get_rect()
-            self.counter_bullets.rect.x = settings["hud_spacing"]
+            self.counter_bullets.rect.x = settings_game["hud_spacing"]
             self.counter_bullets.rect.y = self.heart.rect.y + \
-                self.heart.rect.height + (settings["hud_spacing"] * 2)
+                self.heart.rect.height + (settings_game["hud_spacing"] * 2)
 
             # Update coin counter
-            self.counter_coins.image = settings["font"].render(
+            self.counter_coins.image = settings_game["font"].render(
                 "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
-            self.counter_coins.rect.x = settings["hud_spacing"]
+            self.counter_coins.rect.x = settings_game["hud_spacing"]
             self.counter_coins.rect.y = self.counter_bullets.rect.y + \
-                self.counter_bullets.rect.height + settings["hud_spacing"]
+                self.counter_bullets.rect.height + settings_game["hud_spacing"]
 
             # Update score counter
-            self.counter_score.image = settings["font"].render(
+            self.counter_score.image = settings_game["font"].render(
                 "SCORE    " + str(score), False, WHITE)
             self.counter_score.rect = self.counter_score.image.get_rect()
-            self.counter_score.rect.x = settings["hud_spacing"]
+            self.counter_score.rect.x = settings_game["hud_spacing"]
             self.counter_score.rect.y = self.counter_coins.rect.y + \
-                self.counter_coins.rect.height + settings["hud_spacing"]
+                self.counter_coins.rect.height + settings_game["hud_spacing"]

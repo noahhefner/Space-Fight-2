@@ -8,7 +8,7 @@ Last Edit: 6/28/2020
 # Imports
 import pygame
 import random
-from settings import settings
+from settings import settings_game
 from strings import image_paths
 
 # Initialize pygame
@@ -43,7 +43,7 @@ class Drop(pygame.sprite.Sprite):
         Times the drop for dropped_frames. Kills drop at frame limit.
         """
 
-        if self.dropped_frames == int(settings["drop_frames"]):
+        if self.dropped_frames == int(settings_game["drop_frames"]):
 
             self.kill()
 

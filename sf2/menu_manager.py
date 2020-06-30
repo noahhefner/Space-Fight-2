@@ -7,7 +7,7 @@ Last Edit: 6/29/2020
 
 # Imports
 import pygame
-from button import Button
+from button_picture import ButtonPicture
 from menu_manager_settings import menu_manager_settings
 
 # Initialize pygame
@@ -112,7 +112,7 @@ class MenuManager:
 
                 for element in self.current_page.elements:
 
-                    if isinstance(element, Button):
+                    if isinstance(element, ButtonPicture):
 
                         if element.is_clicked(mouse_pos):
 

@@ -1,0 +1,22 @@
+Noah Hefner
+Space Fight 2.0
+Development Log
+Last Edit: 6/30/2020
+
+Currently Working On:
+  - Split settings into game settings and program settings DONE
+  - Move function for picture DONE
+  - Better image assets for menu
+  - Rename Button to ImageButton
+
+Features for Future Work:
+  - Documentation
+  - Comments
+  - PEP8 adherence
+  - Audio player for menu system
+  - Custom menu cursor
+  - High score saver module (can probably reuse code from SF1)
+  - Work on README
+  - TextButton, create buttons just from a string
+  - Automatic positioning for menu elements
+  - Figure out how to put menu stuff in its own module

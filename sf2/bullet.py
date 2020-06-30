@@ -2,14 +2,15 @@
 Noah Hefner
 Space Fight 2.0
 Bullet Class
-Last Edit: 8/2/2019
+Last Edit: 6/30/2020
 """
 
 # Imports
 import math
 import pygame
 from constants import BLACK
-from settings import settings
+from settings import settings_game
+from settings import settings_program
 
 # Initialize pygame
 pygame.init()
@@ -25,7 +26,9 @@ class Bullet(pygame.sprite.Sprite):
     """
 
     def __init__(self, image_string, mouse_pos, player_pos):
-        """ Initiate bullet class.
+        """
+        Initiate bullet class.
+
         Args:
             image_string (string): Image path for bullet image.
             x_traj (int): X axis trajectory of the bullet.
@@ -40,10 +43,8 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.x = player_pos[0]
         self.rect.y = player_pos[1]
         self.mouse_pos = mouse_pos
-        self.speed = int(settings["bullet_speed"])
+        self.speed = int(settings_game["bullet_speed"])
         self.trajectory = self.__calculate_trajectory(mouse_pos, player_pos)
-
-        return
 
     def update(self):
         """
@@ -58,12 +59,10 @@ class Bullet(pygame.sprite.Sprite):
 
             self.kill()
 
-        elif self.rect.y > settings["screen_height"] or \
-                self.rect.x > settings["screen_width"]:
+        elif self.rect.y > settings_program["screen_height"] or \
+                self.rect.x > settings_program["screen_width"]:
 
             self.kill()
-
-        return True
 
     def get_x(self):
         """
@@ -95,8 +94,6 @@ class Bullet(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-        return True
-
     def set_y(self, new_y):
         """
         Set y value for rect.
@@ -106,8 +103,6 @@ class Bullet(pygame.sprite.Sprite):
         """
 
         self.rect.y = new_y
-
-        return True
 
     def __calculate_trajectory(self, mouse_pos, player_pos):
         """

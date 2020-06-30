@@ -8,7 +8,8 @@ Last Edit: 6/28/2020
 # Imports
 from game_backend import GameBackend
 import pygame
-from settings import settings
+from settings import settings_game
+from settings import settings_program
 from constants import BLACK
 
 # Initialize pygame
@@ -74,9 +75,9 @@ class GameFrontend:
 
         for i in range(self.backend.player.lives):
 
-            x = (settings["hud_spacing"] * (i + 1)) + \
+            x = (settings_game["hud_spacing"] * (i + 1)) + \
                 (i * self.backend.hud.heart.rect.width)
-            y = settings["hud_spacing"]
+            y = settings_game["hud_spacing"]
 
             self.screen.blit(self.backend.hud.heart.image, [x, y])
 
@@ -106,7 +107,7 @@ class GameFrontend:
         pygame.display.flip()
 
         # Tick clock
-        self.clock.tick(settings["fps"])
+        self.clock.tick(settings_program["fps"])
 
     def __update_window_title (self):
         """

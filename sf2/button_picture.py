@@ -13,7 +13,7 @@ from menu_manager_settings import menu_manager_settings
 pygame.init()
 
 
-class Button(pygame.sprite.Sprite):
+class ButtonPicture(pygame.sprite.Sprite):
     """
     Button object for menu manager.
 
@@ -33,7 +33,7 @@ class Button(pygame.sprite.Sprite):
             pos (tuple): XY position for the button.
         """
 
-        super(Button, self).__init__()
+        super(ButtonPicture, self).__init__()
 
         self.image = pygame.image.load(image)
         self.action = action

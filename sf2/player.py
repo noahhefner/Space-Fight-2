@@ -8,7 +8,8 @@ Last Edit: 6/28/2020
 # Imports
 import math
 import pygame
-from settings import settings
+from settings import settings_program
+from settings import settings_game
 
 # Initialize pygame
 pygame.init()
@@ -45,12 +46,12 @@ class Player(pygame.sprite.Sprite):
         self.velx = 0
         self.vely = 0
 
-        self.bullets = settings["start_bullets"]
-        self.lives = settings["start_lives"]
+        self.bullets = settings_game["start_bullets"]
+        self.lives = settings_game["start_lives"]
 
         # Set starting position for player
-        self.set_x(settings["screen_width"] / 2)
-        self.set_y(settings["screen_height"] / 2)
+        self.set_x(settings_program["screen_width"] / 2)
+        self.set_y(settings_program["screen_height"] / 2)
 
     def update(self):
         """
@@ -118,8 +119,8 @@ class Player(pygame.sprite.Sprite):
         Prevents the player from moving off the window.
         """
 
-        if self.rect.x + self.rect.width >= settings["screen_width"]:
-            self.rect.right = settings["screen_width"]
+        if self.rect.x + self.rect.width >= settings_program["screen_width"]:
+            self.rect.right = settings_program["screen_width"]
 
         if self.rect.x <= 0:
             self.rect.left = 0
@@ -127,8 +128,8 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y <= 0:
             self.rect.top = 0
 
-        if self.rect.y + self.rect.height >= settings["screen_height"]:
-            self.rect.bottom = settings["screen_height"]
+        if self.rect.y + self.rect.height >= settings_program["screen_height"]:
+            self.rect.bottom = settings_program["screen_height"]
 
     def __move(self):
         """

@@ -9,7 +9,7 @@ Last Edit: 6/28/2020
 import pygame
 import random
 from constants import BLACK
-from settings import settings
+from settings import settings_program
 
 # Initialize pygame
 pygame.init()
@@ -38,8 +38,8 @@ class Star(pygame.sprite.Sprite):
         self.image = pygame.image.load(image_string).convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.x = random.randrange(0, settings["screen_width"])
-        self.rect.y = random.randrange(0, settings["screen_height"])
+        self.rect.x = random.randrange(0, settings_program["screen_width"])
+        self.rect.y = random.randrange(0, settings_program["screen_height"])
         self.vely = random.randrange(-3, 0)
 
     def update(self):
@@ -51,7 +51,7 @@ class Star(pygame.sprite.Sprite):
 
         if self.rect.y + self.rect.height < 0:
 
-            self.set_y(settings["screen_height"])
+            self.set_y(settings_program["screen_height"])
 
     def get_x(self):
         """

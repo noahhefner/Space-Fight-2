@@ -7,19 +7,19 @@ Last Edit: 6/29/2020
 
 # Imports
 import pygame
-from button import Button
+from button_picture import ButtonPicture
 from game_frontend import GameFrontend
 from menu_manager import MenuManager
 from page import Page
 from picture import Picture
-from settings import settings
+from settings import settings_program
 from strings import image_paths
 
 # Initialize pygame
 pygame.init()
 
 # Create screen and clock
-screen = pygame.display.set_mode([settings["screen_width"], settings["screen_height"]])
+screen = pygame.display.set_mode([settings_program["screen_width"], settings_program["screen_height"]])
 clock = pygame.time.Clock()
 
 # Create MenuManager
@@ -31,9 +31,9 @@ options = Page("options")
 exit_confirm = Page("exit_confirm")
 
 # Create some buttons
-button_play = Button(image_paths["button_play"], man.exit_menu, pos = [10, 10])
-button_options = Button(image_paths["button_options"], man.navigate, "options", pos = [10, 100])
-button_quit = Button(image_paths["button_quit"], man.navigate, "exit_confirm", pos = [10, 175])
+button_play = ButtonPicture(image_paths["button_play"], man.exit_menu, pos = [10, 10])
+button_options = ButtonPicture(image_paths["button_options"], man.navigate, "options", pos = [10, 100])
+button_quit = ButtonPicture(image_paths["button_quit"], man.navigate, "exit_confirm", pos = [10, 175])
 
 picture_you_sure = Picture(image_paths["button_you_sure"], pos = [0,0])
 button_yes = Button(image_paths["button_yes"], man.kill_program, pos = [10, 300])

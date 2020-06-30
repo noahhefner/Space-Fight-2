@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 AudioPlayer Class
-Last Edit: 6/28/2020
+Last Edit: 6/30/2020
 """
 
 # Imports
@@ -15,16 +15,7 @@ pygame.init()
 
 class AudioPlayer:
     """
-    Holds Sound objects and methods to play them.
-
-    Attributes:
-        bullet_fire (pygame.mixer.Sound): Bullet firing Sound object.
-        explosion (pygame.mixer.Sound): Explosion Sound object.
-        hitmarker (pygame.mixer.Sound): Alien/player collision Sound object.
-        pickup_bullets (pygame.mixer.Sound): Pickup bullets Sound obejct.
-        pickup_coin (pygame.mixer.Sound): Pickup coin Sound object.
-        pickup_life (pygame.mixer.Sound): Pickup life Sound object.
-        theme (pygame.mixer.Sound): Theme song Sound object.
+    Plays sounds.
     """
 
     def __init__(self):

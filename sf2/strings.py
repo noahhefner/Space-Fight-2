@@ -2,7 +2,7 @@
 Noah Hefner
 Space Fight 2.0
 Strings Dictionary
-Last Edit: 6/16/2020
+Last Edit: 6/30/2020
 """
 
 # Imports
@@ -16,7 +16,6 @@ font_folder = "resources/font/"
 # Image paths stored as strings
 image_paths = {
 
-    # Image path strings
     "alien1": os.path.abspath(images_folder + "alien_level_one.png"),
     "alien2": os.path.abspath(images_folder + "alien_level_two.png"),
     "alien3": os.path.abspath(images_folder + "alien_level_three.png"),
@@ -53,7 +52,6 @@ image_paths = {
 # Audio paths stored as strings
 audio_paths = {
 
-    # Audio path strings
     "bullet_fire": os.path.abspath(audio_folder + "bullet_fire.ogg"),
     "explosion": os.path.abspath(audio_folder + "explosion.ogg"),
     "hitmarker": os.path.abspath(audio_folder + "hitmarker.ogg"),
@@ -67,7 +65,6 @@ audio_paths = {
 # Font paths stored as strings
 font_paths = {
 
-    # Font path strings
     "arcade_classic": os.path.abspath(font_folder + "ARCADECLASSIC.TTF")
 
 }

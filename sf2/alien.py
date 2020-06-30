@@ -10,7 +10,8 @@ import math
 import pygame
 import random
 from constants import BLACK
-from settings import settings
+from settings import settings_game
+from settings import settings_program
 
 # Initialize pygame
 pygame.init()
@@ -23,7 +24,7 @@ class Alien(pygame.sprite.Sprite):
     Attributes:
         image (pygame.image): Image for alien sprite.
         rect (pygame.image.rect): Position, height, width values for image.
-        drop_carrier (bool): True if alien is a drop carrier.
+        drop_carrier (boolean): True if alien is a drop carrier.
         speed (int): Speed multiplier for aliem movement.
     """
 
@@ -43,7 +44,7 @@ class Alien(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = self.__random_spawn()
 
         self.drop_carrier = self.__drop_carrier_chance()
-        self.speed = settings["alien_speed"]
+        self.speed = settings_game["alien_speed"]
 
     def update(self, player_center):
         """
@@ -108,7 +109,7 @@ class Alien(pygame.sprite.Sprite):
         Get boolean of drop_carrier attribute.
 
         Returns:
-            self.drop_carrier (bool): True for carrier, False for non-carrier.
+            self.drop_carrier (boolean): True for carrier, False for non-carrier.
         """
 
         return self.drop_carrier
@@ -121,7 +122,7 @@ class Alien(pygame.sprite.Sprite):
             boolean: True if alien is carrier, False if alien is not a carrier.
         """
 
-        carrier = random.randrange(0, settings["drop_probability"])
+        carrier = random.randrange(0, settings_game["drop_probability"])
 
         if not carrier:
 
@@ -157,14 +158,14 @@ class Alien(pygame.sprite.Sprite):
         if left_right == 0:
 
             x = random.randrange(-600, -100)
-            y = random.randrange(-600, settings["screen_height"] + 600)
+            y = random.randrange(-600, settings_program["screen_height"] + 600)
 
         # Middle portion of screen
         # This one is tricky because we have to avoid spawning the alien in the
         # field of play. We want to ensure we only spawn aliens off-screen.
         elif left_right == 1:
 
-            x = random.randrange(0, settings["screen_width"])
+            x = random.randrange(0, settings_program["screen_width"])
 
             top_bottom = random.randrange(0, 2)
 
@@ -174,15 +175,15 @@ class Alien(pygame.sprite.Sprite):
 
             else:
 
-                y = random.randrange(settings["screen_height"] + 100,
-                                     settings["screen_height"] + 700)
+                y = random.randrange(settings_program["screen_height"] + 100,
+                                     settings_program["screen_height"] + 700)
 
         # Right side of screen
         else:
 
-            x = random.randrange(settings["screen_width"] + 100,
-                                 settings["screen_width"] + 700)
-            y = random.randrange(-600, settings["screen_height"] + 600)
+            x = random.randrange(settings_program["screen_width"] + 100,
+                                 settings_program["screen_width"] + 700)
+            y = random.randrange(-600, settings_program["screen_height"] + 600)
 
         position.append(x)
         position.append(y)
