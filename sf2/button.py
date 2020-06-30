@@ -7,7 +7,7 @@ Last Edit: 6/29/2020
 
 # Imports
 import pygame
-from constants import BLACK
+from menu_manager_settings import menu_manager_settings
 
 # Initialize pygame
 pygame.init()
@@ -37,7 +37,7 @@ class Button(pygame.sprite.Sprite):
 
         self.image = pygame.image.load(image)
         self.action = action
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(menu_manager_settings["element_colorkey"])
         self.rect = self.image.get_rect()
         self.rect.x = pos[0]
         self.rect.y = pos[1]

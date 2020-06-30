@@ -8,8 +8,7 @@ Last Edit: 6/29/2020
 # Imports
 import pygame
 from button import Button
-from constants import BLACK
-from settings import settings
+from menu_manager_settings import menu_manager_settings
 
 # Initialize pygame
 pygame.init()
@@ -93,7 +92,7 @@ class MenuManager:
         if not self.start_page_set:
 
             print("Start page not set!")
-            exit()
+            self.kill_program()
 
         if self.exiting:
 
@@ -105,7 +104,7 @@ class MenuManager:
 
             if event.type == pygame.QUIT:
 
-                exit()
+                self.kill_program()
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
@@ -122,10 +121,16 @@ class MenuManager:
         return True
 
     def exit_menu (self):
+        """
+        For exiting the menu manager. Flips the exiting flag.
+        """
 
         self.exiting = True
 
     def kill_program (self):
+        """
+        Stops program execution.
+        """
 
         exit()
 
@@ -135,9 +140,9 @@ class MenuManager:
         """
 
         # Fill background
-        self.screen.fill(BLACK)
+        self.screen.fill(menu_manager_settings["menu_background_color"])
 
         # Display current screen
         self.current_page.display(self.screen)
         pygame.display.flip()
-        self.clock.tick(settings["fps"])
+        self.clock.tick(menu_manager_settings["menu_fps"])
