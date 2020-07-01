@@ -22,6 +22,9 @@ pygame.init()
 screen = pygame.display.set_mode([settings_program["screen_width"], settings_program["screen_height"]])
 clock = pygame.time.Clock()
 
+# Font object for rendering text buttons
+font = pygame.font.SysFont('04B_30_', 50, False, False)
+
 # Create MenuManager
 man = MenuManager(screen, clock)
 
@@ -36,8 +39,8 @@ button_options = ButtonPicture(image_paths["button_options"], man.navigate, "opt
 button_quit = ButtonPicture(image_paths["button_quit"], man.navigate, "exit_confirm", pos = [10, 175])
 
 picture_you_sure = Picture(image_paths["button_you_sure"], pos = [0,0])
-button_yes = Button(image_paths["button_yes"], man.kill_program, pos = [10, 300])
-button_no = Button(image_paths["button_no"], man.navigate, "home", pos = [50, 300])
+button_yes = ButtonText("YES", font, man.kill_program, pos = [0, 0])
+button_no = ButtonText("NO", man.navigate, "home", pos = [0, 100])
 
 # Add buttons to their pages
 home.add_element(button_play)
