@@ -7,13 +7,12 @@ Currently Working On:
   - Split settings into game settings and program settings DONE
   - Move function for picture DONE
   - Better image assets for menu
-  - Rename Button to ImageButton
+  - Rename Button to ImageButton DONE
 
 Features for Future Work:
   - Documentation
   - Comments
   - PEP8 adherence
-  - Audio player for menu system
   - Custom menu cursor
   - High score saver module (can probably reuse code from SF1)
   - Work on README
