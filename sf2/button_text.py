@@ -1,7 +1,7 @@
 """
 Noah Hefner
 Space Fight 2.0
-Picture Button Class
+Text Button Class
 Last Edit: 6/30/2020
 """
 
@@ -13,31 +13,32 @@ from menu_manager_settings import menu_manager_settings
 pygame.init()
 
 
-class ButtonPicture(pygame.sprite.Sprite):
+class ButtonText(pygame.sprite.Sprite):
     """
-    Button object for menu manager.
+    Text Button object for menu manager.
 
     Attributes:
-        image (pygame.image): Image for button.
+        image (pygame.image): Pygame image for the text button.
         action (function): Function to execute when button is pressed.
         rect (pygame.image.rect): Position, height, width values for image.
         action_args (*args): Any arguments required by the action.
     """
 
-    def __init__ (self, image, action, *action_args, pos = [0,0]):
+    def __init__ (self, text, font, action, *action_args, pos = [0,0]):
         """
         Instantiate a button object.
 
         Arguments:
-            image (string): Path of image file to be used for button.
+            text (string): Text to make the button from.
+            font (pygame.font.SysFont): Font to render the text in.
             action (function): Function to execute when button is pressed.
             action_args (*args): Any arguments required by the action.
             pos (tuple): XY position for the button.
         """
 
-        super(ButtonPicture, self).__init__()
+        super(ButtonText, self).__init__()
 
-        self.image = pygame.image.load(image)
+        self.image = font.render(str(text), True, [0, 0, 0])
         self.action = action
         self.image.set_colorkey(menu_manager_settings["element_colorkey"])
         self.rect = self.image.get_rect()

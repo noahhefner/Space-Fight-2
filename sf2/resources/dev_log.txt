@@ -7,7 +7,8 @@ Currently Working On:
   - Split settings into game settings and program settings DONE
   - Move function for picture DONE
   - Better image assets for menu
-  - Rename Button to ImageButton
+  - Rename Button to ImageButton DONE
+  - Make settings for text button attributes
 
 Features for Future Work:
   - Documentation
