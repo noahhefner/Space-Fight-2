@@ -9,7 +9,7 @@ Last Edit: 6/28/2020
 import math
 import pygame
 import random
-from ..common.constants import BLACK
+from sf2.common.constants import BLACK
 from sf2.common.settings import settings_game, settings_program
 
 # Initialize pygame
