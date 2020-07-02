@@ -6,7 +6,7 @@ Last Edit: 6/28/2020
 """
 
 # Imports
-from strings import image_paths, font_paths
+from .strings import image_paths, font_paths
 import pygame
 
 # Initialize pygame

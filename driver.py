@@ -7,16 +7,11 @@ Last Edit: 6/30/2020
 
 # Imports
 import pygame
-from game_frontend import GameFrontend  # Game
+from sf2.game.game_frontend import GameFrontend  # Game
 
-from settings import settings_game  # Settings
-from settings import settings_program
+from sf2.common.settings import settings_game, settings_program  # Settings
 
-from menu_module.menu_manager import MenuManager  # Menu module
-from menu_module.button_picture import ButtonPicture
-from menu_module.button_text import ButtonText
-from menu_module.page import Page
-from menu_module.picture import Picture
+from sf2.nhefner_pg_menus.menus import MenuManager, ButtonPicture, ButtonText, Page, Picture
 
 stats = {
 

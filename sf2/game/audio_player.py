@@ -7,7 +7,7 @@ Last Edit: 6/30/2020
 
 # Imports
 import pygame
-from strings import audio_paths
+from sf2.common.strings import audio_paths
 
 # Initialize pygame
 pygame.init()

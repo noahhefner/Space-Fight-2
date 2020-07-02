@@ -8,8 +8,8 @@ Last Edit: 6/28/2020
 # Imports
 import pygame
 import random
-from constants import BLACK
-from settings import settings_program
+from sf2.common.constants import BLACK
+from sf2.common.settings import settings_program
 
 # Initialize pygame
 pygame.init()

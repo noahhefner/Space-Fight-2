@@ -7,18 +7,17 @@ Last Edit: 6/29/2020
 
 # Imports
 import pygame
-from alien import Alien
-from audio_player import AudioPlayer
-from bullet import Bullet
-from constants import WHITE
-from cursor import Cursor
-from drop import Drop
-from explosion import Explosion
-from player import Player
-from settings import settings_game
-from settings import settings_program
-from star import Star
-from strings import image_paths
+from .alien import Alien
+from .audio_player import AudioPlayer
+from .bullet import Bullet
+from sf2.common.constants import WHITE
+from .cursor import Cursor
+from .drop import Drop
+from .explosion import Explosion
+from .player import Player
+from sf2.common.settings import settings_game, settings_program
+from .star import Star
+from sf2.common.strings import image_paths
 
 # Initialize pygame
 pygame.init()

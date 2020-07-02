@@ -7,8 +7,8 @@ Last Edit: 6/30/2020
 
 # Imports
 import pygame
-from constants import BLACK
-from strings import image_paths
+from sf2.common.constants import BLACK
+from sf2.common.strings import image_paths
 
 # Initialize pygame
 pygame.init()

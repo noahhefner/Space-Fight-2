@@ -6,11 +6,11 @@ Last Edit: 6/28/2020
 """
 
 # Imports
-from game_backend import GameBackend
 import pygame
-from settings import settings_game
-from settings import settings_program
-from constants import BLACK
+from .game_backend import GameBackend
+from sf2.common.settings import settings_game
+from sf2.common.settings import settings_program
+from sf2.common.constants import BLACK
 
 # Initialize pygame
 pygame.init()

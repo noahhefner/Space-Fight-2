@@ -9,9 +9,9 @@ Last Edit: 6/30/2020
 import os
 
 # Folder paths within resources
-images_folder = "resources/images/"
-audio_folder = "resources/audio/"
-font_folder = "resources/font/"
+images_folder = "sf2/resources/images/"
+audio_folder = "sf2/resources/audio/"
+font_folder = "sf2/resources/font/"
 
 # Image paths stored as strings
 image_paths = {

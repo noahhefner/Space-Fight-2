@@ -8,8 +8,8 @@ Last Edit: 6/28/2020
 # Imports
 import pygame
 import random
-from settings import settings_game
-from strings import image_paths
+from sf2.common.settings import settings_game
+from sf2.common.strings import image_paths
 
 # Initialize pygame
 pygame.init()

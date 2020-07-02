@@ -7,7 +7,7 @@ Last Edit: 6/28/2020
 
 # Imports
 import pygame
-from constants import BLACK
+from sf2.common.constants import BLACK
 
 # Initialize pygame
 pygame.init()
@@ -32,7 +32,7 @@ class Cursor(pygame.sprite.Sprite):
 
         super(Cursor, self).__init__()
 
-        self.image = pygame.image.load(cursor_image)
+        self.image = pygame.image.load(cursor_image).convert()
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
 
