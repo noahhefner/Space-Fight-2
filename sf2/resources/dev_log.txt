@@ -16,6 +16,6 @@ Features for Future Work:
   - Custom menu cursor
   - High score saver module (can probably reuse code from SF1)
   - Work on README
-  - TextButton, create buttons just from a string
+  - TextButton, create buttons just from a string DONE
   - Automatic positioning for menu elements
   - Figure out how to put menu stuff in its own module

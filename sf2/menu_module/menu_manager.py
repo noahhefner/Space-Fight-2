@@ -2,13 +2,14 @@
 Noah Hefner
 Space Fight 2.0
 Page Class
-Last Edit: 6/29/2020
+Last Edit: 6/30/2020
 """
 
 # Imports
 import pygame
-from button_picture import ButtonPicture
-from menu_manager_settings import menu_manager_settings
+from .button_picture import ButtonPicture
+from .button_text import ButtonText
+from .menu_manager_settings import menu_manager_settings
 
 # Initialize pygame
 pygame.init()
@@ -35,7 +36,7 @@ class MenuManager:
         self.current_page = None
         self.screen = screen
         self.clock = clock
-        self.start_page_set = False
+        self.start_page = None
         self.exiting = False
 
     def add_page (self, new_page):
@@ -47,6 +48,15 @@ class MenuManager:
         """
 
         self.pages.append(new_page)
+
+    def do_menu_stuff (self):
+        """
+        Puts the menu loop into a function for ease of use.
+        """
+
+        while self.update():
+
+            self.display()
 
     def navigate (self, page_id):
         """
@@ -77,7 +87,7 @@ class MenuManager:
             if (page.id == start_page.id):
 
                 self.current_page = start_page
-                self.start_page_set = True
+                self.start_page = page
 
     def update (self):
         """
@@ -89,7 +99,7 @@ class MenuManager:
             Boolean: True if program execution should continue, False otherwise.
         """
 
-        if not self.start_page_set:
+        if self.start_page == None:
 
             print("Start page not set!")
             self.kill_program()
@@ -97,6 +107,7 @@ class MenuManager:
         if self.exiting:
 
             self.exiting = False
+            self.current_page = self.start_page
 
             return False
 
@@ -112,7 +123,8 @@ class MenuManager:
 
                 for element in self.current_page.elements:
 
-                    if isinstance(element, ButtonPicture):
+                    if isinstance(element, ButtonPicture) or \
+                       isinstance(element, ButtonText):
 
                         if element.is_clicked(mouse_pos):
 

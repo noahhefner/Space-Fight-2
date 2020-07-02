@@ -7,7 +7,7 @@ Last Edit: 6/29/2020
 
 # Imports
 import pygame
-from menu_manager_settings import menu_manager_settings
+from .menu_manager_settings import menu_manager_settings
 
 # Initialize pygame
 pygame.init()
