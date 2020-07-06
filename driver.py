@@ -39,7 +39,7 @@ man.add_page(exit_confirm)
 """ ---------------------------- Set a Start Page -------------------------- """
 man.set_start_page(home)
 
-""" -------------------------- Create Some Buttons ------------------------- """
+""" ------------------------- Create Some Elements ------------------------- """
 # Home buttons
 button_play = ButtonText("PLAY", font, man.exit_menu, pos = [10, 10], background_color = [255, 0, 0])
 button_highscores = ButtonText("HIGHSCORES", font, man.navigate, "highscores", pos = [10, 60], background_color = [255, 0, 0])
@@ -56,7 +56,7 @@ button_back_op = ButtonText("BACK", font, man.navigate, "home", pos = [10, 10], 
 button_yes = ButtonText("YES", font, man.kill_program, pos = [0, 0], background_color = [255, 0, 0])
 button_no = ButtonText("NO", font, man.navigate, "home", pos = [0, 100], background_color = [255, 0, 0])
 
-""" ----------------------- Add Buttons to Their Pages --------------------- """
+""" ----------------------- Add Elements to Their Pages --------------------- """
 # Home buttons
 home.add_element(button_play)
 home.add_element(button_highscores)

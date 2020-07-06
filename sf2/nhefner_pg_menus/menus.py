@@ -1,7 +1,7 @@
 """
 Noah Hefner
 Pygame Menu System
-Last Edit: 2 July 2020
+Last Edit: 6 July 2020
 """
 
 # Imports
@@ -178,7 +178,7 @@ class MenuManager:
         Instantiate a MenuManager object.
         """
 
-        self.pages = []
+        self.pages = list()
         self.current_page = None
         self.screen = screen
         self.clock = clock
@@ -305,6 +305,34 @@ class MenuManager:
         pygame.display.flip()
         self.clock.tick(menu_manager_settings["menu_fps"])
 
+    def save_highscore (self, score):
+
+        # Open scores file and name file
+
+        # Check if score is in top 10
+
+        # If yes, enter a sort of mini program loop
+
+            # Display the keyboard for the highscore
+
+            # Wait for user to click submit
+
+            # Once submit is clicked
+
+                # Write name and score to files
+
+                # Close files
+
+                # Navigate to start page
+
+        # If no
+
+            # Close files
+
+            # Navigate to home
+
+        pass
+
 class Page:
     """
     Page object for menu manager.
@@ -327,7 +355,7 @@ class Page:
         """
 
         self.id = id
-        self.elements = []
+        self.elements = list()
 
     def add_element (self, new_element):
         """
