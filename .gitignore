@@ -1,2 +1,3 @@
 *.pyc
 sf2/__pycache__
+sf2/nhefner_pg_menus/__pycache

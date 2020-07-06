@@ -45,7 +45,25 @@ def get_names ():
 
     return names
 
-def insert_score(score):
+def is_highscore (score):
+
+    score_file = open("highscore_numbers.txt", "r")
+
+    score_file = open("highscore_numbers.txt", "r")
+    contents = score_file.readlines()
+
+    for i in range(len(contents)):
+
+        if score > int(contents[i]):
+
+            return True
+
+    return False
+
+def add_highscore (score, name):
+    """
+    Adds a highscore to the name and score files.
+    """
 
     index = 0
 
@@ -77,10 +95,6 @@ def insert_score(score):
     score_file.write(contents)
     score_file.close()
 
-    return index
-
-def insert_name(name, index):
-
     name_file = open("highscore_names.txt", "r")
     contents = name_file.readlines()
 
@@ -94,11 +108,9 @@ def insert_name(name, index):
 
         contents[i] + "\n"
 
-    contents = contents[0:6]
+    contents = contents[0:5]
 
     contents = "".join(contents)
 
     name_file.write(contents)
     name_file.close()
-
-print()

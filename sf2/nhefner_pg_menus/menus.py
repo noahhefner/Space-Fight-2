@@ -6,6 +6,7 @@ Last Edit: 6 July 2020
 
 # Imports
 import pygame
+from highscores import get_highscores, get_names, add_highscore, is_highscore
 
 # Initialize pygame
 pygame.init()
@@ -306,6 +307,14 @@ class MenuManager:
         self.clock.tick(menu_manager_settings["menu_fps"])
 
     def save_highscore (self, score):
+
+        if is_highscore(score):
+
+            pass
+
+        else:
+
+            self.navigate(self.start_page.id)
 
         # Open scores file and name file
 
