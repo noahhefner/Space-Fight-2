@@ -6,7 +6,8 @@ Last Edit: 6 July 2020
 
 # Imports
 import pygame
-from highscores import get_highscores, get_names, add_highscore, is_highscore
+import string
+from .highscores import get_highscores, get_names, add_highscore, is_highscore
 
 # Initialize pygame
 pygame.init()
@@ -90,7 +91,7 @@ class ButtonPicture(pygame.sprite.Sprite):
 
             self.action(*self.action_args)
 
-class ButtonText(pygame.sprite.Sprite):
+class ButtonText (pygame.sprite.Sprite):
     """
     Text Button object for menu manager.
 
@@ -117,6 +118,11 @@ class ButtonText(pygame.sprite.Sprite):
 
         super(ButtonText, self).__init__()
 
+        self.font = font
+        self.antialias = antialias
+        self.color = color
+        self.background_color = background_color
+
         self.image = font.render(str(text), antialias, color, background_color)
         self.action = action
         self.image.set_colorkey(menu_manager_settings["element_colorkey"])
@@ -124,6 +130,10 @@ class ButtonText(pygame.sprite.Sprite):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
         self.action_args = action_args
+
+    def change_text (self, new_text):
+
+        self.image = self.font.render(str(new_text), self.antialias, self.color, self.background_color)
 
     def is_clicked (self, mouse_pos):
         """
@@ -306,7 +316,7 @@ class MenuManager:
         pygame.display.flip()
         self.clock.tick(menu_manager_settings["menu_fps"])
 
-    def save_highscore (self, score):
+    def save_highscore (self, score, font):
 
         if is_highscore(score):
 
@@ -388,7 +398,99 @@ class Page:
 
             screen.blit(element.image, [element.rect.x, element.rect.y])
 
-class Picture(pygame.sprite.Sprite):
+class HighscorePage (Page):
+    """
+    Specialized Page class just for saving highscores.
+
+    Attributes:
+        characters (List): List of characters usable for highscore name.
+    """
+
+    def __init__ (self, font):
+        """
+        Instantiate a HighscorePage object.
+
+        Arguments:
+            font (pygame.font): Font for rendering text.
+        """
+
+        super(Page, self).__init__("add_highscore")
+
+        self.characters = string.ascii_uppercase + string.digits
+
+        width = pygame.display.get_surface().get_width()
+        height = pygame.display.get_surface().get_height()
+        spacing = font.size("A")
+
+        x_mid = width / 2
+        x_left = self. x_mid - spacing[0] * 2
+        x_right = self.x_mid + spacing[0] * 2
+
+        self.index_left = 0
+        self.index_mid = 0
+        self.index_right = 0
+
+        self.char_left = ButtonText(self.characters[index_left], font, None)
+        self.char_mid = ButtonText(self.characters[index_mid], font, None)
+        self.char_mid = ButtonText(self.characters[index_right], font, None)
+        self.submit = ButtonText("SUBMIT", font, None)
+
+        self.char_left.set_pos([x_left - (self.char_left.rect.width / 2), 50])
+        self.char_mid.set_pos([x_mid - (self.char_mid.rect.width / 2), 50])
+        self.chr_right.set_pos([x_right - (self.char_right.rect.width / 2), 50])
+        self.submit.set_pos([x_mid - (self.char_right.rect.width / 2), 100])
+
+        self.add_element(self.char_left)
+        self.add_element(self.char_mid)
+        self.add_element(self.char_right)
+        self.add_element(self.submit)
+
+    def save_score ():
+
+
+
+    def update (self):
+        """
+        Updates the letters when they are clicked.
+        """
+
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT:
+
+                self.kill_program()
+
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+
+                mouse_pos = pygame.mouse.get_pos()
+
+                for element in self.elements:
+
+                    if isinstance(element, ButtonText):
+
+                        if element.is_clicked(mouse_pos):
+
+                            if element == self.char_left:
+
+                                self.char_left.change_text(self.characters[36 % (self.index_left + 1)])
+                                self.index_left += 1
+
+                            else if element == self.char_mid:
+
+                                self.char_mid.change_text(self.characters[36 % (self.index_mid + 1)])
+                                self.index_mid += 1
+
+                            else if element == self.char_right:
+
+                                self.char_right.change_text(self.characters[36 % (self.index_right + 1)])
+                                self.index_right += 1
+
+                            else:
+
+                                pass
+
+
+class Picture (pygame.sprite.Sprite):
     """
     Picture object for menu manager.
 
