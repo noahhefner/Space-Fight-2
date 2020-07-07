@@ -89,3 +89,4 @@ while True:
     del game
 
     """ Highscore save """
+    man.save_highscore(99, font)

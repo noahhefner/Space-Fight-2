@@ -118,6 +118,7 @@ class ButtonText (pygame.sprite.Sprite):
 
         super(ButtonText, self).__init__()
 
+        self.text = text
         self.font = font
         self.antialias = antialias
         self.color = color
@@ -130,6 +131,10 @@ class ButtonText (pygame.sprite.Sprite):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
         self.action_args = action_args
+
+    def get_text(self):
+
+        return self.text
 
     def change_text (self, new_text):
 
@@ -320,37 +325,20 @@ class MenuManager:
 
         if is_highscore(score):
 
-            pass
+            highscore_save_page = HighscorePage(font, score)
+
+            submitted = False
+
+            while not submitted:
+
+                if not highscore_save_page.update():
+
+                    submitted = True
+                    self.navigate(self.start_page.id)
 
         else:
 
             self.navigate(self.start_page.id)
-
-        # Open scores file and name file
-
-        # Check if score is in top 10
-
-        # If yes, enter a sort of mini program loop
-
-            # Display the keyboard for the highscore
-
-            # Wait for user to click submit
-
-            # Once submit is clicked
-
-                # Write name and score to files
-
-                # Close files
-
-                # Navigate to start page
-
-        # If no
-
-            # Close files
-
-            # Navigate to home
-
-        pass
 
 class Page:
     """
@@ -406,7 +394,7 @@ class HighscorePage (Page):
         characters (List): List of characters usable for highscore name.
     """
 
-    def __init__ (self, font):
+    def __init__ (self, font, score, manager):
         """
         Instantiate a HighscorePage object.
 
@@ -416,6 +404,8 @@ class HighscorePage (Page):
 
         super(Page, self).__init__("add_highscore")
 
+        self.manager = manager
+        self.score = score
         self.characters = string.ascii_uppercase + string.digits
 
         width = pygame.display.get_surface().get_width()
@@ -447,7 +437,8 @@ class HighscorePage (Page):
 
     def save_score ():
 
-
+        name = self.char_left.get_text() + self.char_mid.get_text() + self.char_right.get_text()
+        add_highscore(name, self.score)
 
     def update (self):
         """
@@ -475,19 +466,26 @@ class HighscorePage (Page):
                                 self.char_left.change_text(self.characters[36 % (self.index_left + 1)])
                                 self.index_left += 1
 
-                            else if element == self.char_mid:
+                            elif element == self.char_mid:
 
                                 self.char_mid.change_text(self.characters[36 % (self.index_mid + 1)])
                                 self.index_mid += 1
 
-                            else if element == self.char_right:
+                            elif element == self.char_right:
 
                                 self.char_right.change_text(self.characters[36 % (self.index_right + 1)])
                                 self.index_right += 1
 
+                            elif element == self.submit:
+
+                                self.save_score()
+                                return False
+
                             else:
 
                                 pass
+
+        return True
 
 
 class Picture (pygame.sprite.Sprite):

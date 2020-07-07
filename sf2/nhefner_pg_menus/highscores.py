@@ -3,7 +3,7 @@ Noah Hefner
 Highscore Saving Methods
 Last Edit: 6 July 2020
 """
-
+import os
 
 def get_highscores ():
   """
@@ -47,17 +47,18 @@ def get_names ():
 
 def is_highscore (score):
 
-    score_file = open("highscore_numbers.txt", "r")
-
-    score_file = open("highscore_numbers.txt", "r")
+    score_file = open(str(os.path.abspath("highscore_numbers.txt")), "r")
     contents = score_file.readlines()
 
     for i in range(len(contents)):
 
         if score > int(contents[i]):
 
+            score_file.close()
+
             return True
 
+    score_file.close()
     return False
 
 def add_highscore (score, name):
