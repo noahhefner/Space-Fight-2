@@ -45,6 +45,7 @@ image_paths = {
     "player_white": os.path.abspath(images_folder + "player_white.png"),
     "player_yellow": os.path.abspath(images_folder + "player_yellow.png"),
     "logo": os.path.abspath(images_folder + "space_fight_logo.png"),
+    "selection_box" : os.path.abspath(images_folder + "selection_box.png"),
     "star": os.path.abspath(images_folder + "star.png")
 
 }

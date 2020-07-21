@@ -4,6 +4,7 @@ Development Log
 Last Edit: 7 July 2020
 
 Currently Working On:
+  - Generalize explosion class
   - High score saver module (can probably reuse code from SF1)
   - Background color for pages
   - Automatic positioning for menu elements
@@ -17,6 +18,8 @@ Features for Future Work:
   - Custom menu cursor
 
 Completed:
+  - Put frontend and backend back together since backend elements have frontend
+    methods
   - TextButton, create buttons just from a string
   - Split settings into game settings and program settings
   - Move function for picture
