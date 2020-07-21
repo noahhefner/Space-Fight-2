@@ -2,11 +2,12 @@
 Noah Hefner
 Space Fight 2.0
 Game Classes
-Last Edit: 7/19/2020
+Last Edit: 7/21/2020
 """
 
 # Imports
 import math
+import os
 import pygame
 import random
 from sf2.common.constants import BLACK, WHITE
@@ -16,7 +17,7 @@ from sf2.common.settings import settings_game, settings_program
 # Initialize pygame
 pygame.init()
 
-class Alien(pygame.sprite.Sprite):
+class Alien (pygame.sprite.Sprite):
     """
     In-game alien entity.
 
@@ -27,7 +28,7 @@ class Alien(pygame.sprite.Sprite):
         speed (int): Speed multiplier for aliem movement.
     """
 
-    def __init__(self, image_string):
+    def __init__ (self, image_string):
         """
         Instantiate an alien object.
 
@@ -45,7 +46,7 @@ class Alien(pygame.sprite.Sprite):
         self.drop_carrier = self.__drop_carrier_chance()
         self.speed = settings_game["alien_speed"]
 
-    def update(self, player_center):
+    def update (self, player_center):
         """
         Calculates path towards player and moves alien.
 
@@ -63,7 +64,7 @@ class Alien(pygame.sprite.Sprite):
 
         self.__move(velx, vely)
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -73,7 +74,7 @@ class Alien(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -83,7 +84,7 @@ class Alien(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -93,7 +94,7 @@ class Alien(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 
@@ -103,7 +104,7 @@ class Alien(pygame.sprite.Sprite):
 
         self.rect.y = new_y
 
-    def is_drop_carrier(self):
+    def is_drop_carrier (self):
         """
         Get boolean of drop_carrier attribute.
 
@@ -113,7 +114,7 @@ class Alien(pygame.sprite.Sprite):
 
         return self.drop_carrier
 
-    def __drop_carrier_chance(self):
+    def __drop_carrier_chance (self):
         """
         Generate True or False given drop probability in settings.
 
@@ -131,7 +132,7 @@ class Alien(pygame.sprite.Sprite):
 
             return False
 
-    def __move(self, velx, vely):
+    def __move (self, velx, vely):
         """
         Move the alien according to x and y axis velocities.
         """
@@ -139,7 +140,7 @@ class Alien(pygame.sprite.Sprite):
         self.rect.x += velx
         self.rect.y += vely
 
-    def __random_spawn(self):
+    def __random_spawn (self):
         """
         Generate random spawn point.
 
@@ -194,7 +195,7 @@ class AudioPlayer:
     Plays sounds.
     """
 
-    def __init__(self):
+    def __init__ (self):
         """
         Instantiate a new AudioPlayer object.
         """
@@ -223,7 +224,7 @@ class AudioPlayer:
         else:
             sound.play()
 
-class Bullet(pygame.sprite.Sprite):
+class Bullet (pygame.sprite.Sprite):
     """
     In-game bullet entity.
 
@@ -232,7 +233,7 @@ class Bullet(pygame.sprite.Sprite):
         rect (pygame.image.rect): Position, height, width values for image.
     """
 
-    def __init__(self, image_string, mouse_pos, player_pos):
+    def __init__ (self, image_string, mouse_pos, player_pos):
         """
         Initiate bullet class.
 
@@ -253,7 +254,7 @@ class Bullet(pygame.sprite.Sprite):
         self.speed = int(settings_game["bullet_speed"])
         self.trajectory = self.__calculate_trajectory(mouse_pos, player_pos)
 
-    def update(self):
+    def update (self):
         """
         Move bullet. Kill bullet when it goes off the screen.
         """
@@ -271,7 +272,7 @@ class Bullet(pygame.sprite.Sprite):
 
             self.kill()
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -281,7 +282,7 @@ class Bullet(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -291,7 +292,7 @@ class Bullet(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -301,7 +302,7 @@ class Bullet(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 
@@ -311,7 +312,7 @@ class Bullet(pygame.sprite.Sprite):
 
         self.rect.y = new_y
 
-    def __calculate_trajectory(self, mouse_pos, player_pos):
+    def __calculate_trajectory (self, mouse_pos, player_pos):
         """
         Calculate the trajectory of the bullet given player/mouse coordinates.
 
@@ -329,7 +330,7 @@ class Bullet(pygame.sprite.Sprite):
 
         return [x_traj, y_traj]
 
-class Cursor(pygame.sprite.Sprite):
+class Cursor (pygame.sprite.Sprite):
     """
     Cursor that is blitted in place of the system cursor.
 
@@ -338,7 +339,7 @@ class Cursor(pygame.sprite.Sprite):
       rect (pygame sprite rect): Rect attributes for sprite image.
     """
 
-    def __init__(self, cursor_image):
+    def __init__ (self, cursor_image):
         """
         Initialize a Cursor object.
 
@@ -352,14 +353,14 @@ class Cursor(pygame.sprite.Sprite):
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
 
-    def update(self, mouse_pos):
+    def update (self, mouse_pos):
         """
         Set center of cursor to the mouse position.
         """
 
         self.rect.center = (mouse_pos[0], mouse_pos[1])
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -369,7 +370,7 @@ class Cursor(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -379,7 +380,7 @@ class Cursor(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -389,7 +390,7 @@ class Cursor(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 
@@ -399,7 +400,7 @@ class Cursor(pygame.sprite.Sprite):
 
         self.rect.y = new_y
 
-class Drop(pygame.sprite.Sprite):
+class Drop (pygame.sprite.Sprite):
     """
     Powerups that drop when an alien is killed.
 
@@ -409,7 +410,7 @@ class Drop(pygame.sprite.Sprite):
         dropped_frames (int): Number of frames that the drop has existed.
     """
 
-    def __init__(self, x_coord, y_coord):
+    def __init__ (self, x_coord, y_coord):
 
         super(Drop, self).__init__()
 
@@ -422,16 +423,24 @@ class Drop(pygame.sprite.Sprite):
         self.set_y(y_coord)
         self.dropped_frames = 0
 
-    def update(self):
+    def update (self):
         """
-        Times the drop for dropped_frames. Kills drop at frame limit.
+        Increments dropped frames.
         """
 
-        if self.dropped_frames == int(settings_game["drop_frames"]):
+        self.dropped_frames += 1
 
-            self.kill()
+    def get_droppped_frames (self):
+        """
+        Gets the number of frames this drop has been down.
 
-    def get_type(self):
+        Returns:
+            self.dropped_frames (int): Number of frames the drop has been down.
+        """
+
+        return self.dropped_frames
+
+    def get_type (self):
         """
         Gets the image path of the drop.
 
@@ -441,7 +450,7 @@ class Drop(pygame.sprite.Sprite):
 
         return self.image_string
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -451,7 +460,7 @@ class Drop(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -461,7 +470,7 @@ class Drop(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -471,7 +480,7 @@ class Drop(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 
@@ -481,7 +490,7 @@ class Drop(pygame.sprite.Sprite):
 
         self.rect.y = new_y
 
-class Explosion(pygame.sprite.Sprite):
+class Explosion (pygame.sprite.Sprite):
     """
     Spawns an explosion at the given location.
 
@@ -498,7 +507,7 @@ class Explosion(pygame.sprite.Sprite):
         rect (pygame.image.rect): Position, height, width values for image.
     """
 
-    def __init__(self, x, y):
+    def __init__ (self, x, y):
         """
         Initializes explosion class.
 
@@ -530,7 +539,7 @@ class Explosion(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-    def update(self):
+    def update (self):
         """
         Cycles through the exp_list to display the correct frame and kills the
         sprite at the frame limit.
@@ -547,7 +556,7 @@ class Explosion(pygame.sprite.Sprite):
         self.frame += 1
         self.image = self.image_list[self.exp_num]
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -557,7 +566,7 @@ class Explosion(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -567,7 +576,7 @@ class Explosion(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -577,7 +586,7 @@ class Explosion(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 
@@ -608,7 +617,7 @@ class Game:
         hud (HUD): Overlay that contains information for the player.
     """
 
-    def __init__(self, screen, clock):
+    def __init__ (self, screen, clock):
         """
         Initialize a GameBackend object.
         """
@@ -753,6 +762,12 @@ class Game:
         # Drop update
         for drop in self.drops:
             drop.update()
+            # If dropp has been down for max number of frames
+            if drop.get_droppped_frames() >= int(settings_game["drop_frames"]):
+                # Spawn an explosion in its place and kill the drop
+                explosion = Explosion(drop.rect.x, drop.rect.y)
+                self.explosions.add(explosion)
+                drop.kill()
 
         # Bullet update
         for bullet in self.bullets:
@@ -842,7 +857,7 @@ class Game:
         # Return True if the game should continue
         return True
 
-    def get_aliens(self):
+    def get_aliens (self):
         """
         Gets the aliens sprite group.
 
@@ -852,7 +867,7 @@ class Game:
 
         return self.aliens
 
-    def get_bullets(self):
+    def get_bullets (self):
         """
         Gets the bullets sprite group.
 
@@ -862,7 +877,7 @@ class Game:
 
         return self.bullets
 
-    def get_drops(self):
+    def get_drops (self):
         """
         Gets the drops sprite group.
 
@@ -872,7 +887,7 @@ class Game:
 
         return self.drops
 
-    def get_explosions(self):
+    def get_explosions (self):
         """
         Gets the explosions sprite group.
 
@@ -882,7 +897,7 @@ class Game:
 
         return self.explosions
 
-    def get_stars(self):
+    def get_stars (self):
         """
         Gets the stars sprite group.
 
@@ -892,7 +907,7 @@ class Game:
 
         return self.stars
 
-    def __spawn_bullet(self):
+    def __spawn_bullet (self):
         """
         Spawns a bullet and adds it to bullet sprite list.
         """
@@ -903,7 +918,7 @@ class Game:
         self.bullets.add(new_bullet)
         self.player.bullets -= 1
 
-    def __update_alien_speed(self):
+    def __update_alien_speed (self):
         """
         Increment alien speed based on player score.
         """
@@ -929,7 +944,7 @@ class Game:
             counter_coins (pygame.sprite.Sprite): Player coins counter.
         """
 
-        def __init__(self, score, bullets, coins, lives):
+        def __init__ (self, score, bullets, coins, lives):
             """
             Initialize a HUD object.
 
@@ -940,6 +955,7 @@ class Game:
             """
 
             self.lives = lives
+            self.font = pygame.font.Font(os.path.abspath("sf2/resources/font/ARCADECLASSIC.TTF"), 40)
 
             self.heart = pygame.sprite.Sprite()
             self.heart.image = \
@@ -947,17 +963,17 @@ class Game:
             self.heart.rect = self.heart.image.get_rect()
 
             self.counter_score = pygame.sprite.Sprite()
-            self.counter_score.image = settings_game["font"].render(
+            self.counter_score.image = self.font.render(
                 "SCORE    " + str(score), False, WHITE)
             self.counter_score.rect = self.counter_score.image.get_rect()
 
             self.counter_bullets = pygame.sprite.Sprite()
-            self.counter_bullets.image = settings_game["font"].render(
+            self.counter_bullets.image = self.font.render(
                 "BULLETS    " + str(bullets), False, WHITE)
             self.counter_bullets.rect = self.counter_bullets.image.get_rect()
 
             self.counter_coins = pygame.sprite.Sprite()
-            self.counter_coins.image = settings_game["font"].render(
+            self.counter_coins.image = self.font.render(
                 "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
 
@@ -978,7 +994,7 @@ class Game:
 
                 screen.blit(self.heart.image, [x, y])
 
-        def update(self, score, bullets, coins, lives):
+        def update (self, score, bullets, coins, lives):
             """
             Remake counter sprites with appropriate data.
 
@@ -993,7 +1009,7 @@ class Game:
             self.lives = lives
 
             # Update bullet counter
-            self.counter_bullets.image = settings_game["font"].render(
+            self.counter_bullets.image = self.font.render(
                 "BULLETS    " + str(bullets), False, WHITE)
             self.counter_bullets.rect = self.counter_bullets.image.get_rect()
             self.counter_bullets.rect.x = settings_game["hud_spacing"]
@@ -1001,7 +1017,7 @@ class Game:
                 self.heart.rect.height + (settings_game["hud_spacing"] * 2)
 
             # Update coin counter
-            self.counter_coins.image = settings_game["font"].render(
+            self.counter_coins.image = self.font.render(
                 "COINS    " + str(coins), False, WHITE)
             self.counter_coins.rect = self.counter_coins.image.get_rect()
             self.counter_coins.rect.x = settings_game["hud_spacing"]
@@ -1009,14 +1025,14 @@ class Game:
                 self.counter_bullets.rect.height + settings_game["hud_spacing"]
 
             # Update score counter
-            self.counter_score.image = settings_game["font"].render(
+            self.counter_score.image = self.font.render(
                 "SCORE    " + str(score), False, WHITE)
             self.counter_score.rect = self.counter_score.image.get_rect()
             self.counter_score.rect.x = settings_game["hud_spacing"]
             self.counter_score.rect.y = self.counter_coins.rect.y + \
                 self.counter_coins.rect.height + settings_game["hud_spacing"]
 
-class Player(pygame.sprite.Sprite):
+class Player (pygame.sprite.Sprite):
     """
     In-game player entity.
 
@@ -1030,7 +1046,7 @@ class Player(pygame.sprite.Sprite):
         vely (int): Velocity of player on y axis.
     """
 
-    def __init__(self, image_string):
+    def __init__ (self, image_string):
         """
         Instantiate a player object.
 
@@ -1054,7 +1070,7 @@ class Player(pygame.sprite.Sprite):
         self.set_x(settings_program["screen_width"] / 2)
         self.set_y(settings_program["screen_height"] / 2)
 
-    def update(self):
+    def update (self):
         """
         Rotate and move player, then check for screen edge collision.
         """
@@ -1063,7 +1079,7 @@ class Player(pygame.sprite.Sprite):
         self.__move()
         self.__check_screen_edge_hit()
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -1073,7 +1089,7 @@ class Player(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -1083,7 +1099,7 @@ class Player(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -1093,7 +1109,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 
@@ -1103,7 +1119,7 @@ class Player(pygame.sprite.Sprite):
 
         self.rect.y = new_y
 
-    def change_speed(self, velx, vely):
+    def change_speed (self, velx, vely):
         """
         Change speed of player on x and y axis.
 
@@ -1115,7 +1131,7 @@ class Player(pygame.sprite.Sprite):
         self.velx += velx
         self.vely += vely
 
-    def __check_screen_edge_hit(self):
+    def __check_screen_edge_hit (self):
         """
         Prevents the player from moving off the window.
         """
@@ -1132,7 +1148,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.y + self.rect.height >= settings_program["screen_height"]:
             self.rect.bottom = settings_program["screen_height"]
 
-    def __move(self):
+    def __move (self):
         """
         Move the player according to x and y axis velocities.
         """
@@ -1140,7 +1156,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.velx
         self.rect.y += self.vely
 
-    def __rotate(self):
+    def __rotate (self):
         """
         Rotates the player to face the cursor.
         """
@@ -1152,7 +1168,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.original, angle)
         self.rect = self.image.get_rect(center=self.rect.center)
 
-class Star(pygame.sprite.Sprite):
+class Star (pygame.sprite.Sprite):
     """
     Star image used to create background.
 
@@ -1162,7 +1178,7 @@ class Star(pygame.sprite.Sprite):
         velyt (int): Y-axis velocity of star.
     """
 
-    def __init__(self, image_string):
+    def __init__ (self, image_string):
         """
         Instantiate a Star object.
 
@@ -1179,7 +1195,7 @@ class Star(pygame.sprite.Sprite):
         self.rect.y = random.randrange(0, settings_program["screen_height"])
         self.vely = random.randrange(-3, 0)
 
-    def update(self):
+    def update (self):
         """
         Move star, reset position if it goes off the top of the screen.
         """
@@ -1190,7 +1206,7 @@ class Star(pygame.sprite.Sprite):
 
             self.set_y(settings_program["screen_height"])
 
-    def get_x(self):
+    def get_x (self):
         """
         Get x value of rect.
 
@@ -1200,7 +1216,7 @@ class Star(pygame.sprite.Sprite):
 
         return self.rect.x
 
-    def get_y(self):
+    def get_y (self):
         """
         Get y value of rect.
 
@@ -1210,7 +1226,7 @@ class Star(pygame.sprite.Sprite):
 
         return self.rect.y
 
-    def set_x(self, new_x):
+    def set_x (self, new_x):
         """
         Set x value for rect.
 
@@ -1220,7 +1236,7 @@ class Star(pygame.sprite.Sprite):
 
         self.rect.x = new_x
 
-    def set_y(self, new_y):
+    def set_y (self, new_y):
         """
         Set y value for rect.
 

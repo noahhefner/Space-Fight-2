@@ -6,7 +6,7 @@ Last Edit: 6/28/2020
 """
 
 # Imports
-from .strings import image_paths, font_paths
+from .strings import image_paths
 import pygame
 
 # Initialize pygame
@@ -31,7 +31,6 @@ settings_game = {
     "drop_bullets": 50,
     "drop_coins": 2,
     "hud_spacing": 10,
-    "font": pygame.font.Font(font_paths["arcade_classic"], 40),
     "random_value" : 6
 
 }

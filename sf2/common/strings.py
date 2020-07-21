@@ -11,7 +11,6 @@ import os
 # Folder paths within resources
 images_folder = "sf2/resources/images/"
 audio_folder = "sf2/resources/audio/"
-font_folder = "sf2/resources/font/"
 
 # Image paths stored as strings
 image_paths = {
@@ -60,12 +59,5 @@ audio_paths = {
     "pickup_coin": os.path.abspath(audio_folder + "pickup_coin.ogg"),
     "pickup_life": os.path.abspath(audio_folder + "pickup_life.ogg"),
     "theme": os.path.abspath(audio_folder + "theme.ogg")
-
-}
-
-# Font paths stored as strings
-font_paths = {
-
-    "arcade_classic": os.path.abspath(font_folder + "ARCADECLASSIC.TTF")
 
 }

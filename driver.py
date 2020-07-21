@@ -1,11 +1,11 @@
 """
 Noah Hefner
 Space Fight 2.0
-Menu Manager Usage Demo
-Last Edit: 7/2/2020
+Last Edit: 7/21/2020
 """
 
 # Imports
+import os
 import pygame
 from nhefner_pygame_menus import MenuManager, ButtonPicture, ButtonText, Picture, Text, Page
 from sf2.common.strings import image_paths
@@ -20,41 +20,51 @@ screen = pygame.display.set_mode([settings_program["screen_width"], settings_pro
 clock = pygame.time.Clock()
 
 # Font object for rendering text buttons
-font = settings_game["font"]
+font_size = 40
+font = pygame.font.Font(os.path.abspath("sf2/resources/font/ARCADECLASSIC.TTF"), font_size)
 
-"""
-Functions for buttons.
-"""
+""" Functions for buttons -------------------------------------------------- """
+
 def change_player_image (path):
+    """
+    Change the image of the player in the settings dictionary.
+    """
 
     settings_game["player_type_string"] = path
 
 def change_bullet_image (path):
+    """
+    Change the image of the bullet in the settings dictionary.
+    """
 
     settings_game["bullet_type_string"] = path
 
 def change_cursor_image (path):
+    """
+    Change the image of the cursor in the settings dictionary.
+    """
 
     settings_game["cursor_type_string"] = path
 
-""" -------------------------- Create MenuManager -------------------------- """
+""" Menu Management System Using nhefner_pygame_menus Module --------------- """
+# Create a MenuManager object
 man = MenuManager(screen, clock)
 
-""" --------------------------- Create Some Pages -------------------------- """
+# Create some games
 home = Page("home")
 highscores = Page("highscores")
 options = Page("options")
 exit_confirm = Page("exit_confirm")
 
-""" ------------------------ Add Pages to MenuManager ---------------------- """
+# Add the pages to the MenuManager
 man.add_page(home)
 man.add_page(options)
 man.add_page(exit_confirm)
 
-""" ---------------------------- Set a Start Page -------------------------- """
+# Set the start page
 man.set_start_page(home)
 
-""" ------------------------- Create Some Elements ------------------------- """
+# Create elements for the pages and define their actions
 # Home elements
 button_play = ButtonText("PLAY", font, pos = [20, 375], background_color = [255, 0, 0])
 button_play.add_action(man.exit_menu)
@@ -88,7 +98,7 @@ button_yes.add_action(man.kill_program)
 button_no = ButtonText("NO", font, pos = [20, 160], background_color = [255, 0, 0])
 button_no.add_action(man.navigate, "home")
 
-""" ---------------------- Add Elements to Their Pages --------------------- """
+# Add the elements to their pages
 # Home elements
 home.add_element(button_play)
 home.add_element(button_options)
@@ -108,17 +118,19 @@ exit_confirm.add_element(text_confirmation)
 exit_confirm.add_element(button_yes)
 exit_confirm.add_element(button_no)
 
-""" --------------------------- Main Program Loop -------------------------- """
+""" Main Program Loop ------------------------------------------------------ """
 while True:
 
-    """ Do the menu stuff """
+    # Do the menu stuff
     man.do_menu_stuff()
 
-    """ Game code goes here """
+    # Creating a game object
     game = Game(screen, clock)
 
+    # Main game loop
     while game.update():
 
         game.display()
 
+    # Delete game object
     del game
