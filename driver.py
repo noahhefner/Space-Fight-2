@@ -62,7 +62,7 @@ man.add_page(options)
 man.add_page(exit_confirm)
 
 # Set the start page
-man.set_start_page(home)
+man.set_start_page("home")
 
 # Create elements for the pages and define their actions
 # Home elements
@@ -122,7 +122,7 @@ exit_confirm.add_element(button_no)
 while True:
 
     # Do the menu stuff
-    man.do_menu_stuff()
+    man.run()
 
     # Creating a game object
     game = Game(screen, clock)
